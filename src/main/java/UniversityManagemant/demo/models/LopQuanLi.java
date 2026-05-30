@@ -23,8 +23,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LopQuanLi extends AbstractModel {
-    String ma_lop;
-    String ten_lop;
+    String maLop;
+    String tenLop;
 
     @OneToOne(mappedBy = "lopQuanLi")
     GiangVien giangVien;

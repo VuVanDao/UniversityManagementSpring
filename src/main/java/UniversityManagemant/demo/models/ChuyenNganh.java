@@ -22,14 +22,14 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ChuyenNganh extends AbstractModel {
-    String ma_chuyen_nganh;
-    String ten_chuyen_nganh;
+    String maChuyenNganh;
+    String tenChuyenNganh;
 
     @ManyToOne
     @JoinColumn(name = "khoa_id", nullable = false)
     Khoa khoa;
 
-    @OneToMany(mappedBy = "chuyen_nganh")
+    @OneToMany(mappedBy = "chuyenNganh")
     List<User> users;
 
     @OneToMany(mappedBy = "chuyenNganh")

@@ -20,9 +20,9 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MonHoc extends AbstractModel {
-    String ma_mon_hoc;
-    String ten_mon_hoc;
-    Integer tin_chi;
+    String maMonHoc;
+    String tenMonHoc;
+    Integer tinChi;
 
     // @OneToMany(mappedBy = "monHoc")
     // List<BangDiem> bangDiems;

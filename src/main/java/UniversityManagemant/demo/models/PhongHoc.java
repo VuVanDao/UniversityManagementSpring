@@ -20,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PhongHoc extends AbstractModel {
-    String ten_phong_hoc;
+    String tenPhongHoc;
 
     @OneToMany(mappedBy = "phongHoc")
     List<NhomHoc> nhomHocs;

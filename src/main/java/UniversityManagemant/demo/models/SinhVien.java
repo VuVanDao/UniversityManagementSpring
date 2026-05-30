@@ -24,8 +24,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SinhVien extends AbstractModel {
-    String ma_sinh_vien;
-    BigDecimal diem_GPA;
+    String maSinhVien;
+    BigDecimal diemGPA;
 
     @OneToOne
     @JoinColumn(name = "user_id")
