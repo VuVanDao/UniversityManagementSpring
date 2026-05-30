@@ -31,8 +31,8 @@ public class BangDiem extends AbstractModel {
     @JoinColumn(name = "mon_hoc_id", nullable = false)
     MonHoc monHoc;
 
-    BigDecimal diem_he_10;
-    BigDecimal diem_he_4;
-    String diem_chu;
-    String trang_thai_mon_hoc;
+    BigDecimal diemHe10;
+    BigDecimal diemHe4;
+    String diemChu;
+    String trangThaiMonHoc;
 }

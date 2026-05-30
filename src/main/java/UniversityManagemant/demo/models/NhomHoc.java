@@ -23,13 +23,13 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class NhomHoc extends AbstractModel {
-    String ma_nhom;
-    String ten_nhom;
-    Integer tiet_bat_dau;
-    Integer tiet_ket_thuc;
-    LocalDateTime from_time;
-    LocalDateTime to_time;
-    Integer so_luong_sinh_vien;
+    String maNhom;
+    String tenNhom;
+    Integer tietBatDau;
+    Integer tietKetThuc;
+    LocalDateTime fromTime;
+    LocalDateTime toTime;
+    Integer soLuongSinhVien;
 
     @ManyToOne
     @JoinColumn(name = "mon_hoc_id")

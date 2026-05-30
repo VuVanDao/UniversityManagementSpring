@@ -22,8 +22,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Khoa extends AbstractModel {
-    String ma_khoa;
-    String ten_khoa;
+    String maKhoa;
+    String tenKhoa;
 
     // @OneToOne
     // @JoinColumn(name = "truong_khoa_id")

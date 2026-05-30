@@ -20,20 +20,20 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User extends AbstractModel {
-    String ma_nguoi_dung;
-    String ten_nguoi_dung;
+    String maNguoiDung;
+    String tenNguoiDung;
     String email;
     String password;
-    String ngay_sinh;
-    Boolean gioi_tinh;
+    String ngaySinh;
+    Boolean gioiTinh;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     Role role;
 
     @ManyToOne
-    @JoinColumn(name = "chuyen_nganh_id", nullable = false)
-    ChuyenNganh chuyen_nganh;
+    @JoinColumn(name = "chuyen_nganh_id", nullable = true)
+    ChuyenNganh chuyenNganh;
 
     @OneToOne(mappedBy = "user")
     GiangVien giangVien;

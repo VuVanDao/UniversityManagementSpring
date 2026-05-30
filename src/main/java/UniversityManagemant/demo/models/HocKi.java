@@ -19,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class HocKi extends AbstractModel {
-    String ten_hoc_ki;
-    LocalDate from_time;
-    LocalDate to_time;
+    String tenHocKi;
+    LocalDate fromTime;
+    LocalDate toTime;
 }
