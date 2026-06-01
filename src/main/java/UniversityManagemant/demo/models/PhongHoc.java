@@ -1,9 +1,10 @@
 package UniversityManagemant.demo.models;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,5 +24,6 @@ public class PhongHoc extends AbstractModel {
     String tenPhongHoc;
 
     @OneToMany(mappedBy = "phongHoc")
+    @JsonIgnore
     List<NhomHoc> nhomHocs;
 }

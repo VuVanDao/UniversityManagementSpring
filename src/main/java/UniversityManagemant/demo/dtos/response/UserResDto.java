@@ -3,22 +3,27 @@ package UniversityManagemant.demo.dtos.response;
 import UniversityManagemant.demo.enums.Gender;
 import UniversityManagemant.demo.models.Role;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Builder
+@SuperBuilder
 public class UserResDto {
     Long id;
-    String ma_nguoi_dung;
-    String ten_nguoi_dung;
+    String maNguoiDung;
+    String tenNguoiDung;
     String email;
-    String ngay_sinh;
-    Gender gioi_tinh;
+    String ngaySinh;
+    Gender gioiTinh;
     Role role;
-    String ten_chuyen_nganh;
+    ChuyenNganhResDto chuyenNganh;
 }

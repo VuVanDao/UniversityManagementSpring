@@ -1,6 +1,11 @@
 package UniversityManagemant.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import UniversityManagemant.demo.enums.Gender;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -25,7 +30,8 @@ public class User extends AbstractModel {
     String email;
     String password;
     String ngaySinh;
-    Boolean gioiTinh;
+    @Enumerated(EnumType.STRING)
+    Gender gioiTinh;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
@@ -36,9 +42,11 @@ public class User extends AbstractModel {
     ChuyenNganh chuyenNganh;
 
     @OneToOne(mappedBy = "user")
+    @JsonIgnore
     GiangVien giangVien;
 
     @OneToOne(mappedBy = "user")
+    @JsonIgnore
     SinhVien sinhVien;
 
     // @OneToOne(mappedBy = "truongKhoa")

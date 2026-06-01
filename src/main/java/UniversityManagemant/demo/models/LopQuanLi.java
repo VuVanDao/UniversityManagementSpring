@@ -1,12 +1,12 @@
 package UniversityManagemant.demo.models;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,13 +26,11 @@ public class LopQuanLi extends AbstractModel {
     String maLop;
     String tenLop;
 
-    @OneToOne(mappedBy = "lopQuanLi")
-    GiangVien giangVien;
-
     @ManyToOne
     @JoinColumn(name = "chuyen_nganh_id")
     ChuyenNganh chuyenNganh;
 
     @OneToMany(mappedBy = "lopQuanLi")
+    @JsonIgnore
     List<SinhVien> sinhViens;
 }

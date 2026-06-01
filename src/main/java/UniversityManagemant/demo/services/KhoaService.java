@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreateKhoaReq;
 import UniversityManagemant.demo.dtos.response.KhoaResDto;
+import UniversityManagemant.demo.mappers.KhoaMapper;
 import UniversityManagemant.demo.models.Khoa;
 import UniversityManagemant.demo.repositories.KhoaRepository;
 import lombok.AccessLevel;
@@ -18,46 +19,35 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 public class KhoaService {
     final KhoaRepository khoaRepository;
+    final KhoaMapper khoaMapper;
 
     public KhoaResDto createKhoa(CreateKhoaReq req) {
-        Khoa khoa = Khoa.builder()
-                .maKhoa(req.getMaKhoa())
-                .tenKhoa(req.getTenKhoa())
-                .build();
+        Khoa khoa = khoaMapper.toEntity(req);
         Khoa saved = khoaRepository.save(khoa);
-        return toDto(saved);
+        return khoaMapper.toResDto(saved);
     }
 
     public KhoaResDto getKhoaById(Long id) {
         return khoaRepository.findById(id)
-                .map(this::toDto)
+                .map(khoaMapper::toResDto)
                 .orElseThrow(() -> new RuntimeException("Khoa not found"));
     }
 
     public List<KhoaResDto> getAllKhoa() {
         return khoaRepository.findAll().stream()
-                .map(this::toDto)
+                .map(khoaMapper::toResDto)
                 .collect(Collectors.toList());
     }
 
     public KhoaResDto updateKhoa(Long id, CreateKhoaReq req) {
         Khoa khoa = khoaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Khoa not found"));
-        khoa.setMaKhoa(req.getMaKhoa());
-        khoa.setTenKhoa(req.getTenKhoa());
+        khoaMapper.updateEntityFromDto(req, khoa);
         Khoa updated = khoaRepository.save(khoa);
-        return toDto(updated);
+        return khoaMapper.toResDto(updated);
     }
 
     public void deleteKhoa(Long id) {
         khoaRepository.deleteById(id);
-    }
-
-    private KhoaResDto toDto(Khoa khoa) {
-        return KhoaResDto.builder()
-                .id(khoa.getId())
-                .maKhoa(khoa.getMaKhoa())
-                .tenKhoa(khoa.getTenKhoa())
-                .build();
     }
 }

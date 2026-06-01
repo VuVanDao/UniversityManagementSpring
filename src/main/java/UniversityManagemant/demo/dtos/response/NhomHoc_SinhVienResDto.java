@@ -1,4 +1,8 @@
-package UniversityManagemant.demo.dtos.request;
+package UniversityManagemant.demo.dtos.response;
+
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,8 +18,10 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreateMonHocReq {
-    String maMonHoc;
-    String tenMonHoc;
-    Integer tinChi;
+public class NhomHoc_SinhVienResDto {
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
+    List<SinhVienResDto> sinhViens;
+    NhomHocResDto nhomHoc;
+    Long id;
 }

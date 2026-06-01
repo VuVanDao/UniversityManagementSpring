@@ -7,16 +7,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class GiangVienResDto {
-    Long id;
-    String tenNguoiDung;
-    String maNguoiDung;
-    String tenLop;
+public class GiangVienResDto extends UserResDto {
+    LopQuanLiResDto lopQuanLi;
 }

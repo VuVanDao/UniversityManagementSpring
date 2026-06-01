@@ -1,11 +1,12 @@
 package UniversityManagemant.demo.models;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,8 +31,10 @@ public class ChuyenNganh extends AbstractModel {
     Khoa khoa;
 
     @OneToMany(mappedBy = "chuyenNganh")
+    @JsonIgnore
     List<User> users;
 
     @OneToMany(mappedBy = "chuyenNganh")
+    @JsonIgnore
     List<LopQuanLi> lopQuanLis;
 }
