@@ -2,6 +2,12 @@ package UniversityManagemant.demo.models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,7 +33,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User extends AbstractModel {
+public class User extends AbstractModel implements UserDetails{
     String maNguoiDung;
     String tenNguoiDung;
     String email;
@@ -51,6 +57,18 @@ public class User extends AbstractModel {
     @OneToOne(mappedBy = "user")
     @JsonIgnore
     SinhVien sinhVien;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        GrantedAuthority authority = new SimpleGrantedAuthority(this.getRole().toString());
+        Collection<GrantedAuthority> authorities = Collections.singletonList(authority);
+        return authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
 
     // @OneToOne(mappedBy = "truongKhoa")
     // Khoa khoa;
