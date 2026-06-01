@@ -1,5 +1,8 @@
 package UniversityManagemant.demo.dtos.response;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import UniversityManagemant.demo.enums.Gender;
 import UniversityManagemant.demo.models.Role;
 import lombok.AccessLevel;
@@ -22,7 +25,7 @@ public class UserResDto {
     String maNguoiDung;
     String tenNguoiDung;
     String email;
-    String ngaySinh;
+    LocalDate ngaySinh;
     Gender gioiTinh;
     Role role;
     ChuyenNganhResDto chuyenNganh;

@@ -1,9 +1,14 @@
 package UniversityManagemant.demo.configurations;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import UniversityManagemant.demo.enums.Gender;
 import UniversityManagemant.demo.models.Role;
 import UniversityManagemant.demo.models.User;
 import UniversityManagemant.demo.repositories.RoleRepository;
@@ -13,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @RequiredArgsConstructor
 public class StartAppConfig {
+    private final PasswordEncoder passwordEncoder;
     @Bean
     ApplicationRunner applicationRunner(UserRepository userRepository,RoleRepository roleRepository) {
         return args -> {
@@ -33,8 +39,9 @@ public class StartAppConfig {
                     .maNguoiDung("admin code")
                     .tenNguoiDung("admin")
                     .email("admin@example.com")
-                    .password("admin123")
-                    .ngaySinh(null)
+                    .password(passwordEncoder.encode("admin123"))
+                    .ngaySinh(LocalDate.now())
+                    .gioiTinh(Gender.KHAC)
                     .role(isAdminRoleExists)
                     .build();
                 userRepository.save(user);

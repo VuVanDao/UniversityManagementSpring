@@ -1,5 +1,8 @@
 package UniversityManagemant.demo.models;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import UniversityManagemant.demo.enums.Gender;
@@ -29,7 +32,7 @@ public class User extends AbstractModel {
     String tenNguoiDung;
     String email;
     String password;
-    String ngaySinh;
+    LocalDate ngaySinh;
     @Enumerated(EnumType.STRING)
     Gender gioiTinh;
 

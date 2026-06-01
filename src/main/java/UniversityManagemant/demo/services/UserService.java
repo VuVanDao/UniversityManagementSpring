@@ -2,6 +2,7 @@ package UniversityManagemant.demo.services;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreateUserReq;
@@ -19,9 +20,11 @@ import lombok.experimental.FieldDefaults;
 public class UserService {
     final UserRepository userRepository;
     final UserMapper userMapper;
+    final PasswordEncoder passwordEncoder;
 
     public UserResDto createUser(CreateUserReq createUserReq) {
         User user = userMapper.toEntity(createUserReq);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
         return userMapper.toResDto(savedUser);
     }
