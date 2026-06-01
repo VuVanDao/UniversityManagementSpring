@@ -1,0 +1,25 @@
+package UniversityManagemant.demo.models;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.Entity;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
+
+@Entity
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class HocKi extends AbstractModel {
+    String ten_hoc_ki;
+    LocalDate from_time;
+    LocalDate to_time;
+}
