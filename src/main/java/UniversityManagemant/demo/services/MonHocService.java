@@ -23,7 +23,7 @@ public class MonHocService {
         MonHoc monHoc = MonHoc.builder()
                 .maMonHoc(req.getMaMonHoc())
                 .tenMonHoc(req.getTenMonHoc())
-                .tinChi(req.getSoTinChi())
+                .tinChi(req.getTinChi())
                 .build();
         MonHoc saved = monHocRepository.save(monHoc);
         return toDto(saved);
@@ -46,7 +46,7 @@ public class MonHocService {
                 .orElseThrow(() -> new RuntimeException("MonHoc not found"));
         monHoc.setMaMonHoc(req.getMaMonHoc());
         monHoc.setTenMonHoc(req.getTenMonHoc());
-        monHoc.setTinChi(req.getSoTinChi());
+        monHoc.setTinChi(req.getTinChi());
         MonHoc updated = monHocRepository.save(monHoc);
         return toDto(updated);
     }

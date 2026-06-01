@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreateGiangVienReq;
 import UniversityManagemant.demo.dtos.response.GiangVienResDto;
+import UniversityManagemant.demo.mappers.GiangVienMapper;
 import UniversityManagemant.demo.models.GiangVien;
 import UniversityManagemant.demo.repositories.GiangVienRepository;
 import UniversityManagemant.demo.repositories.UserRepository;
@@ -22,6 +23,7 @@ public class GiangVienService {
     final GiangVienRepository giangVienRepository;
     final UserRepository userRepository;
     final LopQuanLiRepository lopQuanLiRepository;
+    final GiangVienMapper giangVienMapper;
 
     public GiangVienResDto createGiangVien(CreateGiangVienReq req) {
         GiangVien giangVien = GiangVien.builder()
@@ -29,18 +31,18 @@ public class GiangVienService {
                 .lopQuanLi(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow())
                 .build();
         GiangVien saved = giangVienRepository.save(giangVien);
-        return toDto(saved);
+        return giangVienMapper.toResDto(saved);
     }
 
     public GiangVienResDto getGiangVienById(Long id) {
         return giangVienRepository.findById(id)
-                .map(this::toDto)
+                .map(giangVienMapper::toResDto)
                 .orElseThrow(() -> new RuntimeException("GiangVien not found"));
     }
 
     public List<GiangVienResDto> getAllGiangVien() {
         return giangVienRepository.findAll().stream()
-                .map(this::toDto)
+                .map(giangVienMapper::toResDto)
                 .collect(Collectors.toList());
     }
 
@@ -50,19 +52,11 @@ public class GiangVienService {
         giangVien.setUser(userRepository.findById(req.getUserId()).orElseThrow());
         giangVien.setLopQuanLi(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow());
         GiangVien updated = giangVienRepository.save(giangVien);
-        return toDto(updated);
+        return giangVienMapper.toResDto(updated);
     }
 
     public void deleteGiangVien(Long id) {
         giangVienRepository.deleteById(id);
     }
 
-    private GiangVienResDto toDto(GiangVien giangVien) {
-        return GiangVienResDto.builder()
-                .id(giangVien.getId())
-                .tenNguoiDung(giangVien.getUser() != null ? giangVien.getUser().getTenNguoiDung() : null)
-                .maNguoiDung(giangVien.getUser() != null ? giangVien.getUser().getMaNguoiDung() : null)
-                .tenLop(giangVien.getLopQuanLi() != null ? giangVien.getLopQuanLi().getTenLop() : null)
-                .build();
-    }
 }

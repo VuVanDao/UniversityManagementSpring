@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreateRoleReq;
 import UniversityManagemant.demo.dtos.response.RoleResDto;
+import UniversityManagemant.demo.mappers.RoleMapper;
 import UniversityManagemant.demo.models.Role;
 import UniversityManagemant.demo.repositories.RoleRepository;
 import lombok.AccessLevel;
@@ -18,46 +19,35 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 public class RoleService {
     final RoleRepository roleRepository;
+    final RoleMapper roleMapper;
 
     public RoleResDto createRole(CreateRoleReq req) {
-        Role role = Role.builder()
-                .tenRole(req.getTenRole())
-                .moTa(req.getMoTa())
-                .build();
+        Role role = roleMapper.toEntity(req);
         Role saved = roleRepository.save(role);
-        return toDto(saved);
+        return roleMapper.toResDto(saved);
     }
 
     public RoleResDto getRoleById(Long id) {
         return roleRepository.findById(id)
-                .map(this::toDto)
+                .map(roleMapper::toResDto)
                 .orElseThrow(() -> new RuntimeException("Role not found"));
     }
 
     public List<RoleResDto> getAllRoles() {
         return roleRepository.findAll().stream()
-                .map(this::toDto)
+                .map(roleMapper::toResDto)
                 .collect(Collectors.toList());
     }
 
     public RoleResDto updateRole(Long id, CreateRoleReq req) {
         Role role = roleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Role not found"));
-        role.setTenRole(req.getTenRole());
-        role.setMoTa(req.getMoTa());
+        roleMapper.updateEntityFromDto(req, role);
         Role updated = roleRepository.save(role);
-        return toDto(updated);
+        return roleMapper.toResDto(updated);
     }
 
     public void deleteRole(Long id) {
         roleRepository.deleteById(id);
-    }
-
-    private RoleResDto toDto(Role role) {
-        return RoleResDto.builder()
-                .id(role.getId())
-                .tenRole(role.getTenRole())
-                .moTa(role.getMoTa())
-                .build();
     }
 }

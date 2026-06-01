@@ -1,13 +1,14 @@
 package UniversityManagemant.demo.models;
 
-import java.math.BigDecimal;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+
+import java.math.BigDecimal;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,16 +29,16 @@ public class SinhVien extends AbstractModel {
     BigDecimal diemGPA;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
     User user;
 
     @ManyToOne
-    @JoinColumn(name = "lop_quan_li_id")
     LopQuanLi lopQuanLi;
 
     @OneToMany(mappedBy = "sinhVien")
+    @JsonIgnore
     List<BangDiem> bangDiems;
 
     @OneToMany(mappedBy = "sinhVien")
+    @JsonIgnore
     List<NhomHoc_SinhVien> nhomHocSinhViens;
 }
