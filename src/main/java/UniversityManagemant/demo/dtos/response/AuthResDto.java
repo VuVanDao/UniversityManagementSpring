@@ -27,4 +27,6 @@ public class AuthResDto {
     Gender gioiTinh;
     RoleResDto role;
     String message;
+    String accessToken;
+    String refreshToken;
 }
