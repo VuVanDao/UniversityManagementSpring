@@ -60,7 +60,7 @@ public class User extends AbstractModel implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        GrantedAuthority authority = new SimpleGrantedAuthority(this.getRole().toString());
+        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + this.getRole().getTenRole());
         Collection<GrantedAuthority> authorities = Collections.singletonList(authority);
         return authorities;
     }

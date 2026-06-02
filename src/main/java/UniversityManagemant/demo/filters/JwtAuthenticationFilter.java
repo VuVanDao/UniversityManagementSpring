@@ -1,6 +1,8 @@
 package UniversityManagemant.demo.filters;
 
 import UniversityManagemant.demo.utils.JwtProvider;
+import UniversityManagemant.demo.repositories.UserRepository;
+import UniversityManagemant.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,6 +22,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtProvider jwtProvider;
     
+    @Autowired
+    private UserRepository userRepository;
+    
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String BEARER_PREFIX = "Bearer ";
     
@@ -28,19 +33,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         
         try {
-            // lấy token từ header và tiến hành lấy token (loại Bearer ở đầu token)
+            // Extract token from header
             String jwt = extractTokenFromRequest(request);
             
             if (jwt != null && jwtProvider.validateToken(jwt)) {
                 // Validate that it's an access token
                 String tokenType = jwtProvider.getTokenType(jwt);
                 if (jwtProvider.TOKEN_TYPE_ACCESS.equals(tokenType)) {
-                    String username = jwtProvider.getUsernameFromToken(jwt);
+                    String email = jwtProvider.getUsernameFromToken(jwt);
                     
-                    // Create authentication without password (stateless authentication)
-                    Authentication authentication = new UsernamePasswordAuthenticationToken(
-                            username, null, null);
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    // Load user from database to get authorities and roles
+                    User user = userRepository.findByEmailOrMaNguoiDung(email, email)
+                            .orElse(null);
+                    
+                    if (user != null) {
+                        // Create authentication WITH authorities/roles extracted from user
+                        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                                email, null, user.getAuthorities());
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
+                    }
                 }
             }
         } catch (Exception e) {
