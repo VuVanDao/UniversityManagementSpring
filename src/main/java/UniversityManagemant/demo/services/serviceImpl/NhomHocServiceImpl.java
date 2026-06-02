@@ -1,4 +1,4 @@
-package UniversityManagemant.demo.services;
+package UniversityManagemant.demo.services.serviceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +12,7 @@ import UniversityManagemant.demo.repositories.NhomHocRepository;
 import UniversityManagemant.demo.repositories.MonHocRepository;
 import UniversityManagemant.demo.repositories.GiangVienRepository;
 import UniversityManagemant.demo.repositories.PhongHocRepository;
+import UniversityManagemant.demo.services.serviceInterface.NhomHocService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -19,12 +20,13 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class NhomHocService {
+public class NhomHocServiceImpl implements NhomHocService {
     final NhomHocRepository nhomHocRepository;
     final MonHocRepository monHocRepository;
     final GiangVienRepository giangVienRepository;
     final PhongHocRepository phongHocRepository;
 
+    @Override
     public NhomHocResDto createNhomHoc(CreateNhomHocReq req) {
         NhomHoc nhomHoc = NhomHoc.builder()
                 .maNhom(req.getMaNhom())
@@ -42,18 +44,21 @@ public class NhomHocService {
         return toDto(saved);
     }
 
+    @Override
     public NhomHocResDto getNhomHocById(Long id) {
         return nhomHocRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("NhomHoc not found"));
     }
 
+    @Override
     public List<NhomHocResDto> getAllNhomHoc() {
         return nhomHocRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public NhomHocResDto updateNhomHoc(Long id, CreateNhomHocReq req) {
         NhomHoc nhomHoc = nhomHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("NhomHoc not found"));
@@ -71,6 +76,7 @@ public class NhomHocService {
         return toDto(updated);
     }
 
+    @Override
     public void deleteNhomHoc(Long id) {
         nhomHocRepository.deleteById(id);
     }

@@ -1,4 +1,4 @@
-package UniversityManagemant.demo.services;
+package UniversityManagemant.demo.services.serviceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +9,7 @@ import UniversityManagemant.demo.dtos.request.CreateHocKiReq;
 import UniversityManagemant.demo.dtos.response.HocKiResDto;
 import UniversityManagemant.demo.models.HocKi;
 import UniversityManagemant.demo.repositories.HocKiRepository;
+import UniversityManagemant.demo.services.serviceInterface.HocKiService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -16,9 +17,10 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class HocKiService {
+public class HocKiServiceImpl implements HocKiService {
     final HocKiRepository hocKiRepository;
 
+    @Override
     public HocKiResDto createHocKi(CreateHocKiReq req) {
         HocKi hocKi = HocKi.builder()
                 .tenHocKi(req.getTenHocKi())
@@ -29,18 +31,21 @@ public class HocKiService {
         return toDto(saved);
     }
 
+    @Override
     public HocKiResDto getHocKiById(Long id) {
         return hocKiRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("HocKi not found"));
     }
 
+    @Override
     public List<HocKiResDto> getAllHocKi() {
         return hocKiRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public HocKiResDto updateHocKi(Long id, CreateHocKiReq req) {
         HocKi hocKi = hocKiRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("HocKi not found"));
@@ -51,6 +56,7 @@ public class HocKiService {
         return toDto(updated);
     }
 
+    @Override
     public void deleteHocKi(Long id) {
         hocKiRepository.deleteById(id);
     }

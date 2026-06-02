@@ -1,4 +1,4 @@
-package UniversityManagemant.demo.services;
+package UniversityManagemant.demo.services.serviceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +11,7 @@ import UniversityManagemant.demo.models.SinhVien;
 import UniversityManagemant.demo.repositories.SinhVienRepository;
 import UniversityManagemant.demo.repositories.UserRepository;
 import UniversityManagemant.demo.repositories.LopQuanLiRepository;
+import UniversityManagemant.demo.services.serviceInterface.SinhVienService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,11 +19,12 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class SinhVienService {
+public class SinhVienServiceImpl implements SinhVienService {
     final SinhVienRepository sinhVienRepository;
     final UserRepository userRepository;
     final LopQuanLiRepository lopQuanLiRepository;
 
+    @Override
     public SinhVienResDto createSinhVien(CreateSinhVienReq req) {
         SinhVien sinhVien = SinhVien.builder()
                 .maSinhVien(req.getMaSinhVien())
@@ -33,18 +35,21 @@ public class SinhVienService {
         return toDto(saved);
     }
 
+    @Override
     public SinhVienResDto getSinhVienById(Long id) {
         return sinhVienRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("SinhVien not found"));
     }
 
+    @Override
     public List<SinhVienResDto> getAllSinhVien() {
         return sinhVienRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public SinhVienResDto updateSinhVien(Long id, CreateSinhVienReq req) {
         SinhVien sinhVien = sinhVienRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("SinhVien not found"));
@@ -55,6 +60,7 @@ public class SinhVienService {
         return toDto(updated);
     }
 
+    @Override
     public void deleteSinhVien(Long id) {
         sinhVienRepository.deleteById(id);
     }

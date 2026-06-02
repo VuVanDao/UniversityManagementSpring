@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreatePhongHocReq;
 import UniversityManagemant.demo.dtos.response.PhongHocResDto;
-import UniversityManagemant.demo.services.PhongHocService;
+import UniversityManagemant.demo.services.serviceInterface.PhongHocService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

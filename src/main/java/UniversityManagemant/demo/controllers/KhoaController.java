@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateKhoaReq;
 import UniversityManagemant.demo.dtos.response.KhoaResDto;
-import UniversityManagemant.demo.services.KhoaService;
+import UniversityManagemant.demo.services.serviceInterface.KhoaService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

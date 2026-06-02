@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import UniversityManagemant.demo.dtos.request.CreateNhomHocReq;
 import UniversityManagemant.demo.dtos.response.NhomHocResDto;
-import UniversityManagemant.demo.services.NhomHocService;
+import UniversityManagemant.demo.services.serviceInterface.NhomHocService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

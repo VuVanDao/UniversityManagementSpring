@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.LoginReq;
 import UniversityManagemant.demo.dtos.response.AuthResDto;
-import UniversityManagemant.demo.services.AuthService;
+import UniversityManagemant.demo.services.serviceInterface.AuthService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateBangDiemReq;
 import UniversityManagemant.demo.dtos.response.BangDiemResDto;
-import UniversityManagemant.demo.services.BangDiemService;
+import UniversityManagemant.demo.services.serviceInterface.BangDiemService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

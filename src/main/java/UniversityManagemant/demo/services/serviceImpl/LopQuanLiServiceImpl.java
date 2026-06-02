@@ -1,4 +1,4 @@
-package UniversityManagemant.demo.services;
+package UniversityManagemant.demo.services.serviceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +10,7 @@ import UniversityManagemant.demo.dtos.response.LopQuanLiResDto;
 import UniversityManagemant.demo.models.LopQuanLi;
 import UniversityManagemant.demo.repositories.LopQuanLiRepository;
 import UniversityManagemant.demo.repositories.ChuyenNganhRepository;
+import UniversityManagemant.demo.services.serviceInterface.LopQuanLiService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,10 +18,11 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class LopQuanLiService {
+public class LopQuanLiServiceImpl implements LopQuanLiService {
     final LopQuanLiRepository lopQuanLiRepository;
     final ChuyenNganhRepository chuyenNganhRepository;
 
+    @Override
     public LopQuanLiResDto createLopQuanLi(CreateLopQuanLiReq req) {
         LopQuanLi lopQuanLi = LopQuanLi.builder()
                 .maLop(req.getMaLop())
@@ -31,18 +33,21 @@ public class LopQuanLiService {
         return toDto(saved);
     }
 
+    @Override
     public LopQuanLiResDto getLopQuanLiById(Long id) {
         return lopQuanLiRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("LopQuanLi not found"));
     }
 
+    @Override
     public List<LopQuanLiResDto> getAllLopQuanLi() {
         return lopQuanLiRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public LopQuanLiResDto updateLopQuanLi(Long id, CreateLopQuanLiReq req) {
         LopQuanLi lopQuanLi = lopQuanLiRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("LopQuanLi not found"));
@@ -53,6 +58,7 @@ public class LopQuanLiService {
         return toDto(updated);
     }
 
+    @Override
     public void deleteLopQuanLi(Long id) {
         lopQuanLiRepository.deleteById(id);
     }
