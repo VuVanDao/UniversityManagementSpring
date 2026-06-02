@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateKhoaReq;
+import UniversityManagemant.demo.dtos.request.UpdateKhoaReq;
 import UniversityManagemant.demo.dtos.response.KhoaResDto;
 import UniversityManagemant.demo.services.serviceInterface.KhoaService;
 import lombok.AccessLevel;
@@ -21,7 +23,7 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
-@RequestMapping("/khoas")
+@RequestMapping("/khoa")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class KhoaController {
@@ -43,11 +45,13 @@ public class KhoaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<KhoaResDto> updateKhoa(@PathVariable Long id, @RequestBody CreateKhoaReq req) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<KhoaResDto> updateKhoa(@PathVariable Long id, @RequestBody UpdateKhoaReq req) {
         return ResponseEntity.ok(khoaService.updateKhoa(id, req));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteKhoa(@PathVariable Long id) {
         khoaService.deleteKhoa(id);
         return ResponseEntity.noContent().build();

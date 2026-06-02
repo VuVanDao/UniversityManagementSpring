@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreateKhoaReq;
+import UniversityManagemant.demo.dtos.request.UpdateKhoaReq;
 import UniversityManagemant.demo.dtos.response.KhoaResDto;
 import UniversityManagemant.demo.mappers.KhoaMapper;
 import UniversityManagemant.demo.models.Khoa;
@@ -44,7 +45,7 @@ public class KhoaServiceImpl implements KhoaService {
     }
 
     @Override
-    public KhoaResDto updateKhoa(Long id, CreateKhoaReq req) {
+    public KhoaResDto updateKhoa(Long id, UpdateKhoaReq req) {
         Khoa khoa = khoaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Khoa not found"));
         khoaMapper.updateEntityFromDto(req, khoa);

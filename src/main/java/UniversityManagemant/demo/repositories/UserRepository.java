@@ -11,4 +11,5 @@ import UniversityManagemant.demo.models.User;
 public interface UserRepository extends JpaRepository<User,Long>{
     User findByTenNguoiDung(String tenNguoiDung);
     Optional<User> findByEmailOrMaNguoiDung(String email, String maNguoiDung);
+    Optional<User> findByEmail(String email);
 }

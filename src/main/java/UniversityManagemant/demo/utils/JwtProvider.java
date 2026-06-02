@@ -86,10 +86,10 @@ public class JwtProvider {
         System.out.println("------jwtProvider.validateToken------------");
         try {
             Jwts
-                    .parser()
-                    .verifyWith(key)
-                    .build()
-                    .parseSignedClaims(token);
+                .parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token);
             return true;
         } catch (Exception e) {
             return false;

@@ -3,12 +3,17 @@ package UniversityManagemant.demo.mappers;
 import org.springframework.stereotype.Component;
 
 import UniversityManagemant.demo.dtos.request.CreateKhoaReq;
+import UniversityManagemant.demo.dtos.request.UpdateKhoaReq;
 import UniversityManagemant.demo.dtos.response.KhoaResDto;
 import UniversityManagemant.demo.models.Khoa;
+import UniversityManagemant.demo.models.User;
+import UniversityManagemant.demo.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class KhoaMapper {
-
+    private final UserRepository userRepository;
     public Khoa toEntity(CreateKhoaReq createKhoaReq) {
         return Khoa.builder()
                 .maKhoa(createKhoaReq.getMaKhoa())
@@ -24,8 +29,13 @@ public class KhoaMapper {
                 .build();
     }
 
-    public void updateEntityFromDto(CreateKhoaReq createKhoaReq, Khoa khoa) {
-        khoa.setMaKhoa(createKhoaReq.getMaKhoa());
-        khoa.setTenKhoa(createKhoaReq.getTenKhoa());
+    public void updateEntityFromDto(UpdateKhoaReq updateKhoaReq, Khoa khoa) {
+        khoa.setMaKhoa(updateKhoaReq.getMaKhoa());
+        khoa.setTenKhoa(updateKhoaReq.getTenKhoa());
+        if (updateKhoaReq.getTruongKhoaId() != null) {
+            User truongKhoa = userRepository.findById(updateKhoaReq.getTruongKhoaId())
+                    .orElseThrow(() -> new RuntimeException("Truong Khoa not found with id: " + updateKhoaReq.getTruongKhoaId()));
+            khoa.setTruongKhoa(truongKhoa);
+        }
     }
 }

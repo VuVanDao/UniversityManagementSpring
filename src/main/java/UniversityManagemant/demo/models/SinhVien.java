@@ -27,6 +27,7 @@ import lombok.experimental.SuperBuilder;
 public class SinhVien extends AbstractModel {
     String maSinhVien;
     BigDecimal diemGPA;
+    String HeDaoTao;
 
     @OneToOne
     User user;

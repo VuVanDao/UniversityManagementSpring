@@ -26,9 +26,8 @@ public class Khoa extends AbstractModel {
     String maKhoa;
     String tenKhoa;
 
-    // @OneToOne
-    // @JoinColumn(name = "truong_khoa_id")
-    // User truongKhoa;
+    @OneToOne
+    User truongKhoa;
 
     @OneToMany(mappedBy = "khoa")
     @JsonIgnore
