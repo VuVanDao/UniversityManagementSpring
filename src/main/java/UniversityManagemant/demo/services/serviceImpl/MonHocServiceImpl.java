@@ -1,4 +1,4 @@
-package UniversityManagemant.demo.services;
+package UniversityManagemant.demo.services.serviceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +9,7 @@ import UniversityManagemant.demo.dtos.request.CreateMonHocReq;
 import UniversityManagemant.demo.dtos.response.MonHocResDto;
 import UniversityManagemant.demo.models.MonHoc;
 import UniversityManagemant.demo.repositories.MonHocRepository;
+import UniversityManagemant.demo.services.serviceInterface.MonHocService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -16,9 +17,10 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class MonHocService {
+public class MonHocServiceImpl implements MonHocService {
     final MonHocRepository monHocRepository;
 
+    @Override
     public MonHocResDto createMonHoc(CreateMonHocReq req) {
         MonHoc monHoc = MonHoc.builder()
                 .maMonHoc(req.getMaMonHoc())
@@ -29,18 +31,21 @@ public class MonHocService {
         return toDto(saved);
     }
 
+    @Override
     public MonHocResDto getMonHocById(Long id) {
         return monHocRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("MonHoc not found"));
     }
 
+    @Override
     public List<MonHocResDto> getAllMonHoc() {
         return monHocRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public MonHocResDto updateMonHoc(Long id, CreateMonHocReq req) {
         MonHoc monHoc = monHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("MonHoc not found"));
@@ -51,6 +56,7 @@ public class MonHocService {
         return toDto(updated);
     }
 
+    @Override
     public void deleteMonHoc(Long id) {
         monHocRepository.deleteById(id);
     }

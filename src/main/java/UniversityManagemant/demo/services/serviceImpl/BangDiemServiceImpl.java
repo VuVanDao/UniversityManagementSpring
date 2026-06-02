@@ -1,4 +1,4 @@
-package UniversityManagemant.demo.services;
+package UniversityManagemant.demo.services.serviceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +11,7 @@ import UniversityManagemant.demo.models.BangDiem;
 import UniversityManagemant.demo.repositories.BangDiemRepository;
 import UniversityManagemant.demo.repositories.SinhVienRepository;
 import UniversityManagemant.demo.repositories.MonHocRepository;
+import UniversityManagemant.demo.services.serviceInterface.BangDiemService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,11 +19,12 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class BangDiemService {
+public class BangDiemServiceImpl implements BangDiemService {
     final BangDiemRepository bangDiemRepository;
     final SinhVienRepository sinhVienRepository;
     final MonHocRepository monHocRepository;
 
+    @Override
     public BangDiemResDto createBangDiem(CreateBangDiemReq req) {
         BangDiem bangDiem = BangDiem.builder()
                 .sinhVien(sinhVienRepository.findById(req.getSinhVienId()).orElseThrow())
@@ -36,18 +38,21 @@ public class BangDiemService {
         return toDto(saved);
     }
 
+    @Override
     public BangDiemResDto getBangDiemById(Long id) {
         return bangDiemRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("BangDiem not found"));
     }
 
+    @Override
     public List<BangDiemResDto> getAllBangDiem() {
         return bangDiemRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public BangDiemResDto updateBangDiem(Long id, CreateBangDiemReq req) {
         BangDiem bangDiem = bangDiemRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("BangDiem not found"));
@@ -61,6 +66,7 @@ public class BangDiemService {
         return toDto(updated);
     }
 
+    @Override
     public void deleteBangDiem(Long id) {
         bangDiemRepository.deleteById(id);
     }

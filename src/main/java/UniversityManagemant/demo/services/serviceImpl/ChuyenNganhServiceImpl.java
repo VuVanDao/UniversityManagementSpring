@@ -1,4 +1,4 @@
-package UniversityManagemant.demo.services;
+package UniversityManagemant.demo.services.serviceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +10,7 @@ import UniversityManagemant.demo.dtos.response.ChuyenNganhResDto;
 import UniversityManagemant.demo.models.ChuyenNganh;
 import UniversityManagemant.demo.repositories.ChuyenNganhRepository;
 import UniversityManagemant.demo.repositories.KhoaRepository;
+import UniversityManagemant.demo.services.serviceInterface.ChuyenNganhService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,10 +18,11 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class ChuyenNganhService {
+public class ChuyenNganhServiceImpl implements ChuyenNganhService {
     final ChuyenNganhRepository chuyenNganhRepository;
     final KhoaRepository khoaRepository;
 
+    @Override
     public ChuyenNganhResDto createChuyenNganh(CreateChuyenNganhReq req) {
         ChuyenNganh chuyenNganh = ChuyenNganh.builder()
                 .maChuyenNganh(req.getMaChuyenNganh())
@@ -31,18 +33,21 @@ public class ChuyenNganhService {
         return toDto(saved);
     }
 
+    @Override
     public ChuyenNganhResDto getChuyenNganhById(Long id) {
         return chuyenNganhRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("ChuyenNganh not found"));
     }
 
+    @Override
     public List<ChuyenNganhResDto> getAllChuyenNganh() {
         return chuyenNganhRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public ChuyenNganhResDto updateChuyenNganh(Long id, CreateChuyenNganhReq req) {
         ChuyenNganh chuyenNganh = chuyenNganhRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("ChuyenNganh not found"));
@@ -53,6 +58,7 @@ public class ChuyenNganhService {
         return toDto(updated);
     }
 
+    @Override
     public void deleteChuyenNganh(Long id) {
         chuyenNganhRepository.deleteById(id);
     }

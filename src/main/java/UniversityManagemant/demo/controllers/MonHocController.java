@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateMonHocReq;
 import UniversityManagemant.demo.dtos.response.MonHocResDto;
-import UniversityManagemant.demo.services.MonHocService;
+import UniversityManagemant.demo.services.serviceInterface.MonHocService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

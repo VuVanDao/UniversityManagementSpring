@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateRoleReq;
 import UniversityManagemant.demo.dtos.response.RoleResDto;
-import UniversityManagemant.demo.services.RoleService;
+import UniversityManagemant.demo.services.serviceInterface.RoleService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

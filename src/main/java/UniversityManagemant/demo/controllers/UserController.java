@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateUserReq;
 import UniversityManagemant.demo.dtos.response.UserResDto;
-import UniversityManagemant.demo.services.UserService;
+import UniversityManagemant.demo.services.serviceInterface.UserService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

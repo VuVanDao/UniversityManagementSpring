@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateGiangVienReq;
 import UniversityManagemant.demo.dtos.response.GiangVienResDto;
-import UniversityManagemant.demo.services.GiangVienService;
+import UniversityManagemant.demo.services.serviceInterface.GiangVienService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

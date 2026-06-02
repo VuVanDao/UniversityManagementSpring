@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateLopQuanLiReq;
 import UniversityManagemant.demo.dtos.response.LopQuanLiResDto;
-import UniversityManagemant.demo.services.LopQuanLiService;
+import UniversityManagemant.demo.services.serviceInterface.LopQuanLiService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateSinhVienReq;
 import UniversityManagemant.demo.dtos.response.SinhVienResDto;
-import UniversityManagemant.demo.services.SinhVienService;
+import UniversityManagemant.demo.services.serviceInterface.SinhVienService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

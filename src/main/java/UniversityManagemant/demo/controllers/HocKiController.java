@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateHocKiReq;
 import UniversityManagemant.demo.dtos.response.HocKiResDto;
-import UniversityManagemant.demo.services.HocKiService;
+import UniversityManagemant.demo.services.serviceInterface.HocKiService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

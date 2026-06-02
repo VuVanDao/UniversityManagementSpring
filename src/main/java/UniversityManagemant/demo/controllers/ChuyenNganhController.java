@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateChuyenNganhReq;
 import UniversityManagemant.demo.dtos.response.ChuyenNganhResDto;
-import UniversityManagemant.demo.services.ChuyenNganhService;
+import UniversityManagemant.demo.services.serviceInterface.ChuyenNganhService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
