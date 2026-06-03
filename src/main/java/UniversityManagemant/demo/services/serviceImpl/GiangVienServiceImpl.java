@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import UniversityManagemant.demo.dtos.request.CreateGiangVienReq;
-import UniversityManagemant.demo.dtos.response.GiangVienResDto;
+import UniversityManagemant.demo.dtos.request.CreateLecturerReq;
+import UniversityManagemant.demo.dtos.response.LecturerResDto;
 import UniversityManagemant.demo.mappers.GiangVienMapper;
 import UniversityManagemant.demo.models.Lecturer;
 import UniversityManagemant.demo.repositories.GiangVienRepository;
@@ -27,35 +27,35 @@ public class GiangVienServiceImpl implements GiangVienService {
     final GiangVienMapper giangVienMapper;
 
     @Override
-    public GiangVienResDto createGiangVien(CreateGiangVienReq req) {
+    public LecturerResDto createGiangVien(CreateLecturerReq req) {
         Lecturer giangVien = Lecturer.builder()
                 .user(userRepository.findById(req.getUserId()).orElseThrow())
-                .classManagement(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow())
+                .classManagement(lopQuanLiRepository.findById(req.getClassManagementId()).orElseThrow())
                 .build();
         Lecturer saved = giangVienRepository.save(giangVien);
         return giangVienMapper.toResDto(saved);
     }
 
     @Override
-    public GiangVienResDto getGiangVienById(Long id) {
+    public LecturerResDto getGiangVienById(Long id) {
         return giangVienRepository.findById(id)
                 .map(giangVienMapper::toResDto)
                 .orElseThrow(() -> new RuntimeException("GiangVien not found"));
     }
 
     @Override
-    public List<GiangVienResDto> getAllGiangVien() {
+    public List<LecturerResDto> getAllGiangVien() {
         return giangVienRepository.findAll().stream()
                 .map(giangVienMapper::toResDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public GiangVienResDto updateGiangVien(Long id, CreateGiangVienReq req) {
+    public LecturerResDto updateGiangVien(Long id, CreateLecturerReq req) {
         Lecturer giangVien = giangVienRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("GiangVien not found"));
         giangVien.setUser(userRepository.findById(req.getUserId()).orElseThrow());
-        giangVien.setClassManagement(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow());
+        giangVien.setClassManagement(lopQuanLiRepository.findById(req.getClassManagementId()).orElseThrow());
         Lecturer updated = giangVienRepository.save(giangVien);
         return giangVienMapper.toResDto(updated);
     }

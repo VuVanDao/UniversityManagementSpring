@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import UniversityManagemant.demo.dtos.request.CreateGiangVienReq;
-import UniversityManagemant.demo.dtos.response.GiangVienResDto;
+import UniversityManagemant.demo.dtos.request.CreateLecturerReq;
+import UniversityManagemant.demo.dtos.response.LecturerResDto;
 import UniversityManagemant.demo.services.serviceInterface.GiangVienService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,22 +28,22 @@ public class GiangVienController {
     final GiangVienService giangVienService;
 
     @PostMapping
-    public ResponseEntity<GiangVienResDto> createGiangVien(@RequestBody CreateGiangVienReq req) {
+    public ResponseEntity<LecturerResDto> createGiangVien(@RequestBody CreateLecturerReq req) {
         return ResponseEntity.status(HttpStatus.CREATED).body(giangVienService.createGiangVien(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GiangVienResDto> getGiangVien(@PathVariable Long id) {
+    public ResponseEntity<LecturerResDto> getGiangVien(@PathVariable Long id) {
         return ResponseEntity.ok(giangVienService.getGiangVienById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<GiangVienResDto>> getAllGiangVien() {
+    public ResponseEntity<List<LecturerResDto>> getAllGiangVien() {
         return ResponseEntity.ok(giangVienService.getAllGiangVien());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GiangVienResDto> updateGiangVien(@PathVariable Long id, @RequestBody CreateGiangVienReq req) {
+    public ResponseEntity<LecturerResDto> updateGiangVien(@PathVariable Long id, @RequestBody CreateLecturerReq req) {
         return ResponseEntity.ok(giangVienService.updateGiangVien(id, req));
     }
 

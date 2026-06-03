@@ -15,6 +15,6 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 public class LoginReq {
-    String emailOrMaNguoiDung;
+    String emailOrUserCode;
     String password;
 }

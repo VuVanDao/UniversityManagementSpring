@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import UniversityManagemant.demo.dtos.request.CreateChuyenNganhReq;
-import UniversityManagemant.demo.dtos.response.ChuyenNganhResDto;
+import UniversityManagemant.demo.dtos.request.CreateMajorReq;
+import UniversityManagemant.demo.dtos.response.MajorResDto;
 import UniversityManagemant.demo.services.serviceInterface.ChuyenNganhService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,22 +28,22 @@ public class ChuyenNganhController {
     final ChuyenNganhService chuyenNganhService;
 
     @PostMapping
-    public ResponseEntity<ChuyenNganhResDto> createChuyenNganh(@RequestBody CreateChuyenNganhReq req) {
+    public ResponseEntity<MajorResDto> createChuyenNganh(@RequestBody CreateMajorReq req) {
         return ResponseEntity.status(HttpStatus.CREATED).body(chuyenNganhService.createChuyenNganh(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ChuyenNganhResDto> getChuyenNganh(@PathVariable Long id) {
+    public ResponseEntity<MajorResDto> getChuyenNganh(@PathVariable Long id) {
         return ResponseEntity.ok(chuyenNganhService.getChuyenNganhById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<ChuyenNganhResDto>> getAllChuyenNganh() {
+    public ResponseEntity<List<MajorResDto>> getAllChuyenNganh() {
         return ResponseEntity.ok(chuyenNganhService.getAllChuyenNganh());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ChuyenNganhResDto> updateChuyenNganh(@PathVariable Long id, @RequestBody CreateChuyenNganhReq req) {
+    public ResponseEntity<MajorResDto> updateChuyenNganh(@PathVariable Long id, @RequestBody CreateMajorReq req) {
         return ResponseEntity.ok(chuyenNganhService.updateChuyenNganh(id, req));
     }
 

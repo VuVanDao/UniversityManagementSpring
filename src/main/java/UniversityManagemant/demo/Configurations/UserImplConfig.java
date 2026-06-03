@@ -15,7 +15,7 @@ public class UserImplConfig implements UserDetailsService {
     private final UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmailOrMaNguoiDung(username,username)
+        User user = userRepository.findByEmailOrUserCode(username,username)
                 .orElseThrow(() -> new UsernameNotFoundException("Không tìm thấy người dùng với email hoặc mã người dùng: " + username));
         return user;
     }

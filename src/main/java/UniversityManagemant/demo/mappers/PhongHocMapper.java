@@ -2,27 +2,27 @@ package UniversityManagemant.demo.mappers;
 
 import org.springframework.stereotype.Component;
 
-import UniversityManagemant.demo.dtos.request.CreatePhongHocReq;
-import UniversityManagemant.demo.dtos.response.PhongHocResDto;
+import UniversityManagemant.demo.dtos.request.CreateClassroomReq;
+import UniversityManagemant.demo.dtos.response.ClassroomResDto;
 import UniversityManagemant.demo.models.Classroom;
 
 @Component
 public class PhongHocMapper {
 
-    public Classroom toEntity(CreatePhongHocReq createPhongHocReq) {
+    public Classroom toEntity(CreateClassroomReq createClassroomReq) {
         return Classroom.builder()
-                .classroomName(createPhongHocReq.getTenPhongHoc())
+                .classroomName(createClassroomReq.getClassroomName())
                 .build();
     }
 
-    public PhongHocResDto toResDto(Classroom phongHoc) {
-        return PhongHocResDto.builder()
+    public ClassroomResDto toResDto(Classroom phongHoc) {
+        return ClassroomResDto.builder()
                 .id(phongHoc.getId())
-                .tenPhongHoc(phongHoc.getClassroomName())
+                .classroomName(phongHoc.getClassroomName())
                 .build();
     }
 
-    public void updateEntityFromDto(CreatePhongHocReq createPhongHocReq, Classroom phongHoc) {
-        phongHoc.setClassroomName(createPhongHocReq.getTenPhongHoc());
+    public void updateEntityFromDto(CreateClassroomReq createClassroomReq, Classroom phongHoc) {
+        phongHoc.setClassroomName(createClassroomReq.getClassroomName());
     }
 }

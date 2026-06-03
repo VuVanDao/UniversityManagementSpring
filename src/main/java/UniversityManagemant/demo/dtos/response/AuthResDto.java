@@ -3,7 +3,6 @@ package UniversityManagemant.demo.dtos.response;
 import java.time.LocalDate;
 
 import UniversityManagemant.demo.enums.Gender;
-import UniversityManagemant.demo.models.Role;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,11 +19,11 @@ import lombok.experimental.FieldDefaults;
 @Setter
 public class AuthResDto {
     Long id;
-    String maNguoiDung;
-    String tenNguoiDung;
+    String userCode;
+    String userName;
     String email;
-    LocalDate ngaySinh;
-    Gender gioiTinh;
+    LocalDate dateOfBirth;
+    Gender gender;
     RoleResDto role;
     String message;
     String accessToken;

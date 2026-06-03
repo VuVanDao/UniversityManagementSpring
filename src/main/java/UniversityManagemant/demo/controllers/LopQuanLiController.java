@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import UniversityManagemant.demo.dtos.request.CreateLopQuanLiReq;
-import UniversityManagemant.demo.dtos.response.LopQuanLiResDto;
+import UniversityManagemant.demo.dtos.request.CreateClassManagementReq;
+import UniversityManagemant.demo.dtos.response.ClassManagementResDto;
 import UniversityManagemant.demo.services.serviceInterface.LopQuanLiService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,22 +28,22 @@ public class LopQuanLiController {
     final LopQuanLiService lopQuanLiService;
 
     @PostMapping
-    public ResponseEntity<LopQuanLiResDto> createLopQuanLi(@RequestBody CreateLopQuanLiReq req) {
+    public ResponseEntity<ClassManagementResDto> createLopQuanLi(@RequestBody CreateClassManagementReq req) {
         return ResponseEntity.status(HttpStatus.CREATED).body(lopQuanLiService.createLopQuanLi(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LopQuanLiResDto> getLopQuanLi(@PathVariable Long id) {
+    public ResponseEntity<ClassManagementResDto> getLopQuanLi(@PathVariable Long id) {
         return ResponseEntity.ok(lopQuanLiService.getLopQuanLiById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<LopQuanLiResDto>> getAllLopQuanLi() {
+    public ResponseEntity<List<ClassManagementResDto>> getAllLopQuanLi() {
         return ResponseEntity.ok(lopQuanLiService.getAllLopQuanLi());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<LopQuanLiResDto> updateLopQuanLi(@PathVariable Long id, @RequestBody CreateLopQuanLiReq req) {
+    public ResponseEntity<ClassManagementResDto> updateLopQuanLi(@PathVariable Long id, @RequestBody CreateClassManagementReq req) {
         return ResponseEntity.ok(lopQuanLiService.updateLopQuanLi(id, req));
     }
 

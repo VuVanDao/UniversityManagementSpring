@@ -2,33 +2,33 @@ package UniversityManagemant.demo.mappers;
 
 import org.springframework.stereotype.Component;
 
-import UniversityManagemant.demo.dtos.request.CreateMonHocReq;
-import UniversityManagemant.demo.dtos.response.MonHocResDto;
+import UniversityManagemant.demo.dtos.request.CreateSubjectReq;
+import UniversityManagemant.demo.dtos.response.SubjectResDto;
 import UniversityManagemant.demo.models.Subject;
 
 @Component
 public class MonHocMapper {
 
-    public Subject toEntity(CreateMonHocReq createMonHocReq) {
+    public Subject toEntity(CreateSubjectReq createSubjectReq) {
         return Subject.builder()
-                .subjectCode(createMonHocReq.getMaMonHoc())
-                .subjectName(createMonHocReq.getTenMonHoc())
-                .credits(createMonHocReq.getTinChi())
+                .subjectCode(createSubjectReq.getSubjectCode())
+                .subjectName(createSubjectReq.getSubjectName())
+                .credits(createSubjectReq.getCredits())
                 .build();
     }
 
-    public MonHocResDto toResDto(Subject monHoc) {
-        return MonHocResDto.builder()
+    public SubjectResDto toResDto(Subject monHoc) {
+        return SubjectResDto.builder()
                 .id(monHoc.getId())
-                .maMonHoc(monHoc.getSubjectCode())
-                .tenMonHoc(monHoc.getSubjectName())
-                .tinChi(monHoc.getCredits())
+                .subjectCode(monHoc.getSubjectCode())
+                .subjectName(monHoc.getSubjectName())
+                .credits(monHoc.getCredits())
                 .build();
     }
 
-    public void updateEntityFromDto(CreateMonHocReq createMonHocReq, Subject monHoc) {
-        monHoc.setSubjectCode(createMonHocReq.getMaMonHoc());
-        monHoc.setSubjectName(createMonHocReq.getTenMonHoc());
-        monHoc.setCredits(createMonHocReq.getTinChi());
+    public void updateEntityFromDto(CreateSubjectReq createSubjectReq, Subject monHoc) {
+        monHoc.setSubjectCode(createSubjectReq.getSubjectCode());
+        monHoc.setSubjectName(createSubjectReq.getSubjectName());
+        monHoc.setCredits(createSubjectReq.getCredits());
     }
 }

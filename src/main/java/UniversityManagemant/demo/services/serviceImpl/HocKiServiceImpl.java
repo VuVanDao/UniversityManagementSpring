@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import UniversityManagemant.demo.dtos.request.CreateHocKiReq;
-import UniversityManagemant.demo.dtos.response.HocKiResDto;
+import UniversityManagemant.demo.dtos.request.CreateSemesterReq;
+import UniversityManagemant.demo.dtos.response.SemesterResDto;
 import UniversityManagemant.demo.models.Semester;
 import UniversityManagemant.demo.repositories.HocKiRepository;
 import UniversityManagemant.demo.services.serviceInterface.HocKiService;
@@ -21,9 +21,9 @@ public class HocKiServiceImpl implements HocKiService {
     final HocKiRepository hocKiRepository;
 
     @Override
-    public HocKiResDto createHocKi(CreateHocKiReq req) {
+    public SemesterResDto createHocKi(CreateSemesterReq req) {
         Semester hocKi = Semester.builder()
-                .semesterName(req.getTenHocKi())
+                .semesterName(req.getSemesterName())
                 .fromTime(req.getFromTime())
                 .toTime(req.getToTime())
                 .build();
@@ -32,24 +32,24 @@ public class HocKiServiceImpl implements HocKiService {
     }
 
     @Override
-    public HocKiResDto getHocKiById(Long id) {
+    public SemesterResDto getHocKiById(Long id) {
         return hocKiRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("HocKi not found"));
     }
 
     @Override
-    public List<HocKiResDto> getAllHocKi() {
+    public List<SemesterResDto> getAllHocKi() {
         return hocKiRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public HocKiResDto updateHocKi(Long id, CreateHocKiReq req) {
+    public SemesterResDto updateHocKi(Long id, CreateSemesterReq req) {
         Semester hocKi = hocKiRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("HocKi not found"));
-        hocKi.setSemesterName(req.getTenHocKi());
+        hocKi.setSemesterName(req.getSemesterName());
         hocKi.setFromTime(req.getFromTime());
         hocKi.setToTime(req.getToTime());
         Semester updated = hocKiRepository.save(hocKi);
@@ -61,10 +61,10 @@ public class HocKiServiceImpl implements HocKiService {
         hocKiRepository.deleteById(id);
     }
 
-    private HocKiResDto toDto(Semester hocKi) {
-        return HocKiResDto.builder()
+    private SemesterResDto toDto(Semester hocKi) {
+        return SemesterResDto.builder()
                 .id(hocKi.getId())
-                .tenHocKi(hocKi.getSemesterName())
+                .semesterName(hocKi.getSemesterName())
                 .fromTime(hocKi.getFromTime())
                 .toTime(hocKi.getToTime())
                 .build();

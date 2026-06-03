@@ -23,10 +23,10 @@ public class StartAppConfig {
     ApplicationRunner applicationRunner(UserRepository userRepository,RoleRepository roleRepository) {
         return args -> {
             System.out.println("--------------------- StartAppConfig.ApplicationRunner ---------------------");
-            User isAdminAccountExists = userRepository.findByTenNguoiDung("admin");
+            User isAdminAccountExists = userRepository.findByUserName("admin");
             if (isAdminAccountExists == null) {
                 System.out.println("Admin account does not exist. Creating one...");
-                Role isAdminRoleExists = roleRepository.findByTenRole("ADMIN");
+                Role isAdminRoleExists = roleRepository.findByRoleName("ADMIN");
                 if (isAdminRoleExists == null) {
                     System.out.println("Admin role does not exist. Creating one...");
                     Role adminRole = Role.builder()

@@ -1,4 +1,6 @@
-package UniversityManagemant.demo.dtos.response;
+package UniversityManagemant.demo.dtos.request;
+
+import java.time.LocalDate;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,9 +16,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ChuyenNganhResDto {
-    Long id;
-    String maChuyenNganh;
-    String tenChuyenNganh;
-    String tenKhoa;
+public class CreateSemesterReq {
+    String semesterName;
+    LocalDate fromTime;
+    LocalDate toTime;
 }

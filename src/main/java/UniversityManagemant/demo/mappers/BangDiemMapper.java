@@ -2,20 +2,22 @@ package UniversityManagemant.demo.mappers;
 
 import org.springframework.stereotype.Component;
 
-import UniversityManagemant.demo.dtos.response.BangDiemResDto;
+import UniversityManagemant.demo.dtos.response.GradeRecordResDto;
 import UniversityManagemant.demo.models.GradeRecord;
 
 @Component
 public class BangDiemMapper {
 
-    public BangDiemResDto toResDto(GradeRecord bangDiem) {
-        return BangDiemResDto.builder()
+    public GradeRecordResDto toResDto(GradeRecord bangDiem) {
+        return GradeRecordResDto.builder()
                 .id(bangDiem.getId())
-                .maSinhVien(bangDiem.getStudent() != null ? bangDiem.getStudent().getUser().getUserCode() : null)
-                .tenMonHoc(bangDiem.getSubject() != null ? bangDiem.getSubject().getSubjectName() : null)
-                .diemHe10(bangDiem.getTenPointScale())
-                .diemHe4(bangDiem.getFourPointScale())
-                .trangThaiMonHoc(bangDiem.getSubjectStatus())
+                .studentCode(bangDiem.getStudent() != null ? bangDiem.getStudent().getUser().getUserCode() : null)
+                .userName(bangDiem.getStudent() != null && bangDiem.getStudent().getUser() != null ? bangDiem.getStudent().getUser().getUsername() : null)
+                .subjectName(bangDiem.getSubject() != null ? bangDiem.getSubject().getSubjectName() : null)
+                .tenPointScale(bangDiem.getTenPointScale())
+                .fourPointScale(bangDiem.getFourPointScale())
+                .gradeLetter(bangDiem.getSubjectStatus())
+                .subjectStatus(bangDiem.getSubjectStatus())
                 .build();
     }
 }

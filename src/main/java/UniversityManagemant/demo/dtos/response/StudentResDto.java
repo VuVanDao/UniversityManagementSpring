@@ -1,6 +1,6 @@
 package UniversityManagemant.demo.dtos.response;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -16,16 +16,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class NhomHocResDto {
+public class StudentResDto {
     Long id;
-    String maNhom;
-    String tenNhom;
-    Integer tietBatDau;
-    Integer tietKetThuc;
-    LocalDateTime fromTime;
-    LocalDateTime toTime;
-    Integer soLuongSinhVien;
-    String tenMonHoc;
-    String tenGiangVien;
-    String tenPhongHoc;
+    String studentCode;
+    BigDecimal gpaPoint;
+    String userName;
+    String userCode;
+    String classManagementName;
 }

@@ -2,13 +2,13 @@ package UniversityManagemant.demo.services.serviceInterface;
 
 import java.util.List;
 
-import UniversityManagemant.demo.dtos.request.CreateBangDiemReq;
-import UniversityManagemant.demo.dtos.response.BangDiemResDto;
+import UniversityManagemant.demo.dtos.request.CreateGradeRecordReq;
+import UniversityManagemant.demo.dtos.response.GradeRecordResDto;
 
 public interface BangDiemService {
-    BangDiemResDto createBangDiem(CreateBangDiemReq req);
-    BangDiemResDto getBangDiemById(Long id);
-    List<BangDiemResDto> getAllBangDiem();
-    BangDiemResDto updateBangDiem(Long id, CreateBangDiemReq req);
+    GradeRecordResDto createBangDiem(CreateGradeRecordReq req);
+    GradeRecordResDto getBangDiemById(Long id);
+    List<GradeRecordResDto> getAllBangDiem();
+    GradeRecordResDto updateBangDiem(Long id, CreateGradeRecordReq req);
     void deleteBangDiem(Long id);
 }

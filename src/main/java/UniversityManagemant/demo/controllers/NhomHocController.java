@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import UniversityManagemant.demo.dtos.request.CreateNhomHocReq;
-import UniversityManagemant.demo.dtos.response.NhomHocResDto;
+
+import UniversityManagemant.demo.dtos.request.CreateStudyGroupReq;
+import UniversityManagemant.demo.dtos.response.StudyGroupResDto;
 import UniversityManagemant.demo.services.serviceInterface.NhomHocService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -27,22 +28,22 @@ public class NhomHocController {
     final NhomHocService nhomHocService;
 
     @PostMapping
-    public ResponseEntity<NhomHocResDto> createNhomHoc(@RequestBody CreateNhomHocReq req) {
+    public ResponseEntity<StudyGroupResDto> createNhomHoc(@RequestBody CreateStudyGroupReq req) {
         return ResponseEntity.status(HttpStatus.CREATED).body(nhomHocService.createNhomHoc(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NhomHocResDto> getNhomHoc(@PathVariable Long id) {
+    public ResponseEntity<StudyGroupResDto> getNhomHoc(@PathVariable Long id) {
         return ResponseEntity.ok(nhomHocService.getNhomHocById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<NhomHocResDto>> getAllNhomHoc() {
+    public ResponseEntity<List<StudyGroupResDto>> getAllNhomHoc() {
         return ResponseEntity.ok(nhomHocService.getAllNhomHoc());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<NhomHocResDto> updateNhomHoc(@PathVariable Long id, @RequestBody CreateNhomHocReq req) {
+    public ResponseEntity<StudyGroupResDto> updateNhomHoc(@PathVariable Long id, @RequestBody CreateStudyGroupReq req) {
         return ResponseEntity.ok(nhomHocService.updateNhomHoc(id, req));
     }
 

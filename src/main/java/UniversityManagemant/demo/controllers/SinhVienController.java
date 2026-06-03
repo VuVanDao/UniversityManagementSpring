@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import UniversityManagemant.demo.dtos.request.CreateSinhVienReq;
-import UniversityManagemant.demo.dtos.response.SinhVienResDto;
+import UniversityManagemant.demo.dtos.request.CreateStudentReq;
+import UniversityManagemant.demo.dtos.response.StudentResDto;
 import UniversityManagemant.demo.services.serviceInterface.SinhVienService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,22 +28,22 @@ public class SinhVienController {
     final SinhVienService sinhVienService;
 
     @PostMapping
-    public ResponseEntity<SinhVienResDto> createSinhVien(@RequestBody CreateSinhVienReq req) {
+    public ResponseEntity<StudentResDto> createSinhVien(@RequestBody CreateStudentReq req) {
         return ResponseEntity.status(HttpStatus.CREATED).body(sinhVienService.createSinhVien(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SinhVienResDto> getSinhVien(@PathVariable Long id) {
+    public ResponseEntity<StudentResDto> getSinhVien(@PathVariable Long id) {
         return ResponseEntity.ok(sinhVienService.getSinhVienById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<SinhVienResDto>> getAllSinhVien() {
+    public ResponseEntity<List<StudentResDto>> getAllSinhVien() {
         return ResponseEntity.ok(sinhVienService.getAllSinhVien());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SinhVienResDto> updateSinhVien(@PathVariable Long id, @RequestBody CreateSinhVienReq req) {
+    public ResponseEntity<StudentResDto> updateSinhVien(@PathVariable Long id, @RequestBody CreateStudentReq req) {
         return ResponseEntity.ok(sinhVienService.updateSinhVien(id, req));
     }
 

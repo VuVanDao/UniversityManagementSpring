@@ -2,13 +2,13 @@ package UniversityManagemant.demo.services.serviceInterface;
 
 import java.util.List;
 
-import UniversityManagemant.demo.dtos.request.CreateChuyenNganhReq;
-import UniversityManagemant.demo.dtos.response.ChuyenNganhResDto;
+import UniversityManagemant.demo.dtos.request.CreateMajorReq;
+import UniversityManagemant.demo.dtos.response.MajorResDto;
 
 public interface ChuyenNganhService {
-    ChuyenNganhResDto createChuyenNganh(CreateChuyenNganhReq req);
-    ChuyenNganhResDto getChuyenNganhById(Long id);
-    List<ChuyenNganhResDto> getAllChuyenNganh();
-    ChuyenNganhResDto updateChuyenNganh(Long id, CreateChuyenNganhReq req);
+    MajorResDto createChuyenNganh(CreateMajorReq req);
+    MajorResDto getChuyenNganhById(Long id);
+    List<MajorResDto> getAllChuyenNganh();
+    MajorResDto updateChuyenNganh(Long id, CreateMajorReq req);
     void deleteChuyenNganh(Long id);
 }

@@ -5,14 +5,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import UniversityManagemant.demo.dtos.request.CreateKhoaReq;
-import UniversityManagemant.demo.dtos.request.UpdateKhoaReq;
-import UniversityManagemant.demo.dtos.response.KhoaResDto;
+import UniversityManagemant.demo.dtos.request.CreateFacultyReq;
+import UniversityManagemant.demo.dtos.request.UpdateFacultyReq;
+import UniversityManagemant.demo.dtos.response.FacultyResDto;
 import UniversityManagemant.demo.mappers.KhoaMapper;
 import UniversityManagemant.demo.models.Lecturer;
 import UniversityManagemant.demo.models.Faculty;
-import UniversityManagemant.demo.models.Role;
-import UniversityManagemant.demo.models.User;
 import UniversityManagemant.demo.repositories.GiangVienRepository;
 import UniversityManagemant.demo.repositories.KhoaRepository;
 import UniversityManagemant.demo.repositories.UserRepository;
@@ -30,9 +28,8 @@ public class KhoaServiceImpl implements KhoaService {
     final UserRepository userRepository;
     final GiangVienRepository giangVienRepository;
 
-
     @Override
-    public KhoaResDto createKhoa(CreateKhoaReq req) {
+    public FacultyResDto createKhoa(CreateFacultyReq req) {
         Faculty khoa = khoaMapper.toEntity(req);
         validateKhoa(khoa, null);
         Faculty saved = khoaRepository.save(khoa);
@@ -40,31 +37,31 @@ public class KhoaServiceImpl implements KhoaService {
     }
 
     @Override
-    public KhoaResDto getKhoaById(Long id) {
+    public FacultyResDto getKhoaById(Long id) {
         return khoaRepository.findById(id)
                 .map(khoaMapper::toResDto)
                 .orElseThrow(() -> new RuntimeException("Khoa not found"));
     }
 
     @Override
-    public List<KhoaResDto> getAllKhoa() {
+    public List<FacultyResDto> getAllKhoa() {
         return khoaRepository.findAll().stream()
                 .map(khoaMapper::toResDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public KhoaResDto updateKhoa(Long id, UpdateKhoaReq req) {
+    public FacultyResDto updateKhoa(Long id, UpdateFacultyReq req) {
         Faculty khoa = khoaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tim thấy khoa với ID: " + id));
 
-        if (req.getGiangVienId() != null) {
-            Lecturer giangVien = giangVienRepository.findById(req.getGiangVienId())
-                    .orElseThrow(() -> new RuntimeException("Giang Vien with ID: " + req.getGiangVienId() + " not found"));
+        if (req.getLecturerId() != null) {
+            Lecturer giangVien = giangVienRepository.findById(req.getLecturerId())
+                    .orElseThrow(() -> new RuntimeException("Giang Vien with ID: " + req.getLecturerId() + " not found"));
 
-            Faculty assignedKhoa = khoaRepository.findByTruongKhoa_Id(req.getGiangVienId());
+            Faculty assignedKhoa = khoaRepository.findByDean_Id(req.getLecturerId());
             if (assignedKhoa != null && !assignedKhoa.getId().equals(id)) {
-                throw new RuntimeException("Giang Vien with ID: " + req.getGiangVienId()
+                throw new RuntimeException("Giang Vien with ID: " + req.getLecturerId()
                         + " is already assigned as truong khoa of another khoa");
             }
             khoa.setDean(giangVien);

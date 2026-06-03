@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import UniversityManagemant.demo.dtos.request.CreateLopQuanLiReq;
-import UniversityManagemant.demo.dtos.response.LopQuanLiResDto;
+import UniversityManagemant.demo.dtos.request.CreateClassManagementReq;
+import UniversityManagemant.demo.dtos.response.ClassManagementResDto;
 import UniversityManagemant.demo.models.ClassManagement;
 import UniversityManagemant.demo.repositories.LopQuanLiRepository;
 import UniversityManagemant.demo.repositories.ChuyenNganhRepository;
@@ -23,37 +23,37 @@ public class LopQuanLiServiceImpl implements LopQuanLiService {
     final ChuyenNganhRepository chuyenNganhRepository;
 
     @Override
-    public LopQuanLiResDto createLopQuanLi(CreateLopQuanLiReq req) {
+    public ClassManagementResDto createLopQuanLi(CreateClassManagementReq req) {
         ClassManagement lopQuanLi = ClassManagement.builder()
-                .classManagementCode(req.getMaLop())
-                .classManagementName(req.getTenLop())
-                .major(chuyenNganhRepository.findById(req.getChuyenNganhId()).orElseThrow())
+                .classManagementCode(req.getClassManagementCode())
+                .classManagementName(req.getClassManagementName())
+                .major(chuyenNganhRepository.findById(req.getMajorId()).orElseThrow())
                 .build();
         ClassManagement saved = lopQuanLiRepository.save(lopQuanLi);
         return toDto(saved);
     }
 
     @Override
-    public LopQuanLiResDto getLopQuanLiById(Long id) {
+    public ClassManagementResDto getLopQuanLiById(Long id) {
         return lopQuanLiRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("LopQuanLi not found"));
     }
 
     @Override
-    public List<LopQuanLiResDto> getAllLopQuanLi() {
+    public List<ClassManagementResDto> getAllLopQuanLi() {
         return lopQuanLiRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public LopQuanLiResDto updateLopQuanLi(Long id, CreateLopQuanLiReq req) {
+    public ClassManagementResDto updateLopQuanLi(Long id, CreateClassManagementReq req) {
         ClassManagement lopQuanLi = lopQuanLiRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("LopQuanLi not found"));
-        lopQuanLi.setClassManagementCode(req.getMaLop());
-        lopQuanLi.setClassManagementName(req.getTenLop());
-        lopQuanLi.setMajor(chuyenNganhRepository.findById(req.getChuyenNganhId()).orElseThrow());
+        lopQuanLi.setClassManagementCode(req.getClassManagementCode());
+        lopQuanLi.setClassManagementName(req.getClassManagementName());
+        lopQuanLi.setMajor(chuyenNganhRepository.findById(req.getMajorId()).orElseThrow());
         ClassManagement updated = lopQuanLiRepository.save(lopQuanLi);
         return toDto(updated);
     }
@@ -63,12 +63,12 @@ public class LopQuanLiServiceImpl implements LopQuanLiService {
         lopQuanLiRepository.deleteById(id);
     }
 
-    private LopQuanLiResDto toDto(ClassManagement lopQuanLi) {
-        return LopQuanLiResDto.builder()
+    private ClassManagementResDto toDto(ClassManagement lopQuanLi) {
+        return ClassManagementResDto.builder()
                 .id(lopQuanLi.getId())
-                .maLop(lopQuanLi.getClassManagementCode())
-                .tenLop(lopQuanLi.getClassManagementName())
-                .tenChuyenNganh(lopQuanLi.getMajor() != null ? lopQuanLi.getMajor().getMajorName() : null)
+                .classManagementCode(lopQuanLi.getClassManagementCode())
+                .classManagementName(lopQuanLi.getClassManagementName())
+                .majorName(lopQuanLi.getMajor() != null ? lopQuanLi.getMajor().getMajorName() : null)
                 .build();
     }
 }
