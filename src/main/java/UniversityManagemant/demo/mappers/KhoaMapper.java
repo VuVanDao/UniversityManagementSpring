@@ -32,10 +32,5 @@ public class KhoaMapper {
     public void updateEntityFromDto(UpdateKhoaReq updateKhoaReq, Khoa khoa) {
         khoa.setMaKhoa(updateKhoaReq.getMaKhoa());
         khoa.setTenKhoa(updateKhoaReq.getTenKhoa());
-        if (updateKhoaReq.getTruongKhoaId() != null) {
-            User truongKhoa = userRepository.findById(updateKhoaReq.getTruongKhoaId())
-                    .orElseThrow(() -> new RuntimeException("Truong Khoa not found with id: " + updateKhoaReq.getTruongKhoaId()));
-            khoa.setTruongKhoa(truongKhoa);
-        }
     }
 }
