@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import UniversityManagemant.demo.dtos.request.CreateStudentReq;
 import UniversityManagemant.demo.dtos.response.StudentResDto;
 import UniversityManagemant.demo.models.Student;
-import UniversityManagemant.demo.repositories.SinhVienRepository;
+import UniversityManagemant.demo.repositories.StudentRepository;
 import UniversityManagemant.demo.repositories.UserRepository;
-import UniversityManagemant.demo.repositories.LopQuanLiRepository;
+import UniversityManagemant.demo.repositories.ClassManagementRepository;
 import UniversityManagemant.demo.services.serviceInterface.StudentService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -20,47 +20,47 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class StudentServiceImpl implements StudentService {
-    final SinhVienRepository sinhVienRepository;
+    final StudentRepository studentRepository;
     final UserRepository userRepository;
-    final LopQuanLiRepository lopQuanLiRepository;
+    final ClassManagementRepository classManagementRepository;
 
     @Override
     public StudentResDto createStudent(CreateStudentReq req) {
         Student student = Student.builder()
                 .user(userRepository.findById(req.getUserId()).orElseThrow())
-                .classManagement(lopQuanLiRepository.findById(req.getClassManagementId()).orElseThrow())
+                .classManagement(classManagementRepository.findById(req.getClassManagementId()).orElseThrow())
                 .build();
-        Student saved = sinhVienRepository.save(student);
+        Student saved = studentRepository.save(student);
         return toDto(saved);
     }
 
     @Override
     public StudentResDto getStudentById(Long id) {
-        return sinhVienRepository.findById(id)
+        return studentRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
     }
 
     @Override
     public List<StudentResDto> getAllStudents() {
-        return sinhVienRepository.findAll().stream()
+        return studentRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public StudentResDto updateStudent(Long id, CreateStudentReq req) {
-        Student student = sinhVienRepository.findById(id)
+        Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
         student.setUser(userRepository.findById(req.getUserId()).orElseThrow());
-        student.setClassManagement(lopQuanLiRepository.findById(req.getClassManagementId()).orElseThrow());
-        Student updated = sinhVienRepository.save(student);
+        student.setClassManagement(classManagementRepository.findById(req.getClassManagementId()).orElseThrow());
+        Student updated = studentRepository.save(student);
         return toDto(updated);
     }
 
     @Override
     public void deleteStudent(Long id) {
-        sinhVienRepository.deleteById(id);
+        studentRepository.deleteById(id);
     }
 
     private StudentResDto toDto(Student student) {

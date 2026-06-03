@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import UniversityManagemant.demo.dtos.request.CreateSubjectReq;
 import UniversityManagemant.demo.dtos.response.SubjectResDto;
 import UniversityManagemant.demo.models.Subject;
-import UniversityManagemant.demo.repositories.MonHocRepository;
+import UniversityManagemant.demo.repositories.SubjectRepository;
 import UniversityManagemant.demo.services.serviceInterface.SubjectService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -18,55 +18,55 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class SubjectServiceImpl implements SubjectService {
-    final MonHocRepository monHocRepository;
+    final SubjectRepository subjectRepository;
 
     @Override
     public SubjectResDto createSubject(CreateSubjectReq req) {
-        Subject monHoc = Subject.builder()
+        Subject subject = Subject.builder()
                 .subjectCode(req.getSubjectCode())
                 .subjectName(req.getSubjectName())
                 .credits(req.getCredits())
                 .build();
-        Subject saved = monHocRepository.save(monHoc);
+        Subject saved = subjectRepository.save(subject);
         return toDto(saved);
     }
 
     @Override
     public SubjectResDto getSubjectById(Long id) {
-        return monHocRepository.findById(id)
+        return subjectRepository.findById(id)
                 .map(this::toDto)
-                .orElseThrow(() -> new RuntimeException("MonHoc not found"));
+                .orElseThrow(() -> new RuntimeException("Subject not found"));
     }
 
     @Override
     public List<SubjectResDto> getAllSubjects() {
-        return monHocRepository.findAll().stream()
+        return subjectRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public SubjectResDto updateSubject(Long id, CreateSubjectReq req) {
-        Subject monHoc = monHocRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("MonHoc not found"));
-        monHoc.setSubjectCode(req.getSubjectCode());
-        monHoc.setSubjectName(req.getSubjectName());
-        monHoc.setCredits(req.getCredits());
-        Subject updated = monHocRepository.save(monHoc);
+        Subject subject = subjectRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Subject not found"));
+        subject.setSubjectCode(req.getSubjectCode());
+        subject.setSubjectName(req.getSubjectName());
+        subject.setCredits(req.getCredits());
+        Subject updated = subjectRepository.save(subject);
         return toDto(updated);
     }
 
     @Override
     public void deleteSubject(Long id) {
-        monHocRepository.deleteById(id);
+        subjectRepository.deleteById(id);
     }
 
-    private SubjectResDto toDto(Subject monHoc) {
+    private SubjectResDto toDto(Subject subject) {
         return SubjectResDto.builder()
-                .id(monHoc.getId())
-                .subjectCode(monHoc.getSubjectCode())
-                .subjectName(monHoc.getSubjectName())
-                .credits(monHoc.getCredits())
+                .id(subject.getId())
+                .subjectCode(subject.getSubjectCode())
+                .subjectName(subject.getSubjectName())
+                .credits(subject.getCredits())
                 .build();
     }
 }

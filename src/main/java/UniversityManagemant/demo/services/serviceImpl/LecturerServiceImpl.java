@@ -9,9 +9,9 @@ import UniversityManagemant.demo.dtos.request.CreateLecturerReq;
 import UniversityManagemant.demo.dtos.response.LecturerResDto;
 import UniversityManagemant.demo.mappers.GiangVienMapper;
 import UniversityManagemant.demo.models.Lecturer;
-import UniversityManagemant.demo.repositories.GiangVienRepository;
+import UniversityManagemant.demo.repositories.LecturerRepository;
 import UniversityManagemant.demo.repositories.UserRepository;
-import UniversityManagemant.demo.repositories.LopQuanLiRepository;
+import UniversityManagemant.demo.repositories.ClassManagementRepository;
 import UniversityManagemant.demo.services.serviceInterface.LecturerService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,47 +21,47 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class LecturerServiceImpl implements LecturerService {
-    final GiangVienRepository giangVienRepository;
+    final LecturerRepository lecturerRepository;
     final UserRepository userRepository;
-    final LopQuanLiRepository lopQuanLiRepository;
+    final ClassManagementRepository classManagementRepository;
     final GiangVienMapper giangVienMapper;
 
     @Override
     public LecturerResDto createLecturer(CreateLecturerReq req) {
-        Lecturer giangVien = Lecturer.builder()
+        Lecturer lecturer = Lecturer.builder()
                 .user(userRepository.findById(req.getUserId()).orElseThrow())
-                .classManagement(lopQuanLiRepository.findById(req.getClassManagementId()).orElseThrow())
+                .classManagement(classManagementRepository.findById(req.getClassManagementId()).orElseThrow())
                 .build();
-        Lecturer saved = giangVienRepository.save(giangVien);
+        Lecturer saved = lecturerRepository.save(lecturer);
         return giangVienMapper.toResDto(saved);
     }
 
     @Override
     public LecturerResDto getLecturerById(Long id) {
-        return giangVienRepository.findById(id)
+        return lecturerRepository.findById(id)
                 .map(giangVienMapper::toResDto)
-                .orElseThrow(() -> new RuntimeException("GiangVien not found"));
+                .orElseThrow(() -> new RuntimeException("Lecturer not found"));
     }
 
     @Override
     public List<LecturerResDto> getAllLecturers() {
-        return giangVienRepository.findAll().stream()
+        return lecturerRepository.findAll().stream()
                 .map(giangVienMapper::toResDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public LecturerResDto updateLecturer(Long id, CreateLecturerReq req) {
-        Lecturer giangVien = giangVienRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("GiangVien not found"));
-        giangVien.setUser(userRepository.findById(req.getUserId()).orElseThrow());
-        giangVien.setClassManagement(lopQuanLiRepository.findById(req.getClassManagementId()).orElseThrow());
-        Lecturer updated = giangVienRepository.save(giangVien);
+        Lecturer lecturer = lecturerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Lecturer not found"));
+        lecturer.setUser(userRepository.findById(req.getUserId()).orElseThrow());
+        lecturer.setClassManagement(classManagementRepository.findById(req.getClassManagementId()).orElseThrow());
+        Lecturer updated = lecturerRepository.save(lecturer);
         return giangVienMapper.toResDto(updated);
     }
 
     @Override
     public void deleteLecturer(Long id) {
-        giangVienRepository.deleteById(id);
+        lecturerRepository.deleteById(id);
     }
 }

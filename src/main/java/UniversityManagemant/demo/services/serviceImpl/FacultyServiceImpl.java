@@ -11,8 +11,8 @@ import UniversityManagemant.demo.dtos.response.FacultyResDto;
 import UniversityManagemant.demo.mappers.KhoaMapper;
 import UniversityManagemant.demo.models.Lecturer;
 import UniversityManagemant.demo.models.Faculty;
-import UniversityManagemant.demo.repositories.GiangVienRepository;
-import UniversityManagemant.demo.repositories.KhoaRepository;
+import UniversityManagemant.demo.repositories.LecturerRepository;
+import UniversityManagemant.demo.repositories.FacultyRepository;
 import UniversityManagemant.demo.repositories.UserRepository;
 import UniversityManagemant.demo.services.serviceInterface.FacultyService;
 import lombok.AccessLevel;
@@ -23,69 +23,69 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class FacultyServiceImpl implements FacultyService {
-    final KhoaRepository khoaRepository;
+    final FacultyRepository facultyRepository;
     final KhoaMapper khoaMapper;
     final UserRepository userRepository;
-    final GiangVienRepository giangVienRepository;
+    final LecturerRepository lecturerRepository;
 
     @Override
     public FacultyResDto createFaculty(CreateFacultyReq req) {
-        Faculty khoa = khoaMapper.toEntity(req);
-        validateKhoa(khoa, null);
-        Faculty saved = khoaRepository.save(khoa);
+        Faculty faculty = khoaMapper.toEntity(req);
+        validateFaculty(faculty, null);
+        Faculty saved = facultyRepository.save(faculty);
         return khoaMapper.toResDto(saved);
     }
 
     @Override
     public FacultyResDto getFacultyById(Long id) {
-        return khoaRepository.findById(id)
+        return facultyRepository.findById(id)
                 .map(khoaMapper::toResDto)
-                .orElseThrow(() -> new RuntimeException("Khoa not found"));
+                .orElseThrow(() -> new RuntimeException("Faculty not found"));
     }
 
     @Override
     public List<FacultyResDto> getAllFaculties() {
-        return khoaRepository.findAll().stream()
+        return facultyRepository.findAll().stream()
                 .map(khoaMapper::toResDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public FacultyResDto updateFaculty(Long id, UpdateFacultyReq req) {
-        Faculty khoa = khoaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tim thấy khoa với ID: " + id));
+        Faculty faculty = facultyRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy khoa với ID: " + id));
 
         if (req.getLecturerId() != null) {
-            Lecturer giangVien = giangVienRepository.findById(req.getLecturerId())
-                    .orElseThrow(() -> new RuntimeException("Giang Vien with ID: " + req.getLecturerId() + " not found"));
+            Lecturer lecturer = lecturerRepository.findById(req.getLecturerId())
+                    .orElseThrow(() -> new RuntimeException("Lecturer with ID: " + req.getLecturerId() + " not found"));
 
-            Faculty assignedKhoa = khoaRepository.findByDean_Id(req.getLecturerId());
-            if (assignedKhoa != null && !assignedKhoa.getId().equals(id)) {
-                throw new RuntimeException("Giang Vien with ID: " + req.getLecturerId()
-                        + " is already assigned as truong khoa of another khoa");
+            Faculty assignedFaculty = facultyRepository.findByDean_Id(req.getLecturerId());
+            if (assignedFaculty != null && !assignedFaculty.getId().equals(id)) {
+                throw new RuntimeException("Lecturer with ID: " + req.getLecturerId()
+                        + " is already assigned as dean of another faculty");
             }
-            khoa.setDean(giangVien);
+            faculty.setDean(lecturer);
         }
 
-        khoaMapper.updateEntityFromDto(req, khoa);
-        validateKhoa(khoa, id);
+        khoaMapper.updateEntityFromDto(req, faculty);
+        validateFaculty(faculty, id);
 
-        Faculty updated = khoaRepository.save(khoa);
+        Faculty updated = facultyRepository.save(faculty);
         return khoaMapper.toResDto(updated);
     }
 
     @Override
     public void deleteFaculty(Long id) {
-        khoaRepository.deleteById(id);
+        facultyRepository.deleteById(id);
     }
 
-    private void validateKhoa(Faculty khoa, Long excludeId) {
-        if (khoa.getFacultyCode() != null && khoaRepository.existsByFacultyCodeAndIdNot(khoa.getFacultyCode(), excludeId)) {
-            throw new RuntimeException("Ma Khoa already exists: " + khoa.getFacultyCode());
+    private void validateFaculty(Faculty faculty, Long excludeId) {
+        if (faculty.getFacultyCode() != null && facultyRepository.existsByFacultyCodeAndIdNot(faculty.getFacultyCode(), excludeId)) {
+            throw new RuntimeException("Faculty Code already exists: " + faculty.getFacultyCode());
         }
 
-        if (khoa.getFacultyName() != null && khoaRepository.existsByFacultyNameIgnoreCaseAndIdNot(khoa.getFacultyName(), excludeId)) {
-            throw new RuntimeException("Ten Khoa already exists: " + khoa.getFacultyName());
+        if (faculty.getFacultyName() != null && facultyRepository.existsByFacultyNameIgnoreCaseAndIdNot(faculty.getFacultyName(), excludeId)) {
+            throw new RuntimeException("Faculty Name already exists: " + faculty.getFacultyName());
         }
     }
 }
