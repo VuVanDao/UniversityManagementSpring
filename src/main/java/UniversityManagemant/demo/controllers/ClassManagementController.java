@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateClassManagementReq;
 import UniversityManagemant.demo.dtos.response.ClassManagementResDto;
-import UniversityManagemant.demo.services.serviceInterface.LopQuanLiService;
+import UniversityManagemant.demo.services.serviceInterface.ClassManagementService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,31 +25,31 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class ClassManagementController {
-    final LopQuanLiService classManagementService;
+    final ClassManagementService classManagementService;
 
     @PostMapping
-    public ResponseEntity<ClassManagementResDto> createLopQuanLi(@RequestBody CreateClassManagementReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(classManagementService.createLopQuanLi(req));
+    public ResponseEntity<ClassManagementResDto> createClassManagement(@RequestBody CreateClassManagementReq req) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(classManagementService.createClassManagement(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClassManagementResDto> getLopQuanLi(@PathVariable Long id) {
-        return ResponseEntity.ok(classManagementService.getLopQuanLiById(id));
+    public ResponseEntity<ClassManagementResDto> getClassManagement(@PathVariable Long id) {
+        return ResponseEntity.ok(classManagementService.getClassManagementById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<ClassManagementResDto>> getAllLopQuanLi() {
-        return ResponseEntity.ok(classManagementService.getAllLopQuanLi());
+    public ResponseEntity<List<ClassManagementResDto>> getAllClassManagements() {
+        return ResponseEntity.ok(classManagementService.getAllClassManagements());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClassManagementResDto> updateLopQuanLi(@PathVariable Long id, @RequestBody CreateClassManagementReq req) {
-        return ResponseEntity.ok(classManagementService.updateLopQuanLi(id, req));
+    public ResponseEntity<ClassManagementResDto> updateClassManagement(@PathVariable Long id, @RequestBody CreateClassManagementReq req) {
+        return ResponseEntity.ok(classManagementService.updateClassManagement(id, req));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLopQuanLi(@PathVariable Long id) {
-        classManagementService.deleteLopQuanLi(id);
+    public ResponseEntity<Void> deleteClassManagement(@PathVariable Long id) {
+        classManagementService.deleteClassManagement(id);
         return ResponseEntity.noContent().build();
     }
 }

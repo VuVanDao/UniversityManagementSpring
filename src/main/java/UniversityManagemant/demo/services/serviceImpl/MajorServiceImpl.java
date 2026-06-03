@@ -10,7 +10,7 @@ import UniversityManagemant.demo.dtos.response.MajorResDto;
 import UniversityManagemant.demo.models.Major;
 import UniversityManagemant.demo.repositories.ChuyenNganhRepository;
 import UniversityManagemant.demo.repositories.KhoaRepository;
-import UniversityManagemant.demo.services.serviceInterface.ChuyenNganhService;
+import UniversityManagemant.demo.services.serviceInterface.MajorService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,12 +18,12 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class ChuyenNganhServiceImpl implements ChuyenNganhService {
+public class MajorServiceImpl implements MajorService {
     final ChuyenNganhRepository chuyenNganhRepository;
     final KhoaRepository khoaRepository;
 
     @Override
-    public MajorResDto createChuyenNganh(CreateMajorReq req) {
+    public MajorResDto createMajor(CreateMajorReq req) {
         Major chuyenNganh = Major.builder()
                 .MajorCode(req.getMajorCode())
                 .MajorName(req.getMajorName())
@@ -34,21 +34,21 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
     }
 
     @Override
-    public MajorResDto getChuyenNganhById(Long id) {
+    public MajorResDto getMajorById(Long id) {
         return chuyenNganhRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("ChuyenNganh not found"));
     }
 
     @Override
-    public List<MajorResDto> getAllChuyenNganh() {
+    public List<MajorResDto> getAllMajors() {
         return chuyenNganhRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public MajorResDto updateChuyenNganh(Long id, CreateMajorReq req) {
+    public MajorResDto updateMajor(Long id, CreateMajorReq req) {
         Major chuyenNganh = chuyenNganhRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("ChuyenNganh not found"));
         chuyenNganh.setMajorCode(req.getMajorCode());
@@ -59,7 +59,7 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
     }
 
     @Override
-    public void deleteChuyenNganh(Long id) {
+    public void deleteMajor(Long id) {
         chuyenNganhRepository.deleteById(id);
     }
 

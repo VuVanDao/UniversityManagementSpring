@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateSemesterReq;
 import UniversityManagemant.demo.dtos.response.SemesterResDto;
-import UniversityManagemant.demo.services.serviceInterface.HocKiService;
+import UniversityManagemant.demo.services.serviceInterface.SemesterService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,31 +25,31 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class SemesterController {
-    final HocKiService semesterService;
+    final SemesterService semesterService;
 
     @PostMapping
-    public ResponseEntity<SemesterResDto> createHocKi(@RequestBody CreateSemesterReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(semesterService.createHocKi(req));
+    public ResponseEntity<SemesterResDto> createSemester(@RequestBody CreateSemesterReq req) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(semesterService.createSemester(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SemesterResDto> getHocKi(@PathVariable Long id) {
-        return ResponseEntity.ok(semesterService.getHocKiById(id));
+    public ResponseEntity<SemesterResDto> getSemester(@PathVariable Long id) {
+        return ResponseEntity.ok(semesterService.getSemesterById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<SemesterResDto>> getAllHocKi() {
-        return ResponseEntity.ok(semesterService.getAllHocKi());
+    public ResponseEntity<List<SemesterResDto>> getAllSemesters() {
+        return ResponseEntity.ok(semesterService.getAllSemesters());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SemesterResDto> updateHocKi(@PathVariable Long id, @RequestBody CreateSemesterReq req) {
-        return ResponseEntity.ok(semesterService.updateHocKi(id, req));
+    public ResponseEntity<SemesterResDto> updateSemester(@PathVariable Long id, @RequestBody CreateSemesterReq req) {
+        return ResponseEntity.ok(semesterService.updateSemester(id, req));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteHocKi(@PathVariable Long id) {
-        semesterService.deleteHocKi(id);
+    public ResponseEntity<Void> deleteSemester(@PathVariable Long id) {
+        semesterService.deleteSemester(id);
         return ResponseEntity.noContent().build();
     }
 }

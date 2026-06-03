@@ -9,7 +9,7 @@ import UniversityManagemant.demo.dtos.request.CreateSubjectReq;
 import UniversityManagemant.demo.dtos.response.SubjectResDto;
 import UniversityManagemant.demo.models.Subject;
 import UniversityManagemant.demo.repositories.MonHocRepository;
-import UniversityManagemant.demo.services.serviceInterface.MonHocService;
+import UniversityManagemant.demo.services.serviceInterface.SubjectService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,11 +17,11 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class MonHocServiceImpl implements MonHocService {
+public class SubjectServiceImpl implements SubjectService {
     final MonHocRepository monHocRepository;
 
     @Override
-    public SubjectResDto createMonHoc(CreateSubjectReq req) {
+    public SubjectResDto createSubject(CreateSubjectReq req) {
         Subject monHoc = Subject.builder()
                 .subjectCode(req.getSubjectCode())
                 .subjectName(req.getSubjectName())
@@ -32,21 +32,21 @@ public class MonHocServiceImpl implements MonHocService {
     }
 
     @Override
-    public SubjectResDto getMonHocById(Long id) {
+    public SubjectResDto getSubjectById(Long id) {
         return monHocRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("MonHoc not found"));
     }
 
     @Override
-    public List<SubjectResDto> getAllMonHoc() {
+    public List<SubjectResDto> getAllSubjects() {
         return monHocRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public SubjectResDto updateMonHoc(Long id, CreateSubjectReq req) {
+    public SubjectResDto updateSubject(Long id, CreateSubjectReq req) {
         Subject monHoc = monHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("MonHoc not found"));
         monHoc.setSubjectCode(req.getSubjectCode());
@@ -57,7 +57,7 @@ public class MonHocServiceImpl implements MonHocService {
     }
 
     @Override
-    public void deleteMonHoc(Long id) {
+    public void deleteSubject(Long id) {
         monHocRepository.deleteById(id);
     }
 

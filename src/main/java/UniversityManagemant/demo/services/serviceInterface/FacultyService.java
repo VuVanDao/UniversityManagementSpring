@@ -8,16 +8,16 @@ import UniversityManagemant.demo.dtos.request.CreateFacultyReq;
 import UniversityManagemant.demo.dtos.request.UpdateFacultyReq;
 import UniversityManagemant.demo.dtos.response.FacultyResDto;
 
-public interface KhoaService {
+public interface FacultyService {
     @PreAuthorize("hasRole('ADMIN')")
-    FacultyResDto createKhoa(CreateFacultyReq req);
-    FacultyResDto getKhoaById(Long id);
+    FacultyResDto createFaculty(CreateFacultyReq req);
+    FacultyResDto getFacultyById(Long id);
 
-    List<FacultyResDto> getAllKhoa();
-
-    @PreAuthorize("hasRole('ADMIN')")
-    FacultyResDto updateKhoa(Long id, UpdateFacultyReq req);
+    List<FacultyResDto> getAllFaculties();
 
     @PreAuthorize("hasRole('ADMIN')")
-    void deleteKhoa(Long id);
+    FacultyResDto updateFaculty(Long id, UpdateFacultyReq req);
+
+    @PreAuthorize("hasRole('ADMIN')")
+    void deleteFaculty(Long id);
 }
