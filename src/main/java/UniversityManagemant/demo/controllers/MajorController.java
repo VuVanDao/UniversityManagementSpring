@@ -21,35 +21,35 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
-@RequestMapping("/chuyen-nganhs")
+@RequestMapping("/majors")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class ChuyenNganhController {
-    final ChuyenNganhService chuyenNganhService;
+public class MajorController {
+    final ChuyenNganhService majorService;
 
     @PostMapping
     public ResponseEntity<MajorResDto> createChuyenNganh(@RequestBody CreateMajorReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(chuyenNganhService.createChuyenNganh(req));
+        return ResponseEntity.status(HttpStatus.CREATED).body(majorService.createChuyenNganh(req));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MajorResDto> getChuyenNganh(@PathVariable Long id) {
-        return ResponseEntity.ok(chuyenNganhService.getChuyenNganhById(id));
+        return ResponseEntity.ok(majorService.getChuyenNganhById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<MajorResDto>> getAllChuyenNganh() {
-        return ResponseEntity.ok(chuyenNganhService.getAllChuyenNganh());
+        return ResponseEntity.ok(majorService.getAllChuyenNganh());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<MajorResDto> updateChuyenNganh(@PathVariable Long id, @RequestBody CreateMajorReq req) {
-        return ResponseEntity.ok(chuyenNganhService.updateChuyenNganh(id, req));
+        return ResponseEntity.ok(majorService.updateChuyenNganh(id, req));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteChuyenNganh(@PathVariable Long id) {
-        chuyenNganhService.deleteChuyenNganh(id);
+        majorService.deleteChuyenNganh(id);
         return ResponseEntity.noContent().build();
     }
 }

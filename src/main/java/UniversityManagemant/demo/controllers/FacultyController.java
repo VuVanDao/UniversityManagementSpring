@@ -23,37 +23,37 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
-@RequestMapping("/faculty")
+@RequestMapping("/faculties")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class KhoaController {
-    final KhoaService khoaService;
+public class FacultyController {
+    final KhoaService facultyService;
 
     @PostMapping
     public ResponseEntity<FacultyResDto> createKhoa(@RequestBody CreateFacultyReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(khoaService.createKhoa(req));
+        return ResponseEntity.status(HttpStatus.CREATED).body(facultyService.createKhoa(req));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<FacultyResDto> getKhoa(@PathVariable Long id) {
-        return ResponseEntity.ok(khoaService.getKhoaById(id));
+        return ResponseEntity.ok(facultyService.getKhoaById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<FacultyResDto>> getAllKhoa() {
-        return ResponseEntity.ok(khoaService.getAllKhoa());
+        return ResponseEntity.ok(facultyService.getAllKhoa());
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<FacultyResDto> updateKhoa(@PathVariable Long id, @RequestBody UpdateFacultyReq req) {
-        return ResponseEntity.ok(khoaService.updateKhoa(id, req));
+        return ResponseEntity.ok(facultyService.updateKhoa(id, req));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteKhoa(@PathVariable Long id) {
-        khoaService.deleteKhoa(id);
+        facultyService.deleteKhoa(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import UniversityManagemant.demo.dtos.request.CreateStudyGroupReq;
 import UniversityManagemant.demo.dtos.response.StudyGroupResDto;
 import UniversityManagemant.demo.services.serviceInterface.NhomHocService;
@@ -21,35 +20,35 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
-@RequestMapping("/nhom-hocs")
+@RequestMapping("/study-groups")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class NhomHocController {
-    final NhomHocService nhomHocService;
+public class StudyGroupController {
+    final NhomHocService studyGroupService;
 
     @PostMapping
     public ResponseEntity<StudyGroupResDto> createNhomHoc(@RequestBody CreateStudyGroupReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(nhomHocService.createNhomHoc(req));
+        return ResponseEntity.status(HttpStatus.CREATED).body(studyGroupService.createNhomHoc(req));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<StudyGroupResDto> getNhomHoc(@PathVariable Long id) {
-        return ResponseEntity.ok(nhomHocService.getNhomHocById(id));
+        return ResponseEntity.ok(studyGroupService.getNhomHocById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<StudyGroupResDto>> getAllNhomHoc() {
-        return ResponseEntity.ok(nhomHocService.getAllNhomHoc());
+        return ResponseEntity.ok(studyGroupService.getAllNhomHoc());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<StudyGroupResDto> updateNhomHoc(@PathVariable Long id, @RequestBody CreateStudyGroupReq req) {
-        return ResponseEntity.ok(nhomHocService.updateNhomHoc(id, req));
+        return ResponseEntity.ok(studyGroupService.updateNhomHoc(id, req));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteNhomHoc(@PathVariable Long id) {
-        nhomHocService.deleteNhomHoc(id);
+        studyGroupService.deleteNhomHoc(id);
         return ResponseEntity.noContent().build();
     }
 }

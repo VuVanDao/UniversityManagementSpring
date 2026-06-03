@@ -21,35 +21,35 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
-@RequestMapping("/mon-hocs")
+@RequestMapping("/subjects")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class MonHocController {
-    final MonHocService monHocService;
+public class SubjectController {
+    final MonHocService subjectService;
 
     @PostMapping
     public ResponseEntity<SubjectResDto> createMonHoc(@RequestBody CreateSubjectReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(monHocService.createMonHoc(req));
+        return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.createMonHoc(req));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<SubjectResDto> getMonHoc(@PathVariable Long id) {
-        return ResponseEntity.ok(monHocService.getMonHocById(id));
+        return ResponseEntity.ok(subjectService.getMonHocById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<SubjectResDto>> getAllMonHoc() {
-        return ResponseEntity.ok(monHocService.getAllMonHoc());
+        return ResponseEntity.ok(subjectService.getAllMonHoc());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<SubjectResDto> updateMonHoc(@PathVariable Long id, @RequestBody CreateSubjectReq req) {
-        return ResponseEntity.ok(monHocService.updateMonHoc(id, req));
+        return ResponseEntity.ok(subjectService.updateMonHoc(id, req));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMonHoc(@PathVariable Long id) {
-        monHocService.deleteMonHoc(id);
+        subjectService.deleteMonHoc(id);
         return ResponseEntity.noContent().build();
     }
 }

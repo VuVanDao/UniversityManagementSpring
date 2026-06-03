@@ -21,35 +21,35 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
-@RequestMapping("/phong-hocs")
+@RequestMapping("/classrooms")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class PhongHocController {
-    final PhongHocService phongHocService;
+public class ClassroomController {
+    final PhongHocService classroomService;
 
     @PostMapping
     public ResponseEntity<ClassroomResDto> createPhongHoc(@RequestBody CreateClassroomReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(phongHocService.createPhongHoc(req));
+        return ResponseEntity.status(HttpStatus.CREATED).body(classroomService.createPhongHoc(req));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ClassroomResDto> getPhongHoc(@PathVariable Long id) {
-        return ResponseEntity.ok(phongHocService.getPhongHocById(id));
+        return ResponseEntity.ok(classroomService.getPhongHocById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<ClassroomResDto>> getAllPhongHoc() {
-        return ResponseEntity.ok(phongHocService.getAllPhongHoc());
+        return ResponseEntity.ok(classroomService.getAllPhongHoc());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ClassroomResDto> updatePhongHoc(@PathVariable Long id, @RequestBody CreateClassroomReq req) {
-        return ResponseEntity.ok(phongHocService.updatePhongHoc(id, req));
+        return ResponseEntity.ok(classroomService.updatePhongHoc(id, req));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePhongHoc(@PathVariable Long id) {
-        phongHocService.deletePhongHoc(id);
+        classroomService.deletePhongHoc(id);
         return ResponseEntity.noContent().build();
     }
 }

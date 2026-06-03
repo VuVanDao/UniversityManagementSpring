@@ -21,35 +21,35 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
-@RequestMapping("/lop-quan-lis")
+@RequestMapping("/class-managements")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class LopQuanLiController {
-    final LopQuanLiService lopQuanLiService;
+public class ClassManagementController {
+    final LopQuanLiService classManagementService;
 
     @PostMapping
     public ResponseEntity<ClassManagementResDto> createLopQuanLi(@RequestBody CreateClassManagementReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(lopQuanLiService.createLopQuanLi(req));
+        return ResponseEntity.status(HttpStatus.CREATED).body(classManagementService.createLopQuanLi(req));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ClassManagementResDto> getLopQuanLi(@PathVariable Long id) {
-        return ResponseEntity.ok(lopQuanLiService.getLopQuanLiById(id));
+        return ResponseEntity.ok(classManagementService.getLopQuanLiById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<ClassManagementResDto>> getAllLopQuanLi() {
-        return ResponseEntity.ok(lopQuanLiService.getAllLopQuanLi());
+        return ResponseEntity.ok(classManagementService.getAllLopQuanLi());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ClassManagementResDto> updateLopQuanLi(@PathVariable Long id, @RequestBody CreateClassManagementReq req) {
-        return ResponseEntity.ok(lopQuanLiService.updateLopQuanLi(id, req));
+        return ResponseEntity.ok(classManagementService.updateLopQuanLi(id, req));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteLopQuanLi(@PathVariable Long id) {
-        lopQuanLiService.deleteLopQuanLi(id);
+        classManagementService.deleteLopQuanLi(id);
         return ResponseEntity.noContent().build();
     }
 }

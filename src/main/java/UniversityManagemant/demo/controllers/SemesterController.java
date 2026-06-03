@@ -21,35 +21,35 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
-@RequestMapping("/hoc-kis")
+@RequestMapping("/semesters")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class HocKiController {
-    final HocKiService hocKiService;
+public class SemesterController {
+    final HocKiService semesterService;
 
     @PostMapping
     public ResponseEntity<SemesterResDto> createHocKi(@RequestBody CreateSemesterReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(hocKiService.createHocKi(req));
+        return ResponseEntity.status(HttpStatus.CREATED).body(semesterService.createHocKi(req));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<SemesterResDto> getHocKi(@PathVariable Long id) {
-        return ResponseEntity.ok(hocKiService.getHocKiById(id));
+        return ResponseEntity.ok(semesterService.getHocKiById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<SemesterResDto>> getAllHocKi() {
-        return ResponseEntity.ok(hocKiService.getAllHocKi());
+        return ResponseEntity.ok(semesterService.getAllHocKi());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<SemesterResDto> updateHocKi(@PathVariable Long id, @RequestBody CreateSemesterReq req) {
-        return ResponseEntity.ok(hocKiService.updateHocKi(id, req));
+        return ResponseEntity.ok(semesterService.updateHocKi(id, req));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteHocKi(@PathVariable Long id) {
-        hocKiService.deleteHocKi(id);
+        semesterService.deleteHocKi(id);
         return ResponseEntity.noContent().build();
     }
 }
