@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreateMonHocReq;
 import UniversityManagemant.demo.dtos.response.MonHocResDto;
-import UniversityManagemant.demo.models.MonHoc;
+import UniversityManagemant.demo.models.Subject;
 import UniversityManagemant.demo.repositories.MonHocRepository;
 import UniversityManagemant.demo.services.serviceInterface.MonHocService;
 import lombok.AccessLevel;
@@ -22,12 +22,12 @@ public class MonHocServiceImpl implements MonHocService {
 
     @Override
     public MonHocResDto createMonHoc(CreateMonHocReq req) {
-        MonHoc monHoc = MonHoc.builder()
+        Subject monHoc = Subject.builder()
                 .maMonHoc(req.getMaMonHoc())
                 .tenMonHoc(req.getTenMonHoc())
                 .tinChi(req.getTinChi())
                 .build();
-        MonHoc saved = monHocRepository.save(monHoc);
+        Subject saved = monHocRepository.save(monHoc);
         return toDto(saved);
     }
 
@@ -47,12 +47,12 @@ public class MonHocServiceImpl implements MonHocService {
 
     @Override
     public MonHocResDto updateMonHoc(Long id, CreateMonHocReq req) {
-        MonHoc monHoc = monHocRepository.findById(id)
+        Subject monHoc = monHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("MonHoc not found"));
         monHoc.setMaMonHoc(req.getMaMonHoc());
         monHoc.setTenMonHoc(req.getTenMonHoc());
         monHoc.setTinChi(req.getTinChi());
-        MonHoc updated = monHocRepository.save(monHoc);
+        Subject updated = monHocRepository.save(monHoc);
         return toDto(updated);
     }
 
@@ -61,7 +61,7 @@ public class MonHocServiceImpl implements MonHocService {
         monHocRepository.deleteById(id);
     }
 
-    private MonHocResDto toDto(MonHoc monHoc) {
+    private MonHocResDto toDto(Subject monHoc) {
         return MonHocResDto.builder()
                 .id(monHoc.getId())
                 .maMonHoc(monHoc.getMaMonHoc())

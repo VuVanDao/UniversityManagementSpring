@@ -4,20 +4,20 @@ import org.springframework.stereotype.Component;
 
 import UniversityManagemant.demo.dtos.request.CreateMonHocReq;
 import UniversityManagemant.demo.dtos.response.MonHocResDto;
-import UniversityManagemant.demo.models.MonHoc;
+import UniversityManagemant.demo.models.Subject;
 
 @Component
 public class MonHocMapper {
 
-    public MonHoc toEntity(CreateMonHocReq createMonHocReq) {
-        return MonHoc.builder()
+    public Subject toEntity(CreateMonHocReq createMonHocReq) {
+        return Subject.builder()
                 .maMonHoc(createMonHocReq.getMaMonHoc())
                 .tenMonHoc(createMonHocReq.getTenMonHoc())
                 .tinChi(createMonHocReq.getTinChi())
                 .build();
     }
 
-    public MonHocResDto toResDto(MonHoc monHoc) {
+    public MonHocResDto toResDto(Subject monHoc) {
         return MonHocResDto.builder()
                 .id(monHoc.getId())
                 .maMonHoc(monHoc.getMaMonHoc())
@@ -26,7 +26,7 @@ public class MonHocMapper {
                 .build();
     }
 
-    public void updateEntityFromDto(CreateMonHocReq createMonHocReq, MonHoc monHoc) {
+    public void updateEntityFromDto(CreateMonHocReq createMonHocReq, Subject monHoc) {
         monHoc.setMaMonHoc(createMonHocReq.getMaMonHoc());
         monHoc.setTenMonHoc(createMonHocReq.getTenMonHoc());
         monHoc.setTinChi(createMonHocReq.getTinChi());

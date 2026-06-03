@@ -2,8 +2,8 @@ package UniversityManagemant.demo.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import UniversityManagemant.demo.models.SinhVien;
+import UniversityManagemant.demo.models.Student;
 
 @Repository
-public interface SinhVienRepository extends JpaRepository<SinhVien, Long> {
+public interface SinhVienRepository extends JpaRepository<Student, Long> {
 }

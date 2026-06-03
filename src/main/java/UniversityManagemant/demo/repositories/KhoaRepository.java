@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import UniversityManagemant.demo.models.GiangVien;
-import UniversityManagemant.demo.models.Khoa;
+import UniversityManagemant.demo.models.Lecturer;
+import UniversityManagemant.demo.models.Faculty;
 
 @Repository
-public interface KhoaRepository extends JpaRepository<Khoa, Long> {
+public interface KhoaRepository extends JpaRepository<Faculty, Long> {
     Boolean existsByMaKhoa(String maKhoa);
     boolean existsByMaKhoaAndIdNot(String maKhoa, Long id);
     boolean existsByTenKhoaIgnoreCaseAndIdNot(String tenKhoa, Long id);
-    Khoa findByTruongKhoa_Id(Long truongKhoaId);
+    Faculty findByTruongKhoa_Id(Long truongKhoaId);
 }

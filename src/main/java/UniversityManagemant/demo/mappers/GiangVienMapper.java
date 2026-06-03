@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import UniversityManagemant.demo.dtos.request.CreateGiangVienReq;
 import UniversityManagemant.demo.dtos.response.GiangVienResDto;
-import UniversityManagemant.demo.models.GiangVien;
+import UniversityManagemant.demo.models.Lecturer;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 public class GiangVienMapper {
     private final LopQuanLiMapper lopQuanLiMapper;
 
-    public GiangVienResDto toResDto(GiangVien giangVien) {
+    public GiangVienResDto toResDto(Lecturer giangVien) {
         return GiangVienResDto.builder()
                 .id(giangVien.getId())
                 .tenNguoiDung(giangVien.getUser() != null ? giangVien.getUser().getTenNguoiDung() : null)

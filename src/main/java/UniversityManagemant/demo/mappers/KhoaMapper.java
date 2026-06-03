@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import UniversityManagemant.demo.dtos.request.CreateKhoaReq;
 import UniversityManagemant.demo.dtos.request.UpdateKhoaReq;
 import UniversityManagemant.demo.dtos.response.KhoaResDto;
-import UniversityManagemant.demo.models.Khoa;
+import UniversityManagemant.demo.models.Faculty;
 import UniversityManagemant.demo.models.User;
 import UniversityManagemant.demo.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,14 +14,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class KhoaMapper {
     private final UserRepository userRepository;
-    public Khoa toEntity(CreateKhoaReq createKhoaReq) {
-        return Khoa.builder()
+    public Faculty toEntity(CreateKhoaReq createKhoaReq) {
+        return Faculty.builder()
                 .maKhoa(createKhoaReq.getMaKhoa())
                 .tenKhoa(createKhoaReq.getTenKhoa())
                 .build();
     }
 
-    public KhoaResDto toResDto(Khoa khoa) {
+    public KhoaResDto toResDto(Faculty khoa) {
         return KhoaResDto.builder()
                 .id(khoa.getId())
                 .maKhoa(khoa.getMaKhoa())
@@ -29,7 +29,7 @@ public class KhoaMapper {
                 .build();
     }
 
-    public void updateEntityFromDto(UpdateKhoaReq updateKhoaReq, Khoa khoa) {
+    public void updateEntityFromDto(UpdateKhoaReq updateKhoaReq, Faculty khoa) {
         if (updateKhoaReq.getMaKhoa() != null) {
             khoa.setMaKhoa(updateKhoaReq.getMaKhoa());
         }

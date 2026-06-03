@@ -1,12 +1,9 @@
 package UniversityManagemant.demo.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import java.util.List;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,21 +13,19 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
 @Entity
+@Table(name = "nhom_hoc_sinh_vien")
 @Getter
 @Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class LopQuanLi extends AbstractModel {
-    String maLop;
-    String tenLop;
+public class StudyGroupStudent extends AbstractModel {
+    @ManyToOne
+    @JoinColumn(name = "nhom_hoc_id")
+    StudyGroup nhomHoc;
 
     @ManyToOne
-    @JoinColumn(name = "chuyen_nganh_id")
-    ChuyenNganh chuyenNganh;
-
-    @OneToMany(mappedBy = "lopQuanLi")
-    @JsonIgnore
-    List<SinhVien> sinhViens;
+    @JoinColumn(name = "sinh_vien_id")
+    Student sinhVien;
 }

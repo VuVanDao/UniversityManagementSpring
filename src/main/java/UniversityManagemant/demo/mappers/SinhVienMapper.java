@@ -4,12 +4,12 @@ import org.springframework.stereotype.Component;
 
 import UniversityManagemant.demo.dtos.request.CreateSinhVienReq;
 import UniversityManagemant.demo.dtos.response.SinhVienResDto;
-import UniversityManagemant.demo.models.SinhVien;
+import UniversityManagemant.demo.models.Student;
 
 @Component
 public class SinhVienMapper {
 
-    public SinhVienResDto toResDto(SinhVien sinhVien) {
+    public SinhVienResDto toResDto(Student sinhVien) {
         return SinhVienResDto.builder()
                 .id(sinhVien.getId())
                 .maSinhVien(sinhVien.getMaSinhVien())
@@ -20,7 +20,7 @@ public class SinhVienMapper {
                 .build();
     }
 
-    public void updateEntityFromDto(CreateSinhVienReq createSinhVienReq, SinhVien sinhVien) {
+    public void updateEntityFromDto(CreateSinhVienReq createSinhVienReq, Student sinhVien) {
         sinhVien.setMaSinhVien(createSinhVienReq.getMaSinhVien());
     }
 }
