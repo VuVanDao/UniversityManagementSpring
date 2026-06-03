@@ -12,15 +12,15 @@ public class SinhVienMapper {
     public SinhVienResDto toResDto(Student sinhVien) {
         return SinhVienResDto.builder()
                 .id(sinhVien.getId())
-                .maSinhVien(sinhVien.getMaSinhVien())
-                .diemGPA(sinhVien.getDiemGPA())
-                .tenNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getTenNguoiDung() : null)
-                .maNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getMaNguoiDung() : null)
-                .tenLopQuanLi(sinhVien.getLopQuanLi() != null ? sinhVien.getLopQuanLi().getTenLop() : null)
+                .maSinhVien(sinhVien.getUser().getUserCode())
+                .diemGPA(sinhVien.getGPAPoint())
+                .tenNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getUsername() : null)
+                .maNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getUserCode() : null)
+                .tenLopQuanLi(sinhVien.getClassManagement() != null ? sinhVien.getClassManagement().getClassManagementName() : null)
                 .build();
     }
 
     public void updateEntityFromDto(CreateSinhVienReq createSinhVienReq, Student sinhVien) {
-        sinhVien.setMaSinhVien(createSinhVienReq.getMaSinhVien());
+        sinhVien.getUser().setUserCode(createSinhVienReq.getMaSinhVien());
     }
 }

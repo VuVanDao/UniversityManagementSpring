@@ -16,25 +16,25 @@ public class KhoaMapper {
     private final UserRepository userRepository;
     public Faculty toEntity(CreateKhoaReq createKhoaReq) {
         return Faculty.builder()
-                .maKhoa(createKhoaReq.getMaKhoa())
-                .tenKhoa(createKhoaReq.getTenKhoa())
+                .facultyCode(createKhoaReq.getMaKhoa())
+                .facultyName(createKhoaReq.getTenKhoa())
                 .build();
     }
 
     public KhoaResDto toResDto(Faculty khoa) {
         return KhoaResDto.builder()
                 .id(khoa.getId())
-                .maKhoa(khoa.getMaKhoa())
-                .tenKhoa(khoa.getTenKhoa())
+                .maKhoa(khoa.getFacultyCode())
+                .tenKhoa(khoa.getFacultyName())
                 .build();
     }
 
     public void updateEntityFromDto(UpdateKhoaReq updateKhoaReq, Faculty khoa) {
         if (updateKhoaReq.getMaKhoa() != null) {
-            khoa.setMaKhoa(updateKhoaReq.getMaKhoa());
+            khoa.setFacultyCode(updateKhoaReq.getMaKhoa());
         }
         if (updateKhoaReq.getTenKhoa() != null) {
-            khoa.setTenKhoa(updateKhoaReq.getTenKhoa());
+            khoa.setFacultyName(updateKhoaReq.getTenKhoa());
         }
     }
 }

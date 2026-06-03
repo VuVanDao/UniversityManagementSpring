@@ -27,12 +27,11 @@ public class BangDiemServiceImpl implements BangDiemService {
     @Override
     public BangDiemResDto createBangDiem(CreateBangDiemReq req) {
         GradeRecord bangDiem = GradeRecord.builder()
-                .sinhVien(sinhVienRepository.findById(req.getSinhVienId()).orElseThrow())
-                .monHoc(monHocRepository.findById(req.getMonHocId()).orElseThrow())
-                .diemHe10(req.getDiemHe10())
-                .diemHe4(req.getDiemHe4())
-                .diemChu(req.getDiemChu())
-                .trangThaiMonHoc(req.getTrangThaiMonHoc())
+                .student(sinhVienRepository.findById(req.getSinhVienId()).orElseThrow())
+                .subject(monHocRepository.findById(req.getMonHocId()).orElseThrow())
+                .TenPointScale(req.getDiemHe10())
+                .FourPointScale(req.getDiemHe4())
+                .SubjectStatus(req.getTrangThaiMonHoc())
                 .build();
         GradeRecord saved = bangDiemRepository.save(bangDiem);
         return toDto(saved);
@@ -56,12 +55,11 @@ public class BangDiemServiceImpl implements BangDiemService {
     public BangDiemResDto updateBangDiem(Long id, CreateBangDiemReq req) {
         GradeRecord bangDiem = bangDiemRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("BangDiem not found"));
-        bangDiem.setSinhVien(sinhVienRepository.findById(req.getSinhVienId()).orElseThrow());
-        bangDiem.setMonHoc(monHocRepository.findById(req.getMonHocId()).orElseThrow());
-        bangDiem.setDiemHe10(req.getDiemHe10());
-        bangDiem.setDiemHe4(req.getDiemHe4());
-        bangDiem.setDiemChu(req.getDiemChu());
-        bangDiem.setTrangThaiMonHoc(req.getTrangThaiMonHoc());
+        bangDiem.setStudent(sinhVienRepository.findById(req.getSinhVienId()).orElseThrow());
+        bangDiem.setSubject(monHocRepository.findById(req.getMonHocId()).orElseThrow());
+        bangDiem.setTenPointScale(req.getDiemHe10());
+        bangDiem.setFourPointScale(req.getDiemHe4());
+        bangDiem.setSubjectStatus(req.getTrangThaiMonHoc());
         GradeRecord updated = bangDiemRepository.save(bangDiem);
         return toDto(updated);
     }
@@ -74,14 +72,14 @@ public class BangDiemServiceImpl implements BangDiemService {
     private BangDiemResDto toDto(GradeRecord bangDiem) {
         return BangDiemResDto.builder()
                 .id(bangDiem.getId())
-                .maSinhVien(bangDiem.getSinhVien() != null ? bangDiem.getSinhVien().getMaSinhVien() : null)
-                .tenNguoiDung(bangDiem.getSinhVien() != null && bangDiem.getSinhVien().getUser() != null
-                    ? bangDiem.getSinhVien().getUser().getTenNguoiDung() : null)
-                .tenMonHoc(bangDiem.getMonHoc() != null ? bangDiem.getMonHoc().getTenMonHoc() : null)
-                .diemHe10(bangDiem.getDiemHe10())
-                .diemHe4(bangDiem.getDiemHe4())
-                .diemChu(bangDiem.getDiemChu())
-                .trangThaiMonHoc(bangDiem.getTrangThaiMonHoc())
+                .maSinhVien(bangDiem.getStudent() != null ? bangDiem.getStudent().getUser().getUserCode() : null)
+                .tenNguoiDung(bangDiem.getStudent() != null && bangDiem.getStudent().getUser() != null
+                    ? bangDiem.getStudent().getUser().getUsername() : null)
+                .tenMonHoc(bangDiem.getSubject() != null ? bangDiem.getSubject().getSubjectName() : null)
+                .diemHe10(bangDiem.getTenPointScale())
+                .diemHe4(bangDiem.getFourPointScale())
+                .diemChu(bangDiem.getSubjectStatus())
+                .trangThaiMonHoc(bangDiem.getSubjectStatus())
                 .build();
     }
 }

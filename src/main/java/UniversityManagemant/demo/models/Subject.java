@@ -21,14 +21,14 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Subject extends AbstractModel {
-    String maMonHoc;
-    String tenMonHoc;
-    Integer tinChi;
+    String subjectCode;
+    String subjectName;
+    Integer credits;
 
     // @OneToMany(mappedBy = "monHoc")
     // List<BangDiem> bangDiems;
 
-    @OneToMany(mappedBy = "monHoc")
+    @OneToMany(mappedBy = "subject")
     @JsonIgnore
-    List<StudyGroup> nhomHocs;
+    List<StudyGroup> studyGroups;
 }

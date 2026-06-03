@@ -11,7 +11,7 @@ public class HocKiMapper {
 
     public Semester toEntity(CreateHocKiReq createHocKiReq) {
         return Semester.builder()
-                .tenHocKi(createHocKiReq.getTenHocKi())
+                .semesterName(createHocKiReq.getTenHocKi())
                 .fromTime(createHocKiReq.getFromTime())
                 .toTime(createHocKiReq.getToTime())
                 .build();
@@ -20,14 +20,14 @@ public class HocKiMapper {
     public HocKiResDto toResDto(Semester hocKi) {
         return HocKiResDto.builder()
                 .id(hocKi.getId())
-                .tenHocKi(hocKi.getTenHocKi())
+                .tenHocKi(hocKi.getSemesterName())
                 .fromTime(hocKi.getFromTime())
                 .toTime(hocKi.getToTime())
                 .build();
     }
 
     public void updateEntityFromDto(CreateHocKiReq createHocKiReq, Semester hocKi) {
-        hocKi.setTenHocKi(createHocKiReq.getTenHocKi());
+        hocKi.setSemesterName(createHocKiReq.getTenHocKi());
         hocKi.setFromTime(createHocKiReq.getFromTime());
         hocKi.setToTime(createHocKiReq.getToTime());
     }

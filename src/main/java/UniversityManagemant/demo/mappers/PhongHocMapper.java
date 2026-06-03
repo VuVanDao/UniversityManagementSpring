@@ -11,18 +11,18 @@ public class PhongHocMapper {
 
     public Classroom toEntity(CreatePhongHocReq createPhongHocReq) {
         return Classroom.builder()
-                .tenPhongHoc(createPhongHocReq.getTenPhongHoc())
+                .classroomName(createPhongHocReq.getTenPhongHoc())
                 .build();
     }
 
     public PhongHocResDto toResDto(Classroom phongHoc) {
         return PhongHocResDto.builder()
                 .id(phongHoc.getId())
-                .tenPhongHoc(phongHoc.getTenPhongHoc())
+                .tenPhongHoc(phongHoc.getClassroomName())
                 .build();
     }
 
     public void updateEntityFromDto(CreatePhongHocReq createPhongHocReq, Classroom phongHoc) {
-        phongHoc.setTenPhongHoc(createPhongHocReq.getTenPhongHoc());
+        phongHoc.setClassroomName(createPhongHocReq.getTenPhongHoc());
     }
 }

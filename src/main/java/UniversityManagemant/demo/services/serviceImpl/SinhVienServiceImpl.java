@@ -27,9 +27,8 @@ public class SinhVienServiceImpl implements SinhVienService {
     @Override
     public SinhVienResDto createSinhVien(CreateSinhVienReq req) {
         Student sinhVien = Student.builder()
-                .maSinhVien(req.getMaSinhVien())
                 .user(userRepository.findById(req.getUserId()).orElseThrow())
-                .lopQuanLi(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow())
+                .classManagement(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow())
                 .build();
         Student saved = sinhVienRepository.save(sinhVien);
         return toDto(saved);
@@ -53,9 +52,8 @@ public class SinhVienServiceImpl implements SinhVienService {
     public SinhVienResDto updateSinhVien(Long id, CreateSinhVienReq req) {
         Student sinhVien = sinhVienRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("SinhVien not found"));
-        sinhVien.setMaSinhVien(req.getMaSinhVien());
         sinhVien.setUser(userRepository.findById(req.getUserId()).orElseThrow());
-        sinhVien.setLopQuanLi(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow());
+        sinhVien.setClassManagement(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow());
         Student updated = sinhVienRepository.save(sinhVien);
         return toDto(updated);
     }
@@ -68,11 +66,11 @@ public class SinhVienServiceImpl implements SinhVienService {
     private SinhVienResDto toDto(Student sinhVien) {
         return SinhVienResDto.builder()
                 .id(sinhVien.getId())
-                .maSinhVien(sinhVien.getMaSinhVien())
-                .diemGPA(sinhVien.getDiemGPA())
-                .tenNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getTenNguoiDung() : null)
-                .maNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getMaNguoiDung() : null)
-                .tenLopQuanLi(sinhVien.getLopQuanLi() != null ? sinhVien.getLopQuanLi().getTenLop() : null)
+                .maSinhVien(sinhVien.getUser() != null ? sinhVien.getUser().getUserCode() : null)
+                .diemGPA(sinhVien.getGPAPoint())
+                .tenNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getUsername() : null)
+                .maNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getUserCode() : null)
+                .tenLopQuanLi(sinhVien.getClassManagement() != null ? sinhVien.getClassManagement().getClassManagementName() : null)
                 .build();
     }
 }

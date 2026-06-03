@@ -24,15 +24,14 @@ import lombok.experimental.SuperBuilder;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class GradeRecord extends AbstractModel {
     @ManyToOne
-    @JoinColumn(name = "sinh_vien_id", nullable = false)
-    Student sinhVien;
+    @JoinColumn(name = "student_id", nullable = false)
+    Student student;
 
     @ManyToOne
-    @JoinColumn(name = "mon_hoc_id", nullable = false)
-    Subject monHoc;
+    @JoinColumn(name = "subject_id", nullable = false)
+    Subject subject;
 
-    BigDecimal diemHe10;
-    BigDecimal diemHe4;
-    String diemChu;
-    String trangThaiMonHoc;
+    BigDecimal TenPointScale;
+    BigDecimal FourPointScale;
+    String SubjectStatus;
 }

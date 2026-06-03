@@ -23,13 +23,13 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Faculty extends AbstractModel {
-    String maKhoa;
-    String tenKhoa;
+    String facultyCode;
+    String facultyName;
 
-    @OneToOne(mappedBy = "khoa")
-    Lecturer truongKhoa;
+    @OneToOne(mappedBy = "faculty")
+    Lecturer dean;// trưởng khoa
 
-    @OneToMany(mappedBy = "khoa")
+    @OneToMany(mappedBy = "faculty")
     @JsonIgnore
-    List<Major> chuyenNganhs;
+    List<Major> majors;
 }

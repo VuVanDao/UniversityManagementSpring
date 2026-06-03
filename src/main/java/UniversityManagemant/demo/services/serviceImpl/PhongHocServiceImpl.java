@@ -23,7 +23,7 @@ public class PhongHocServiceImpl implements PhongHocService {
     @Override
     public PhongHocResDto createPhongHoc(CreatePhongHocReq req) {
         Classroom phongHoc = Classroom.builder()
-                .tenPhongHoc(req.getTenPhongHoc())
+                .classroomName(req.getTenPhongHoc())
                 .build();
         Classroom saved = phongHocRepository.save(phongHoc);
         return toDto(saved);
@@ -47,7 +47,7 @@ public class PhongHocServiceImpl implements PhongHocService {
     public PhongHocResDto updatePhongHoc(Long id, CreatePhongHocReq req) {
         Classroom phongHoc = phongHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("PhongHoc not found"));
-        phongHoc.setTenPhongHoc(req.getTenPhongHoc());
+        phongHoc.setClassroomName(req.getTenPhongHoc());
         Classroom updated = phongHocRepository.save(phongHoc);
         return toDto(updated);
     }
@@ -60,7 +60,7 @@ public class PhongHocServiceImpl implements PhongHocService {
     private PhongHocResDto toDto(Classroom phongHoc) {
         return PhongHocResDto.builder()
                 .id(phongHoc.getId())
-                .tenPhongHoc(phongHoc.getTenPhongHoc())
+                .tenPhongHoc(phongHoc.getClassroomName())
                 .build();
     }
 }

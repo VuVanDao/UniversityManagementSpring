@@ -25,9 +25,9 @@ public class LopQuanLiServiceImpl implements LopQuanLiService {
     @Override
     public LopQuanLiResDto createLopQuanLi(CreateLopQuanLiReq req) {
         ClassManagement lopQuanLi = ClassManagement.builder()
-                .maLop(req.getMaLop())
-                .tenLop(req.getTenLop())
-                .chuyenNganh(chuyenNganhRepository.findById(req.getChuyenNganhId()).orElseThrow())
+                .classManagementCode(req.getMaLop())
+                .classManagementName(req.getTenLop())
+                .major(chuyenNganhRepository.findById(req.getChuyenNganhId()).orElseThrow())
                 .build();
         ClassManagement saved = lopQuanLiRepository.save(lopQuanLi);
         return toDto(saved);
@@ -51,9 +51,9 @@ public class LopQuanLiServiceImpl implements LopQuanLiService {
     public LopQuanLiResDto updateLopQuanLi(Long id, CreateLopQuanLiReq req) {
         ClassManagement lopQuanLi = lopQuanLiRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("LopQuanLi not found"));
-        lopQuanLi.setMaLop(req.getMaLop());
-        lopQuanLi.setTenLop(req.getTenLop());
-        lopQuanLi.setChuyenNganh(chuyenNganhRepository.findById(req.getChuyenNganhId()).orElseThrow());
+        lopQuanLi.setClassManagementCode(req.getMaLop());
+        lopQuanLi.setClassManagementName(req.getTenLop());
+        lopQuanLi.setMajor(chuyenNganhRepository.findById(req.getChuyenNganhId()).orElseThrow());
         ClassManagement updated = lopQuanLiRepository.save(lopQuanLi);
         return toDto(updated);
     }
@@ -66,9 +66,9 @@ public class LopQuanLiServiceImpl implements LopQuanLiService {
     private LopQuanLiResDto toDto(ClassManagement lopQuanLi) {
         return LopQuanLiResDto.builder()
                 .id(lopQuanLi.getId())
-                .maLop(lopQuanLi.getMaLop())
-                .tenLop(lopQuanLi.getTenLop())
-                .tenChuyenNganh(lopQuanLi.getChuyenNganh() != null ? lopQuanLi.getChuyenNganh().getTenChuyenNganh() : null)
+                .maLop(lopQuanLi.getClassManagementCode())
+                .tenLop(lopQuanLi.getClassManagementName())
+                .tenChuyenNganh(lopQuanLi.getMajor() != null ? lopQuanLi.getMajor().getMajorName() : null)
                 .build();
     }
 }

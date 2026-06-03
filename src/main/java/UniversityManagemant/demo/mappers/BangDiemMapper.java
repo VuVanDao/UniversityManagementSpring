@@ -11,12 +11,11 @@ public class BangDiemMapper {
     public BangDiemResDto toResDto(GradeRecord bangDiem) {
         return BangDiemResDto.builder()
                 .id(bangDiem.getId())
-                .maSinhVien(bangDiem.getSinhVien() != null ? bangDiem.getSinhVien().getMaSinhVien() : null)
-                .tenMonHoc(bangDiem.getMonHoc() != null ? bangDiem.getMonHoc().getTenMonHoc() : null)
-                .diemHe10(bangDiem.getDiemHe10())
-                .diemHe4(bangDiem.getDiemHe4())
-                .diemChu(bangDiem.getDiemChu())
-                .trangThaiMonHoc(bangDiem.getTrangThaiMonHoc())
+                .maSinhVien(bangDiem.getStudent() != null ? bangDiem.getStudent().getUser().getUserCode() : null)
+                .tenMonHoc(bangDiem.getSubject() != null ? bangDiem.getSubject().getSubjectName() : null)
+                .diemHe10(bangDiem.getTenPointScale())
+                .diemHe4(bangDiem.getFourPointScale())
+                .trangThaiMonHoc(bangDiem.getSubjectStatus())
                 .build();
     }
 }

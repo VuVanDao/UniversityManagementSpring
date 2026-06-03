@@ -23,9 +23,9 @@ public class MonHocServiceImpl implements MonHocService {
     @Override
     public MonHocResDto createMonHoc(CreateMonHocReq req) {
         Subject monHoc = Subject.builder()
-                .maMonHoc(req.getMaMonHoc())
-                .tenMonHoc(req.getTenMonHoc())
-                .tinChi(req.getTinChi())
+                .subjectCode(req.getMaMonHoc())
+                .subjectName(req.getTenMonHoc())
+                .credits(req.getTinChi())
                 .build();
         Subject saved = monHocRepository.save(monHoc);
         return toDto(saved);
@@ -49,9 +49,9 @@ public class MonHocServiceImpl implements MonHocService {
     public MonHocResDto updateMonHoc(Long id, CreateMonHocReq req) {
         Subject monHoc = monHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("MonHoc not found"));
-        monHoc.setMaMonHoc(req.getMaMonHoc());
-        monHoc.setTenMonHoc(req.getTenMonHoc());
-        monHoc.setTinChi(req.getTinChi());
+        monHoc.setSubjectCode(req.getMaMonHoc());
+        monHoc.setSubjectName(req.getTenMonHoc());
+        monHoc.setCredits(req.getTinChi());
         Subject updated = monHocRepository.save(monHoc);
         return toDto(updated);
     }
@@ -64,9 +64,9 @@ public class MonHocServiceImpl implements MonHocService {
     private MonHocResDto toDto(Subject monHoc) {
         return MonHocResDto.builder()
                 .id(monHoc.getId())
-                .maMonHoc(monHoc.getMaMonHoc())
-                .tenMonHoc(monHoc.getTenMonHoc())
-                .tinChi(monHoc.getTinChi())
+                .maMonHoc(monHoc.getSubjectCode())
+                .tenMonHoc(monHoc.getSubjectName())
+                .tinChi(monHoc.getCredits())
                 .build();
     }
 }
