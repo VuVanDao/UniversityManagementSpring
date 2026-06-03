@@ -21,35 +21,35 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
-@RequestMapping("/bang-diems")
+@RequestMapping("/grade-records")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class BangDiemController {
-    final BangDiemService bangDiemService;
+public class GradeRecordController {
+    final BangDiemService gradeRecordService;
 
     @PostMapping
     public ResponseEntity<GradeRecordResDto> createBangDiem(@RequestBody CreateGradeRecordReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(bangDiemService.createBangDiem(req));
+        return ResponseEntity.status(HttpStatus.CREATED).body(gradeRecordService.createBangDiem(req));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<GradeRecordResDto> getBangDiem(@PathVariable Long id) {
-        return ResponseEntity.ok(bangDiemService.getBangDiemById(id));
+        return ResponseEntity.ok(gradeRecordService.getBangDiemById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<GradeRecordResDto>> getAllBangDiem() {
-        return ResponseEntity.ok(bangDiemService.getAllBangDiem());
+        return ResponseEntity.ok(gradeRecordService.getAllBangDiem());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<GradeRecordResDto> updateBangDiem(@PathVariable Long id, @RequestBody CreateGradeRecordReq req) {
-        return ResponseEntity.ok(bangDiemService.updateBangDiem(id, req));
+        return ResponseEntity.ok(gradeRecordService.updateBangDiem(id, req));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBangDiem(@PathVariable Long id) {
-        bangDiemService.deleteBangDiem(id);
+        gradeRecordService.deleteBangDiem(id);
         return ResponseEntity.noContent().build();
     }
 }

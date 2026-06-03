@@ -21,35 +21,35 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
-@RequestMapping("/sinh-viens")
+@RequestMapping("/students")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class SinhVienController {
-    final SinhVienService sinhVienService;
+public class StudentController {
+    final SinhVienService studentService;
 
     @PostMapping
     public ResponseEntity<StudentResDto> createSinhVien(@RequestBody CreateStudentReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(sinhVienService.createSinhVien(req));
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createSinhVien(req));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentResDto> getSinhVien(@PathVariable Long id) {
-        return ResponseEntity.ok(sinhVienService.getSinhVienById(id));
+        return ResponseEntity.ok(studentService.getSinhVienById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<StudentResDto>> getAllSinhVien() {
-        return ResponseEntity.ok(sinhVienService.getAllSinhVien());
+        return ResponseEntity.ok(studentService.getAllSinhVien());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<StudentResDto> updateSinhVien(@PathVariable Long id, @RequestBody CreateStudentReq req) {
-        return ResponseEntity.ok(sinhVienService.updateSinhVien(id, req));
+        return ResponseEntity.ok(studentService.updateSinhVien(id, req));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSinhVien(@PathVariable Long id) {
-        sinhVienService.deleteSinhVien(id);
+        studentService.deleteSinhVien(id);
         return ResponseEntity.noContent().build();
     }
 }
