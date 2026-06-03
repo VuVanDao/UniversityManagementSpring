@@ -2,8 +2,8 @@ package UniversityManagemant.demo.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import UniversityManagemant.demo.models.ClassManagement;
+import UniversityManagemant.demo.models.Lecturer;
 
 @Repository
-public interface LopQuanLiRepository extends JpaRepository<ClassManagement, Long> {
+public interface LecturerRepository extends JpaRepository<Lecturer, Long> {
 }
