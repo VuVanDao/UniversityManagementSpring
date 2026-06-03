@@ -9,7 +9,7 @@ import UniversityManagemant.demo.dtos.request.CreateClassroomReq;
 import UniversityManagemant.demo.dtos.response.ClassroomResDto;
 import UniversityManagemant.demo.models.Classroom;
 import UniversityManagemant.demo.repositories.PhongHocRepository;
-import UniversityManagemant.demo.services.serviceInterface.PhongHocService;
+import UniversityManagemant.demo.services.serviceInterface.ClassroomService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,11 +17,11 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class PhongHocServiceImpl implements PhongHocService {
+public class ClassroomServiceImpl implements ClassroomService {
     final PhongHocRepository phongHocRepository;
 
     @Override
-    public ClassroomResDto createPhongHoc(CreateClassroomReq req) {
+    public ClassroomResDto createClassroom(CreateClassroomReq req) {
         Classroom phongHoc = Classroom.builder()
                 .classroomName(req.getClassroomName())
                 .build();
@@ -30,21 +30,21 @@ public class PhongHocServiceImpl implements PhongHocService {
     }
 
     @Override
-    public ClassroomResDto getPhongHocById(Long id) {
+    public ClassroomResDto getClassroomById(Long id) {
         return phongHocRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("PhongHoc not found"));
     }
 
     @Override
-    public List<ClassroomResDto> getAllPhongHoc() {
+    public List<ClassroomResDto> getAllClassrooms() {
         return phongHocRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ClassroomResDto updatePhongHoc(Long id, CreateClassroomReq req) {
+    public ClassroomResDto updateClassroom(Long id, CreateClassroomReq req) {
         Classroom phongHoc = phongHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("PhongHoc not found"));
         phongHoc.setClassroomName(req.getClassroomName());
@@ -53,7 +53,7 @@ public class PhongHocServiceImpl implements PhongHocService {
     }
 
     @Override
-    public void deletePhongHoc(Long id) {
+    public void deleteClassroom(Long id) {
         phongHocRepository.deleteById(id);
     }
 

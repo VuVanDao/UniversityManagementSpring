@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateClassroomReq;
 import UniversityManagemant.demo.dtos.response.ClassroomResDto;
-import UniversityManagemant.demo.services.serviceInterface.PhongHocService;
+import UniversityManagemant.demo.services.serviceInterface.ClassroomService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,31 +25,31 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class ClassroomController {
-    final PhongHocService classroomService;
+    final ClassroomService classroomService;
 
     @PostMapping
-    public ResponseEntity<ClassroomResDto> createPhongHoc(@RequestBody CreateClassroomReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(classroomService.createPhongHoc(req));
+    public ResponseEntity<ClassroomResDto> createClassroom(@RequestBody CreateClassroomReq req) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(classroomService.createClassroom(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClassroomResDto> getPhongHoc(@PathVariable Long id) {
-        return ResponseEntity.ok(classroomService.getPhongHocById(id));
+    public ResponseEntity<ClassroomResDto> getClassroom(@PathVariable Long id) {
+        return ResponseEntity.ok(classroomService.getClassroomById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<ClassroomResDto>> getAllPhongHoc() {
-        return ResponseEntity.ok(classroomService.getAllPhongHoc());
+    public ResponseEntity<List<ClassroomResDto>> getAllClassrooms() {
+        return ResponseEntity.ok(classroomService.getAllClassrooms());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClassroomResDto> updatePhongHoc(@PathVariable Long id, @RequestBody CreateClassroomReq req) {
-        return ResponseEntity.ok(classroomService.updatePhongHoc(id, req));
+    public ResponseEntity<ClassroomResDto> updateClassroom(@PathVariable Long id, @RequestBody CreateClassroomReq req) {
+        return ResponseEntity.ok(classroomService.updateClassroom(id, req));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePhongHoc(@PathVariable Long id) {
-        classroomService.deletePhongHoc(id);
+    public ResponseEntity<Void> deleteClassroom(@PathVariable Long id) {
+        classroomService.deleteClassroom(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateLecturerReq;
 import UniversityManagemant.demo.dtos.response.LecturerResDto;
-import UniversityManagemant.demo.services.serviceInterface.GiangVienService;
+import UniversityManagemant.demo.services.serviceInterface.LecturerService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,31 +25,31 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class LecturerController {
-    final GiangVienService lecturerService;
+    final LecturerService lecturerService;
 
     @PostMapping
-    public ResponseEntity<LecturerResDto> createGiangVien(@RequestBody CreateLecturerReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(lecturerService.createGiangVien(req));
+    public ResponseEntity<LecturerResDto> createLecturer(@RequestBody CreateLecturerReq req) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(lecturerService.createLecturer(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LecturerResDto> getGiangVien(@PathVariable Long id) {
-        return ResponseEntity.ok(lecturerService.getGiangVienById(id));
+    public ResponseEntity<LecturerResDto> getLecturer(@PathVariable Long id) {
+        return ResponseEntity.ok(lecturerService.getLecturerById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<LecturerResDto>> getAllGiangVien() {
-        return ResponseEntity.ok(lecturerService.getAllGiangVien());
+    public ResponseEntity<List<LecturerResDto>> getAllLecturers() {
+        return ResponseEntity.ok(lecturerService.getAllLecturers());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<LecturerResDto> updateGiangVien(@PathVariable Long id, @RequestBody CreateLecturerReq req) {
-        return ResponseEntity.ok(lecturerService.updateGiangVien(id, req));
+    public ResponseEntity<LecturerResDto> updateLecturer(@PathVariable Long id, @RequestBody CreateLecturerReq req) {
+        return ResponseEntity.ok(lecturerService.updateLecturer(id, req));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteGiangVien(@PathVariable Long id) {
-        lecturerService.deleteGiangVien(id);
+    public ResponseEntity<Void> deleteLecturer(@PathVariable Long id) {
+        lecturerService.deleteLecturer(id);
         return ResponseEntity.noContent().build();
     }
 }

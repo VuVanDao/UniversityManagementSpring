@@ -9,7 +9,7 @@ import UniversityManagemant.demo.dtos.request.CreateSemesterReq;
 import UniversityManagemant.demo.dtos.response.SemesterResDto;
 import UniversityManagemant.demo.models.Semester;
 import UniversityManagemant.demo.repositories.HocKiRepository;
-import UniversityManagemant.demo.services.serviceInterface.HocKiService;
+import UniversityManagemant.demo.services.serviceInterface.SemesterService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,11 +17,11 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class HocKiServiceImpl implements HocKiService {
+public class SemesterServiceImpl implements SemesterService {
     final HocKiRepository hocKiRepository;
 
     @Override
-    public SemesterResDto createHocKi(CreateSemesterReq req) {
+    public SemesterResDto createSemester(CreateSemesterReq req) {
         Semester hocKi = Semester.builder()
                 .semesterName(req.getSemesterName())
                 .fromTime(req.getFromTime())
@@ -32,21 +32,21 @@ public class HocKiServiceImpl implements HocKiService {
     }
 
     @Override
-    public SemesterResDto getHocKiById(Long id) {
+    public SemesterResDto getSemesterById(Long id) {
         return hocKiRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("HocKi not found"));
     }
 
     @Override
-    public List<SemesterResDto> getAllHocKi() {
+    public List<SemesterResDto> getAllSemesters() {
         return hocKiRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public SemesterResDto updateHocKi(Long id, CreateSemesterReq req) {
+    public SemesterResDto updateSemester(Long id, CreateSemesterReq req) {
         Semester hocKi = hocKiRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("HocKi not found"));
         hocKi.setSemesterName(req.getSemesterName());
@@ -57,7 +57,7 @@ public class HocKiServiceImpl implements HocKiService {
     }
 
     @Override
-    public void deleteHocKi(Long id) {
+    public void deleteSemester(Long id) {
         hocKiRepository.deleteById(id);
     }
 

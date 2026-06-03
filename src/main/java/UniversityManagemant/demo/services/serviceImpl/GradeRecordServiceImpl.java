@@ -11,7 +11,7 @@ import UniversityManagemant.demo.models.GradeRecord;
 import UniversityManagemant.demo.repositories.BangDiemRepository;
 import UniversityManagemant.demo.repositories.SinhVienRepository;
 import UniversityManagemant.demo.repositories.MonHocRepository;
-import UniversityManagemant.demo.services.serviceInterface.BangDiemService;
+import UniversityManagemant.demo.services.serviceInterface.GradeRecordService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -19,13 +19,13 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class BangDiemServiceImpl implements BangDiemService {
+public class GradeRecordServiceImpl implements GradeRecordService {
     final BangDiemRepository bangDiemRepository;
     final SinhVienRepository sinhVienRepository;
     final MonHocRepository monHocRepository;
 
     @Override
-    public GradeRecordResDto createBangDiem(CreateGradeRecordReq req) {
+    public GradeRecordResDto createGradeRecord(CreateGradeRecordReq req) {
         GradeRecord bangDiem = GradeRecord.builder()
                 .student(sinhVienRepository.findById(req.getStudentId()).orElseThrow())
                 .subject(monHocRepository.findById(req.getSubjectId()).orElseThrow())
@@ -38,23 +38,23 @@ public class BangDiemServiceImpl implements BangDiemService {
     }
 
     @Override
-    public GradeRecordResDto getBangDiemById(Long id) {
+    public GradeRecordResDto getGradeRecordById(Long id) {
         return bangDiemRepository.findById(id)
                 .map(this::toDto)
-                .orElseThrow(() -> new RuntimeException("BangDiem not found"));
+                .orElseThrow(() -> new RuntimeException("GradeRecord not found"));
     }
 
     @Override
-    public List<GradeRecordResDto> getAllBangDiem() {
+    public List<GradeRecordResDto> getAllGradeRecords() {
         return bangDiemRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public GradeRecordResDto updateBangDiem(Long id, CreateGradeRecordReq req) {
+    public GradeRecordResDto updateGradeRecord(Long id, CreateGradeRecordReq req) {
         GradeRecord bangDiem = bangDiemRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("BangDiem not found"));
+                .orElseThrow(() -> new RuntimeException("GradeRecord not found"));
         bangDiem.setStudent(sinhVienRepository.findById(req.getStudentId()).orElseThrow());
         bangDiem.setSubject(monHocRepository.findById(req.getSubjectId()).orElseThrow());
         bangDiem.setTenPointScale(req.getTenPointScale());
@@ -65,7 +65,7 @@ public class BangDiemServiceImpl implements BangDiemService {
     }
 
     @Override
-    public void deleteBangDiem(Long id) {
+    public void deleteGradeRecord(Long id) {
         bangDiemRepository.deleteById(id);
     }
 

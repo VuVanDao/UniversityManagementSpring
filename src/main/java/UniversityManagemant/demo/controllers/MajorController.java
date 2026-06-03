@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateMajorReq;
 import UniversityManagemant.demo.dtos.response.MajorResDto;
-import UniversityManagemant.demo.services.serviceInterface.ChuyenNganhService;
+import UniversityManagemant.demo.services.serviceInterface.MajorService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,31 +25,31 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class MajorController {
-    final ChuyenNganhService majorService;
+    final MajorService majorService;
 
     @PostMapping
-    public ResponseEntity<MajorResDto> createChuyenNganh(@RequestBody CreateMajorReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(majorService.createChuyenNganh(req));
+    public ResponseEntity<MajorResDto> createMajor(@RequestBody CreateMajorReq req) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(majorService.createMajor(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MajorResDto> getChuyenNganh(@PathVariable Long id) {
-        return ResponseEntity.ok(majorService.getChuyenNganhById(id));
+    public ResponseEntity<MajorResDto> getMajor(@PathVariable Long id) {
+        return ResponseEntity.ok(majorService.getMajorById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<MajorResDto>> getAllChuyenNganh() {
-        return ResponseEntity.ok(majorService.getAllChuyenNganh());
+    public ResponseEntity<List<MajorResDto>> getAllMajors() {
+        return ResponseEntity.ok(majorService.getAllMajors());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MajorResDto> updateChuyenNganh(@PathVariable Long id, @RequestBody CreateMajorReq req) {
-        return ResponseEntity.ok(majorService.updateChuyenNganh(id, req));
+    public ResponseEntity<MajorResDto> updateMajor(@PathVariable Long id, @RequestBody CreateMajorReq req) {
+        return ResponseEntity.ok(majorService.updateMajor(id, req));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteChuyenNganh(@PathVariable Long id) {
-        majorService.deleteChuyenNganh(id);
+    public ResponseEntity<Void> deleteMajor(@PathVariable Long id) {
+        majorService.deleteMajor(id);
         return ResponseEntity.noContent().build();
     }
 }

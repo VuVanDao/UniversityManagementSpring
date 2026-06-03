@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import UniversityManagemant.demo.dtos.request.CreateStudentReq;
 import UniversityManagemant.demo.dtos.response.StudentResDto;
-import UniversityManagemant.demo.services.serviceInterface.SinhVienService;
+import UniversityManagemant.demo.services.serviceInterface.StudentService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,31 +25,31 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class StudentController {
-    final SinhVienService studentService;
+    final StudentService studentService;
 
     @PostMapping
-    public ResponseEntity<StudentResDto> createSinhVien(@RequestBody CreateStudentReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createSinhVien(req));
+    public ResponseEntity<StudentResDto> createStudent(@RequestBody CreateStudentReq req) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentResDto> getSinhVien(@PathVariable Long id) {
-        return ResponseEntity.ok(studentService.getSinhVienById(id));
+    public ResponseEntity<StudentResDto> getStudent(@PathVariable Long id) {
+        return ResponseEntity.ok(studentService.getStudentById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<StudentResDto>> getAllSinhVien() {
-        return ResponseEntity.ok(studentService.getAllSinhVien());
+    public ResponseEntity<List<StudentResDto>> getAllStudents() {
+        return ResponseEntity.ok(studentService.getAllStudents());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StudentResDto> updateSinhVien(@PathVariable Long id, @RequestBody CreateStudentReq req) {
-        return ResponseEntity.ok(studentService.updateSinhVien(id, req));
+    public ResponseEntity<StudentResDto> updateStudent(@PathVariable Long id, @RequestBody CreateStudentReq req) {
+        return ResponseEntity.ok(studentService.updateStudent(id, req));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSinhVien(@PathVariable Long id) {
-        studentService.deleteSinhVien(id);
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
         return ResponseEntity.noContent().build();
     }
 }

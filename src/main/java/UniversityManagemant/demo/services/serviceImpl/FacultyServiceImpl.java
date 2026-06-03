@@ -14,7 +14,7 @@ import UniversityManagemant.demo.models.Faculty;
 import UniversityManagemant.demo.repositories.GiangVienRepository;
 import UniversityManagemant.demo.repositories.KhoaRepository;
 import UniversityManagemant.demo.repositories.UserRepository;
-import UniversityManagemant.demo.services.serviceInterface.KhoaService;
+import UniversityManagemant.demo.services.serviceInterface.FacultyService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -22,14 +22,14 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class KhoaServiceImpl implements KhoaService {
+public class FacultyServiceImpl implements FacultyService {
     final KhoaRepository khoaRepository;
     final KhoaMapper khoaMapper;
     final UserRepository userRepository;
     final GiangVienRepository giangVienRepository;
 
     @Override
-    public FacultyResDto createKhoa(CreateFacultyReq req) {
+    public FacultyResDto createFaculty(CreateFacultyReq req) {
         Faculty khoa = khoaMapper.toEntity(req);
         validateKhoa(khoa, null);
         Faculty saved = khoaRepository.save(khoa);
@@ -37,21 +37,21 @@ public class KhoaServiceImpl implements KhoaService {
     }
 
     @Override
-    public FacultyResDto getKhoaById(Long id) {
+    public FacultyResDto getFacultyById(Long id) {
         return khoaRepository.findById(id)
                 .map(khoaMapper::toResDto)
                 .orElseThrow(() -> new RuntimeException("Khoa not found"));
     }
 
     @Override
-    public List<FacultyResDto> getAllKhoa() {
+    public List<FacultyResDto> getAllFaculties() {
         return khoaRepository.findAll().stream()
                 .map(khoaMapper::toResDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public FacultyResDto updateKhoa(Long id, UpdateFacultyReq req) {
+    public FacultyResDto updateFaculty(Long id, UpdateFacultyReq req) {
         Faculty khoa = khoaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tim thấy khoa với ID: " + id));
 
@@ -75,7 +75,7 @@ public class KhoaServiceImpl implements KhoaService {
     }
 
     @Override
-    public void deleteKhoa(Long id) {
+    public void deleteFaculty(Long id) {
         khoaRepository.deleteById(id);
     }
 

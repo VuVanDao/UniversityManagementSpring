@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import UniversityManagemant.demo.dtos.request.CreateFacultyReq;
 import UniversityManagemant.demo.dtos.request.UpdateFacultyReq;
 import UniversityManagemant.demo.dtos.response.FacultyResDto;
-import UniversityManagemant.demo.services.serviceInterface.KhoaService;
+import UniversityManagemant.demo.services.serviceInterface.FacultyService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -27,33 +27,33 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class FacultyController {
-    final KhoaService facultyService;
+    final FacultyService facultyService;
 
     @PostMapping
-    public ResponseEntity<FacultyResDto> createKhoa(@RequestBody CreateFacultyReq req) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(facultyService.createKhoa(req));
+    public ResponseEntity<FacultyResDto> createFaculty(@RequestBody CreateFacultyReq req) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(facultyService.createFaculty(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FacultyResDto> getKhoa(@PathVariable Long id) {
-        return ResponseEntity.ok(facultyService.getKhoaById(id));
+    public ResponseEntity<FacultyResDto> getFaculty(@PathVariable Long id) {
+        return ResponseEntity.ok(facultyService.getFacultyById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<FacultyResDto>> getAllKhoa() {
-        return ResponseEntity.ok(facultyService.getAllKhoa());
+    public ResponseEntity<List<FacultyResDto>> getAllFaculties() {
+        return ResponseEntity.ok(facultyService.getAllFaculties());
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<FacultyResDto> updateKhoa(@PathVariable Long id, @RequestBody UpdateFacultyReq req) {
-        return ResponseEntity.ok(facultyService.updateKhoa(id, req));
+    public ResponseEntity<FacultyResDto> updateFaculty(@PathVariable Long id, @RequestBody UpdateFacultyReq req) {
+        return ResponseEntity.ok(facultyService.updateFaculty(id, req));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> deleteKhoa(@PathVariable Long id) {
-        facultyService.deleteKhoa(id);
+    public ResponseEntity<Void> deleteFaculty(@PathVariable Long id) {
+        facultyService.deleteFaculty(id);
         return ResponseEntity.noContent().build();
     }
 }

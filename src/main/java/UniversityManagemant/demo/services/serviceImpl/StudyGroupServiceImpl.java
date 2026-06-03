@@ -12,7 +12,7 @@ import UniversityManagemant.demo.repositories.NhomHocRepository;
 import UniversityManagemant.demo.repositories.MonHocRepository;
 import UniversityManagemant.demo.repositories.GiangVienRepository;
 import UniversityManagemant.demo.repositories.PhongHocRepository;
-import UniversityManagemant.demo.services.serviceInterface.NhomHocService;
+import UniversityManagemant.demo.services.serviceInterface.StudyGroupService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,14 +20,14 @@ import lombok.experimental.FieldDefaults;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class NhomHocServiceImpl implements NhomHocService {
+public class StudyGroupServiceImpl implements StudyGroupService {
     final NhomHocRepository nhomHocRepository;
     final MonHocRepository monHocRepository;
     final GiangVienRepository giangVienRepository;
     final PhongHocRepository phongHocRepository;
 
     @Override
-    public StudyGroupResDto createNhomHoc(CreateStudyGroupReq req) {
+    public StudyGroupResDto createStudyGroup(CreateStudyGroupReq req) {
         StudyGroup nhomHoc = StudyGroup.builder()
                 .studyGroupCode(req.getStudyGroupCode())
                 .studyGroupName(req.getStudyGroupName())
@@ -45,21 +45,21 @@ public class NhomHocServiceImpl implements NhomHocService {
     }
 
     @Override
-    public StudyGroupResDto getNhomHocById(Long id) {
+    public StudyGroupResDto getStudyGroupById(Long id) {
         return nhomHocRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("NhomHoc not found"));
     }
 
     @Override
-    public List<StudyGroupResDto> getAllNhomHoc() {
+    public List<StudyGroupResDto> getAllStudyGroups() {
         return nhomHocRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public StudyGroupResDto updateNhomHoc(Long id, CreateStudyGroupReq req) {
+    public StudyGroupResDto updateStudyGroup(Long id, CreateStudyGroupReq req) {
         StudyGroup nhomHoc = nhomHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("NhomHoc not found"));
         nhomHoc.setStudyGroupCode(req.getStudyGroupCode());
@@ -77,7 +77,7 @@ public class NhomHocServiceImpl implements NhomHocService {
     }
 
     @Override
-    public void deleteNhomHoc(Long id) {
+    public void deleteStudyGroup(Long id) {
         nhomHocRepository.deleteById(id);
     }
 
