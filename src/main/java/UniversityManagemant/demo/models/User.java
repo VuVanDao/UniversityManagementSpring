@@ -69,7 +69,4 @@ public class User extends AbstractModel implements UserDetails{
     public String getUsername() {
         return this.email;
     }
-
-    // @OneToOne(mappedBy = "truongKhoa")
-    // Khoa khoa;
 }

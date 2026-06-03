@@ -30,7 +30,11 @@ public class KhoaMapper {
     }
 
     public void updateEntityFromDto(UpdateKhoaReq updateKhoaReq, Khoa khoa) {
-        khoa.setMaKhoa(updateKhoaReq.getMaKhoa());
-        khoa.setTenKhoa(updateKhoaReq.getTenKhoa());
+        if (updateKhoaReq.getMaKhoa() != null) {
+            khoa.setMaKhoa(updateKhoaReq.getMaKhoa());
+        }
+        if (updateKhoaReq.getTenKhoa() != null) {
+            khoa.setTenKhoa(updateKhoaReq.getTenKhoa());
+        }
     }
 }

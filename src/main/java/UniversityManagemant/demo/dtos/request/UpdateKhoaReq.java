@@ -17,5 +17,5 @@ import lombok.experimental.FieldDefaults;
 public class UpdateKhoaReq {
     String maKhoa;
     String tenKhoa;
-    Long truongKhoaId;
+    Long giangVienId;
 }
