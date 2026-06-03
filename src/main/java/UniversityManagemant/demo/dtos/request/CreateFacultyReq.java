@@ -14,8 +14,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UpdateKhoaReq {
-    String maKhoa;
-    String tenKhoa;
-    Long giangVienId;
+public class CreateFacultyReq {
+    String facultyCode;
+    String facultyName;
 }

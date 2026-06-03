@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import UniversityManagemant.demo.dtos.request.CreateHocKiReq;
-import UniversityManagemant.demo.dtos.response.HocKiResDto;
+import UniversityManagemant.demo.dtos.request.CreateSemesterReq;
+import UniversityManagemant.demo.dtos.response.SemesterResDto;
 import UniversityManagemant.demo.services.serviceInterface.HocKiService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,22 +28,22 @@ public class HocKiController {
     final HocKiService hocKiService;
 
     @PostMapping
-    public ResponseEntity<HocKiResDto> createHocKi(@RequestBody CreateHocKiReq req) {
+    public ResponseEntity<SemesterResDto> createHocKi(@RequestBody CreateSemesterReq req) {
         return ResponseEntity.status(HttpStatus.CREATED).body(hocKiService.createHocKi(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<HocKiResDto> getHocKi(@PathVariable Long id) {
+    public ResponseEntity<SemesterResDto> getHocKi(@PathVariable Long id) {
         return ResponseEntity.ok(hocKiService.getHocKiById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<HocKiResDto>> getAllHocKi() {
+    public ResponseEntity<List<SemesterResDto>> getAllHocKi() {
         return ResponseEntity.ok(hocKiService.getAllHocKi());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<HocKiResDto> updateHocKi(@PathVariable Long id, @RequestBody CreateHocKiReq req) {
+    public ResponseEntity<SemesterResDto> updateHocKi(@PathVariable Long id, @RequestBody CreateSemesterReq req) {
         return ResponseEntity.ok(hocKiService.updateHocKi(id, req));
     }
 

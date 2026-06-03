@@ -11,8 +11,8 @@ import UniversityManagemant.demo.models.Faculty;
 
 @Repository
 public interface KhoaRepository extends JpaRepository<Faculty, Long> {
-    Boolean existsByMaKhoa(String maKhoa);
-    boolean existsByFacultyCodeAndIdNot(String maKhoa, Long id);
-    boolean existsByFacultyNameIgnoreCaseAndIdNot(String tenKhoa, Long id);
-    Faculty findByTruongKhoa_Id(Long truongKhoaId);
+    Boolean existsByFacultyCode(String facultyCode);
+    boolean existsByFacultyCodeAndIdNot(String facultyCode, Long id);
+    boolean existsByFacultyNameIgnoreCaseAndIdNot(String facultyName, Long id);
+    Faculty findByDean_Id(Long deanId);
 }

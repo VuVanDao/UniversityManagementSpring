@@ -2,33 +2,33 @@ package UniversityManagemant.demo.mappers;
 
 import org.springframework.stereotype.Component;
 
-import UniversityManagemant.demo.dtos.request.CreateHocKiReq;
-import UniversityManagemant.demo.dtos.response.HocKiResDto;
+import UniversityManagemant.demo.dtos.request.CreateSemesterReq;
+import UniversityManagemant.demo.dtos.response.SemesterResDto;
 import UniversityManagemant.demo.models.Semester;
 
 @Component
 public class HocKiMapper {
 
-    public Semester toEntity(CreateHocKiReq createHocKiReq) {
+    public Semester toEntity(CreateSemesterReq createSemesterReq) {
         return Semester.builder()
-                .semesterName(createHocKiReq.getTenHocKi())
-                .fromTime(createHocKiReq.getFromTime())
-                .toTime(createHocKiReq.getToTime())
+                .semesterName(createSemesterReq.getSemesterName())
+                .fromTime(createSemesterReq.getFromTime())
+                .toTime(createSemesterReq.getToTime())
                 .build();
     }
 
-    public HocKiResDto toResDto(Semester hocKi) {
-        return HocKiResDto.builder()
+    public SemesterResDto toResDto(Semester hocKi) {
+        return SemesterResDto.builder()
                 .id(hocKi.getId())
-                .tenHocKi(hocKi.getSemesterName())
+                .semesterName(hocKi.getSemesterName())
                 .fromTime(hocKi.getFromTime())
                 .toTime(hocKi.getToTime())
                 .build();
     }
 
-    public void updateEntityFromDto(CreateHocKiReq createHocKiReq, Semester hocKi) {
-        hocKi.setSemesterName(createHocKiReq.getTenHocKi());
-        hocKi.setFromTime(createHocKiReq.getFromTime());
-        hocKi.setToTime(createHocKiReq.getToTime());
+    public void updateEntityFromDto(CreateSemesterReq createSemesterReq, Semester hocKi) {
+        hocKi.setSemesterName(createSemesterReq.getSemesterName());
+        hocKi.setFromTime(createSemesterReq.getFromTime());
+        hocKi.setToTime(createSemesterReq.getToTime());
     }
 }

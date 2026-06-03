@@ -1,7 +1,5 @@
 package UniversityManagemant.demo.dtos.response;
 
-import java.math.BigDecimal;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,13 +14,9 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class BangDiemResDto {
+public class MajorResDto {
     Long id;
-    String maSinhVien;
-    String tenNguoiDung;
-    String tenMonHoc;
-    BigDecimal diemHe10;
-    BigDecimal diemHe4;
-    String diemChu;
-    String trangThaiMonHoc;
+    String majorCode;
+    String majorName;
+    String facultyName;
 }

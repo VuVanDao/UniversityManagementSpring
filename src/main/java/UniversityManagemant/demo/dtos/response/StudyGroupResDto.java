@@ -1,6 +1,6 @@
 package UniversityManagemant.demo.dtos.response;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -16,9 +16,16 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class HocKiResDto {
+public class StudyGroupResDto {
     Long id;
-    String tenHocKi;
-    LocalDate fromTime;
-    LocalDate toTime;
+    String studyGroupCode;
+    String studyGroupName;
+    Integer startTime;
+    Integer endTime;
+    LocalDateTime fromTime;
+    LocalDateTime toTime;
+    Integer numberOfStudents;
+    String subjectName;
+    String lecturerName;
+    String classroomName;
 }

@@ -1,5 +1,7 @@
 package UniversityManagemant.demo.dtos.request;
 
+import java.math.BigDecimal;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,8 +16,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreateLopQuanLiReq {
-    String maLop;
-    String tenLop;
-    Long chuyenNganhId;
+public class CreateGradeRecordReq {
+    Long studentId;
+    Long subjectId;
+    BigDecimal tenPointScale;
+    BigDecimal fourPointScale;
+    String letterGrade;
+    String subjectStatus;
 }

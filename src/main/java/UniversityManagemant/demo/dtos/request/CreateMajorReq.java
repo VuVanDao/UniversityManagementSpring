@@ -1,4 +1,4 @@
-package UniversityManagemant.demo.dtos.response;
+package UniversityManagemant.demo.dtos.request;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -7,14 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class GiangVienResDto extends UserResDto {
-    LopQuanLiResDto lopQuanLi;
+public class CreateMajorReq {
+    String majorCode;
+    String majorName;
+    Long facultyId;
 }

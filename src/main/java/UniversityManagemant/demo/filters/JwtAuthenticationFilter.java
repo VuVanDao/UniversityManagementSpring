@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     String email = jwtProvider.getUsernameFromToken(jwt);
                     
                     // Load user from database to get authorities and roles
-                    User user = userRepository.findByEmailOrMaNguoiDung(email, email)
+                    User user = userRepository.findByEmailOrUserCode(email, email)
                             .orElse(null);
                     
                     if (user != null) {

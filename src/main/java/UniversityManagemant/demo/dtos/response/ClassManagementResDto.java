@@ -1,4 +1,4 @@
-package UniversityManagemant.demo.dtos.request;
+package UniversityManagemant.demo.dtos.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,9 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreateGiangVienReq {
-    Long userId;
-    Long lopQuanLiId;
+public class ClassManagementResDto {
+    Long id;
+    String classManagementCode;
+    String classManagementName;
+    String majorName;
 }

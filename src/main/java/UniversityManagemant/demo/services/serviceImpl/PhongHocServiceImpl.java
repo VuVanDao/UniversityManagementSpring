@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import UniversityManagemant.demo.dtos.request.CreatePhongHocReq;
-import UniversityManagemant.demo.dtos.response.PhongHocResDto;
+import UniversityManagemant.demo.dtos.request.CreateClassroomReq;
+import UniversityManagemant.demo.dtos.response.ClassroomResDto;
 import UniversityManagemant.demo.models.Classroom;
 import UniversityManagemant.demo.repositories.PhongHocRepository;
 import UniversityManagemant.demo.services.serviceInterface.PhongHocService;
@@ -21,33 +21,33 @@ public class PhongHocServiceImpl implements PhongHocService {
     final PhongHocRepository phongHocRepository;
 
     @Override
-    public PhongHocResDto createPhongHoc(CreatePhongHocReq req) {
+    public ClassroomResDto createPhongHoc(CreateClassroomReq req) {
         Classroom phongHoc = Classroom.builder()
-                .classroomName(req.getTenPhongHoc())
+                .classroomName(req.getClassroomName())
                 .build();
         Classroom saved = phongHocRepository.save(phongHoc);
         return toDto(saved);
     }
 
     @Override
-    public PhongHocResDto getPhongHocById(Long id) {
+    public ClassroomResDto getPhongHocById(Long id) {
         return phongHocRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("PhongHoc not found"));
     }
 
     @Override
-    public List<PhongHocResDto> getAllPhongHoc() {
+    public List<ClassroomResDto> getAllPhongHoc() {
         return phongHocRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public PhongHocResDto updatePhongHoc(Long id, CreatePhongHocReq req) {
+    public ClassroomResDto updatePhongHoc(Long id, CreateClassroomReq req) {
         Classroom phongHoc = phongHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("PhongHoc not found"));
-        phongHoc.setClassroomName(req.getTenPhongHoc());
+        phongHoc.setClassroomName(req.getClassroomName());
         Classroom updated = phongHocRepository.save(phongHoc);
         return toDto(updated);
     }
@@ -57,10 +57,10 @@ public class PhongHocServiceImpl implements PhongHocService {
         phongHocRepository.deleteById(id);
     }
 
-    private PhongHocResDto toDto(Classroom phongHoc) {
-        return PhongHocResDto.builder()
+    private ClassroomResDto toDto(Classroom phongHoc) {
+        return ClassroomResDto.builder()
                 .id(phongHoc.getId())
-                .tenPhongHoc(phongHoc.getClassroomName())
+                .classroomName(phongHoc.getClassroomName())
                 .build();
     }
 }

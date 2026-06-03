@@ -15,6 +15,6 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateRoleReq {
-    String tenRole;
-    String moTa;
+    String roleName;
+    String description;
 }

@@ -1,7 +1,6 @@
 package UniversityManagemant.demo.dtos.request;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import UniversityManagemant.demo.models.Role;
 import lombok.AccessLevel;
@@ -19,11 +18,11 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 public class CreateUserReq {
-    String ma_nguoi_dung;
-    String ten_nguoi_dung;
+    String userCode;
+    String userName;
     String email;
     String password;
-    LocalDate ngay_sinh;
-    Role role;
-    Long chuyen_nganh_id;
+    LocalDate dateOfBirth;
+    Long role_id;
+    Long majorId;
 }

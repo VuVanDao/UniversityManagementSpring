@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import UniversityManagemant.demo.dtos.request.CreatePhongHocReq;
-import UniversityManagemant.demo.dtos.response.PhongHocResDto;
+import UniversityManagemant.demo.dtos.request.CreateClassroomReq;
+import UniversityManagemant.demo.dtos.response.ClassroomResDto;
 import UniversityManagemant.demo.services.serviceInterface.PhongHocService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,22 +28,22 @@ public class PhongHocController {
     final PhongHocService phongHocService;
 
     @PostMapping
-    public ResponseEntity<PhongHocResDto> createPhongHoc(@RequestBody CreatePhongHocReq req) {
+    public ResponseEntity<ClassroomResDto> createPhongHoc(@RequestBody CreateClassroomReq req) {
         return ResponseEntity.status(HttpStatus.CREATED).body(phongHocService.createPhongHoc(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PhongHocResDto> getPhongHoc(@PathVariable Long id) {
+    public ResponseEntity<ClassroomResDto> getPhongHoc(@PathVariable Long id) {
         return ResponseEntity.ok(phongHocService.getPhongHocById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<PhongHocResDto>> getAllPhongHoc() {
+    public ResponseEntity<List<ClassroomResDto>> getAllPhongHoc() {
         return ResponseEntity.ok(phongHocService.getAllPhongHoc());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PhongHocResDto> updatePhongHoc(@PathVariable Long id, @RequestBody CreatePhongHocReq req) {
+    public ResponseEntity<ClassroomResDto> updatePhongHoc(@PathVariable Long id, @RequestBody CreateClassroomReq req) {
         return ResponseEntity.ok(phongHocService.updatePhongHoc(id, req));
     }
 

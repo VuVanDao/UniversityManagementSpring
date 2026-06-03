@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import UniversityManagemant.demo.dtos.request.CreateChuyenNganhReq;
-import UniversityManagemant.demo.dtos.response.ChuyenNganhResDto;
+import UniversityManagemant.demo.dtos.request.CreateMajorReq;
+import UniversityManagemant.demo.dtos.response.MajorResDto;
 import UniversityManagemant.demo.models.Major;
 import UniversityManagemant.demo.repositories.ChuyenNganhRepository;
 import UniversityManagemant.demo.repositories.KhoaRepository;
@@ -23,37 +23,37 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
     final KhoaRepository khoaRepository;
 
     @Override
-    public ChuyenNganhResDto createChuyenNganh(CreateChuyenNganhReq req) {
+    public MajorResDto createChuyenNganh(CreateMajorReq req) {
         Major chuyenNganh = Major.builder()
-                .MajorCode(req.getMaChuyenNganh())
-                .MajorName(req.getTenChuyenNganh())
-                .faculty(khoaRepository.findById(req.getKhoaId()).orElseThrow())
+                .MajorCode(req.getMajorCode())
+                .MajorName(req.getMajorName())
+                .faculty(khoaRepository.findById(req.getFacultyId()).orElseThrow())
                 .build();
         Major saved = chuyenNganhRepository.save(chuyenNganh);
         return toDto(saved);
     }
 
     @Override
-    public ChuyenNganhResDto getChuyenNganhById(Long id) {
+    public MajorResDto getChuyenNganhById(Long id) {
         return chuyenNganhRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("ChuyenNganh not found"));
     }
 
     @Override
-    public List<ChuyenNganhResDto> getAllChuyenNganh() {
+    public List<MajorResDto> getAllChuyenNganh() {
         return chuyenNganhRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ChuyenNganhResDto updateChuyenNganh(Long id, CreateChuyenNganhReq req) {
+    public MajorResDto updateChuyenNganh(Long id, CreateMajorReq req) {
         Major chuyenNganh = chuyenNganhRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("ChuyenNganh not found"));
-        chuyenNganh.setMajorCode(req.getMaChuyenNganh());
-        chuyenNganh.setMajorName(req.getTenChuyenNganh());
-        chuyenNganh.setFaculty(khoaRepository.findById(req.getKhoaId()).orElseThrow());
+        chuyenNganh.setMajorCode(req.getMajorCode());
+        chuyenNganh.setMajorName(req.getMajorName());
+        chuyenNganh.setFaculty(khoaRepository.findById(req.getFacultyId()).orElseThrow());
         Major updated = chuyenNganhRepository.save(chuyenNganh);
         return toDto(updated);
     }
@@ -63,12 +63,12 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
         chuyenNganhRepository.deleteById(id);
     }
 
-    private ChuyenNganhResDto toDto(Major chuyenNganh) {
-        return ChuyenNganhResDto.builder()
+    private MajorResDto toDto(Major chuyenNganh) {
+        return MajorResDto.builder()
                 .id(chuyenNganh.getId())
-                .maChuyenNganh(chuyenNganh.getMajorCode())
-                .tenChuyenNganh(chuyenNganh.getMajorName())
-                .tenKhoa(chuyenNganh.getFaculty() != null ? chuyenNganh.getFaculty().getFacultyName() : null)
+                .majorCode(chuyenNganh.getMajorCode())
+                .majorName(chuyenNganh.getMajorName())
+                .facultyName(chuyenNganh.getFaculty() != null ? chuyenNganh.getFaculty().getFacultyName() : null)
                 .build();
     }
 }

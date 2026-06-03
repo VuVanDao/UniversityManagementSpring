@@ -1,18 +1,18 @@
 package UniversityManagemant.demo.mappers;
 
 import org.springframework.stereotype.Component;
-import UniversityManagemant.demo.dtos.response.LopQuanLiResDto;
+import UniversityManagemant.demo.dtos.response.ClassManagementResDto;
 import UniversityManagemant.demo.models.ClassManagement;
 
 @Component
 public class LopQuanLiMapper {
 
-    public LopQuanLiResDto toResDto(ClassManagement lopQuanLi) {
-        return LopQuanLiResDto.builder()
+    public ClassManagementResDto toResDto(ClassManagement lopQuanLi) {
+        return ClassManagementResDto.builder()
                 .id(lopQuanLi.getId())
-                .maLop(lopQuanLi.getClassManagementCode())
-                .tenLop(lopQuanLi.getClassManagementCode())
-                .tenChuyenNganh(lopQuanLi.getMajor() != null ? lopQuanLi.getMajor().getMajorName() : null)
+                .classManagementCode(lopQuanLi.getClassManagementCode())
+                .classManagementName(lopQuanLi.getClassManagementName())
+                .majorName(lopQuanLi.getMajor() != null ? lopQuanLi.getMajor().getMajorName() : null)
                 .build();
     }
 }

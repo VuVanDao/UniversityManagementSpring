@@ -27,10 +27,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResDto login(LoginReq loginReq) {
-        User user = userRepository.findByEmailOrMaNguoiDung(loginReq.getEmailOrMaNguoiDung(), 
-                                                              loginReq.getEmailOrMaNguoiDung())
+        User user = userRepository.findByEmailOrUserCode(loginReq.getEmailOrUserCode(), 
+                                                              loginReq.getEmailOrUserCode())
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng với email hoặc mã người dùng: " + 
-                                                       loginReq.getEmailOrMaNguoiDung()));
+                                                       loginReq.getEmailOrUserCode()));
 
         if (!passwordEncoder.matches(loginReq.getPassword(), user.getPassword())) {
             throw new RuntimeException("Mật khẩu không đúng");
@@ -39,11 +39,11 @@ public class AuthServiceImpl implements AuthService {
         String refreshToken = jwtProvider.generateRefreshToken(user.getEmail());
         return AuthResDto.builder()
                 .id(user.getId())
-                .maNguoiDung(user.getUserCode())
-                .tenNguoiDung(user.getUsername())
+                .userCode(user.getUserCode())
+                .userName(user.getUsername())
                 .email(user.getEmail())
-                .ngaySinh(user.getDateOfBirth())
-                .gioiTinh(user.getGender())
+                .dateOfBirth(user.getDateOfBirth())
+                .gender(user.getGender())
                 .role(roleMapper.toResDto(user.getRole()))
                 .message("Đăng nhập thành công")
                 .accessToken(accessToken)

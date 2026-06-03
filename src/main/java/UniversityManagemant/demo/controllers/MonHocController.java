@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import UniversityManagemant.demo.dtos.request.CreateMonHocReq;
-import UniversityManagemant.demo.dtos.response.MonHocResDto;
+import UniversityManagemant.demo.dtos.request.CreateSubjectReq;
+import UniversityManagemant.demo.dtos.response.SubjectResDto;
 import UniversityManagemant.demo.services.serviceInterface.MonHocService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,22 +28,22 @@ public class MonHocController {
     final MonHocService monHocService;
 
     @PostMapping
-    public ResponseEntity<MonHocResDto> createMonHoc(@RequestBody CreateMonHocReq req) {
+    public ResponseEntity<SubjectResDto> createMonHoc(@RequestBody CreateSubjectReq req) {
         return ResponseEntity.status(HttpStatus.CREATED).body(monHocService.createMonHoc(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MonHocResDto> getMonHoc(@PathVariable Long id) {
+    public ResponseEntity<SubjectResDto> getMonHoc(@PathVariable Long id) {
         return ResponseEntity.ok(monHocService.getMonHocById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<MonHocResDto>> getAllMonHoc() {
+    public ResponseEntity<List<SubjectResDto>> getAllMonHoc() {
         return ResponseEntity.ok(monHocService.getAllMonHoc());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MonHocResDto> updateMonHoc(@PathVariable Long id, @RequestBody CreateMonHocReq req) {
+    public ResponseEntity<SubjectResDto> updateMonHoc(@PathVariable Long id, @RequestBody CreateSubjectReq req) {
         return ResponseEntity.ok(monHocService.updateMonHoc(id, req));
     }
 

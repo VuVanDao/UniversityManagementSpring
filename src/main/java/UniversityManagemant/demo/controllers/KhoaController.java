@@ -14,39 +14,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import UniversityManagemant.demo.dtos.request.CreateKhoaReq;
-import UniversityManagemant.demo.dtos.request.UpdateKhoaReq;
-import UniversityManagemant.demo.dtos.response.KhoaResDto;
+import UniversityManagemant.demo.dtos.request.CreateFacultyReq;
+import UniversityManagemant.demo.dtos.request.UpdateFacultyReq;
+import UniversityManagemant.demo.dtos.response.FacultyResDto;
 import UniversityManagemant.demo.services.serviceInterface.KhoaService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
-@RequestMapping("/khoa")
+@RequestMapping("/faculty")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class KhoaController {
     final KhoaService khoaService;
 
     @PostMapping
-    public ResponseEntity<KhoaResDto> createKhoa(@RequestBody CreateKhoaReq req) {
+    public ResponseEntity<FacultyResDto> createKhoa(@RequestBody CreateFacultyReq req) {
         return ResponseEntity.status(HttpStatus.CREATED).body(khoaService.createKhoa(req));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<KhoaResDto> getKhoa(@PathVariable Long id) {
+    public ResponseEntity<FacultyResDto> getKhoa(@PathVariable Long id) {
         return ResponseEntity.ok(khoaService.getKhoaById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<KhoaResDto>> getAllKhoa() {
+    public ResponseEntity<List<FacultyResDto>> getAllKhoa() {
         return ResponseEntity.ok(khoaService.getAllKhoa());
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<KhoaResDto> updateKhoa(@PathVariable Long id, @RequestBody UpdateKhoaReq req) {
+    public ResponseEntity<FacultyResDto> updateKhoa(@PathVariable Long id, @RequestBody UpdateFacultyReq req) {
         return ResponseEntity.ok(khoaService.updateKhoa(id, req));
     }
 

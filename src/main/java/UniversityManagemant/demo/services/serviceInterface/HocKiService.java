@@ -2,13 +2,13 @@ package UniversityManagemant.demo.services.serviceInterface;
 
 import java.util.List;
 
-import UniversityManagemant.demo.dtos.request.CreateHocKiReq;
-import UniversityManagemant.demo.dtos.response.HocKiResDto;
+import UniversityManagemant.demo.dtos.request.CreateSemesterReq;
+import UniversityManagemant.demo.dtos.response.SemesterResDto;
 
 public interface HocKiService {
-    HocKiResDto createHocKi(CreateHocKiReq req);
-    HocKiResDto getHocKiById(Long id);
-    List<HocKiResDto> getAllHocKi();
-    HocKiResDto updateHocKi(Long id, CreateHocKiReq req);
+    SemesterResDto createHocKi(CreateSemesterReq req);
+    SemesterResDto getHocKiById(Long id);
+    List<SemesterResDto> getAllHocKi();
+    SemesterResDto updateHocKi(Long id, CreateSemesterReq req);
     void deleteHocKi(Long id);
 }

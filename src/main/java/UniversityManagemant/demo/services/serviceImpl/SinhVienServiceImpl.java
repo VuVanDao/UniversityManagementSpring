@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import UniversityManagemant.demo.dtos.request.CreateSinhVienReq;
-import UniversityManagemant.demo.dtos.response.SinhVienResDto;
+import UniversityManagemant.demo.dtos.request.CreateStudentReq;
+import UniversityManagemant.demo.dtos.response.StudentResDto;
 import UniversityManagemant.demo.models.Student;
 import UniversityManagemant.demo.repositories.SinhVienRepository;
 import UniversityManagemant.demo.repositories.UserRepository;
@@ -25,35 +25,35 @@ public class SinhVienServiceImpl implements SinhVienService {
     final LopQuanLiRepository lopQuanLiRepository;
 
     @Override
-    public SinhVienResDto createSinhVien(CreateSinhVienReq req) {
+    public StudentResDto createSinhVien(CreateStudentReq req) {
         Student sinhVien = Student.builder()
                 .user(userRepository.findById(req.getUserId()).orElseThrow())
-                .classManagement(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow())
+                .classManagement(lopQuanLiRepository.findById(req.getClassManagementId()).orElseThrow())
                 .build();
         Student saved = sinhVienRepository.save(sinhVien);
         return toDto(saved);
     }
 
     @Override
-    public SinhVienResDto getSinhVienById(Long id) {
+    public StudentResDto getSinhVienById(Long id) {
         return sinhVienRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("SinhVien not found"));
     }
 
     @Override
-    public List<SinhVienResDto> getAllSinhVien() {
+    public List<StudentResDto> getAllSinhVien() {
         return sinhVienRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public SinhVienResDto updateSinhVien(Long id, CreateSinhVienReq req) {
+    public StudentResDto updateSinhVien(Long id, CreateStudentReq req) {
         Student sinhVien = sinhVienRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("SinhVien not found"));
         sinhVien.setUser(userRepository.findById(req.getUserId()).orElseThrow());
-        sinhVien.setClassManagement(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow());
+        sinhVien.setClassManagement(lopQuanLiRepository.findById(req.getClassManagementId()).orElseThrow());
         Student updated = sinhVienRepository.save(sinhVien);
         return toDto(updated);
     }
@@ -63,14 +63,14 @@ public class SinhVienServiceImpl implements SinhVienService {
         sinhVienRepository.deleteById(id);
     }
 
-    private SinhVienResDto toDto(Student sinhVien) {
-        return SinhVienResDto.builder()
+    private StudentResDto toDto(Student sinhVien) {
+        return StudentResDto.builder()
                 .id(sinhVien.getId())
-                .maSinhVien(sinhVien.getUser() != null ? sinhVien.getUser().getUserCode() : null)
-                .diemGPA(sinhVien.getGPAPoint())
-                .tenNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getUsername() : null)
-                .maNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getUserCode() : null)
-                .tenLopQuanLi(sinhVien.getClassManagement() != null ? sinhVien.getClassManagement().getClassManagementName() : null)
+                .studentCode(sinhVien.getUser() != null ? sinhVien.getUser().getUserCode() : null)
+                .gpaPoint(sinhVien.getGPAPoint())
+                .userName(sinhVien.getUser() != null ? sinhVien.getUser().getUsername() : null)
+                .userCode(sinhVien.getUser() != null ? sinhVien.getUser().getUserCode() : null)
+                .classManagementName(sinhVien.getClassManagement() != null ? sinhVien.getClassManagement().getClassManagementName() : null)
                 .build();
     }
 }

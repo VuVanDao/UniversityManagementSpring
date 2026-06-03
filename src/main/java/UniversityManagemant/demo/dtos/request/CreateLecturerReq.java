@@ -1,7 +1,5 @@
 package UniversityManagemant.demo.dtos.request;
 
-import java.time.LocalDateTime;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,15 +14,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreateNhomHocReq {
-    String maNhom;
-    String tenNhom;
-    Integer tietBatDau;
-    Integer tietKetThuc;
-    LocalDateTime fromTime;
-    LocalDateTime toTime;
-    Integer soLuongSinhVien;
-    Long monHocId;
-    Long giangVienId;
-    Long phongHocId;
+public class CreateLecturerReq {
+    Long userId;
+    Long classManagementId;
 }

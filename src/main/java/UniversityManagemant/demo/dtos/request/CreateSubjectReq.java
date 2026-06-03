@@ -1,4 +1,4 @@
-package UniversityManagemant.demo.dtos.response;
+package UniversityManagemant.demo.dtos.request;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,9 +14,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MonHocResDto {
-    Long id;
-    String maMonHoc;
-    String tenMonHoc;
-    Integer tinChi;
+public class CreateSubjectReq {
+    String subjectCode;
+    String subjectName;
+    Integer credits;
 }

@@ -14,6 +14,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreatePhongHocReq {
-    String tenPhongHoc;
+public class CreateClassroomReq {
+    String classroomName;
 }

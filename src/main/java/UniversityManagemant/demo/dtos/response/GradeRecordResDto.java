@@ -1,4 +1,6 @@
-package UniversityManagemant.demo.dtos.request;
+package UniversityManagemant.demo.dtos.response;
+
+import java.math.BigDecimal;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,8 +16,13 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreateSinhVienReq {
-    String maSinhVien;
-    Long userId;
-    Long lopQuanLiId;
+public class GradeRecordResDto {
+    Long id;
+    String studentCode;
+    String userName;
+    String subjectName;
+    BigDecimal tenPointScale;
+    BigDecimal fourPointScale;
+    String gradeLetter;
+    String subjectStatus;
 }

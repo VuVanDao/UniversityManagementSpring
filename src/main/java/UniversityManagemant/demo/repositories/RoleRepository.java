@@ -7,5 +7,5 @@ import UniversityManagemant.demo.models.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role,Long>{
-    Role findByTenRole(String tenRole);
+    Role findByRoleName(String roleName);
 }

@@ -1,6 +1,6 @@
 package UniversityManagemant.demo.dtos.request;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -16,11 +16,15 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreateBangDiemReq {
-    Long sinhVienId;
-    Long monHocId;
-    BigDecimal diemHe10;
-    BigDecimal diemHe4;
-    String diemChu;
-    String trangThaiMonHoc;
+public class CreateStudyGroupReq {
+    String studyGroupCode;
+    String studyGroupName;
+    Integer startTime;
+    Integer endTime;
+    LocalDateTime fromTime;
+    LocalDateTime toTime;
+    Integer numberOfStudents;
+    Long subjectId;
+    Long lecturerId;
+    Long classroomId;
 }

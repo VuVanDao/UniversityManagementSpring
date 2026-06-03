@@ -2,25 +2,25 @@ package UniversityManagemant.demo.mappers;
 
 import org.springframework.stereotype.Component;
 
-import UniversityManagemant.demo.dtos.request.CreateSinhVienReq;
-import UniversityManagemant.demo.dtos.response.SinhVienResDto;
+import UniversityManagemant.demo.dtos.request.CreateStudentReq;
+import UniversityManagemant.demo.dtos.response.StudentResDto;
 import UniversityManagemant.demo.models.Student;
 
 @Component
 public class SinhVienMapper {
 
-    public SinhVienResDto toResDto(Student sinhVien) {
-        return SinhVienResDto.builder()
+    public StudentResDto toResDto(Student sinhVien) {
+        return StudentResDto.builder()
                 .id(sinhVien.getId())
-                .maSinhVien(sinhVien.getUser().getUserCode())
-                .diemGPA(sinhVien.getGPAPoint())
-                .tenNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getUsername() : null)
-                .maNguoiDung(sinhVien.getUser() != null ? sinhVien.getUser().getUserCode() : null)
-                .tenLopQuanLi(sinhVien.getClassManagement() != null ? sinhVien.getClassManagement().getClassManagementName() : null)
+                .studentCode(sinhVien.getUser().getUserCode())
+                .gpaPoint(sinhVien.getGPAPoint())
+                .userName(sinhVien.getUser() != null ? sinhVien.getUser().getUsername() : null)
+                .userCode(sinhVien.getUser() != null ? sinhVien.getUser().getUserCode() : null)
+                .classManagementName(sinhVien.getClassManagement() != null ? sinhVien.getClassManagement().getClassManagementName() : null)
                 .build();
     }
 
-    public void updateEntityFromDto(CreateSinhVienReq createSinhVienReq, Student sinhVien) {
-        sinhVien.getUser().setUserCode(createSinhVienReq.getMaSinhVien());
+    public void updateEntityFromDto(CreateStudentReq createStudentReq, Student sinhVien) {
+        sinhVien.getUser().setUserCode(createStudentReq.getStudentCode());
     }
 }

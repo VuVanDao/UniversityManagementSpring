@@ -2,13 +2,13 @@ package UniversityManagemant.demo.services.serviceInterface;
 
 import java.util.List;
 
-import UniversityManagemant.demo.dtos.request.CreateNhomHocReq;
-import UniversityManagemant.demo.dtos.response.NhomHocResDto;
+import UniversityManagemant.demo.dtos.request.CreateStudyGroupReq;
+import UniversityManagemant.demo.dtos.response.StudyGroupResDto;
 
 public interface NhomHocService {
-    NhomHocResDto createNhomHoc(CreateNhomHocReq req);
-    NhomHocResDto getNhomHocById(Long id);
-    List<NhomHocResDto> getAllNhomHoc();
-    NhomHocResDto updateNhomHoc(Long id, CreateNhomHocReq req);
+    StudyGroupResDto createNhomHoc(CreateStudyGroupReq req);
+    StudyGroupResDto getNhomHocById(Long id);
+    List<StudyGroupResDto> getAllNhomHoc();
+    StudyGroupResDto updateNhomHoc(Long id, CreateStudyGroupReq req);
     void deleteNhomHoc(Long id);
 }

@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import UniversityManagemant.demo.dtos.request.CreateMonHocReq;
-import UniversityManagemant.demo.dtos.response.MonHocResDto;
+import UniversityManagemant.demo.dtos.request.CreateSubjectReq;
+import UniversityManagemant.demo.dtos.response.SubjectResDto;
 import UniversityManagemant.demo.models.Subject;
 import UniversityManagemant.demo.repositories.MonHocRepository;
 import UniversityManagemant.demo.services.serviceInterface.MonHocService;
@@ -21,37 +21,37 @@ public class MonHocServiceImpl implements MonHocService {
     final MonHocRepository monHocRepository;
 
     @Override
-    public MonHocResDto createMonHoc(CreateMonHocReq req) {
+    public SubjectResDto createMonHoc(CreateSubjectReq req) {
         Subject monHoc = Subject.builder()
-                .subjectCode(req.getMaMonHoc())
-                .subjectName(req.getTenMonHoc())
-                .credits(req.getTinChi())
+                .subjectCode(req.getSubjectCode())
+                .subjectName(req.getSubjectName())
+                .credits(req.getCredits())
                 .build();
         Subject saved = monHocRepository.save(monHoc);
         return toDto(saved);
     }
 
     @Override
-    public MonHocResDto getMonHocById(Long id) {
+    public SubjectResDto getMonHocById(Long id) {
         return monHocRepository.findById(id)
                 .map(this::toDto)
                 .orElseThrow(() -> new RuntimeException("MonHoc not found"));
     }
 
     @Override
-    public List<MonHocResDto> getAllMonHoc() {
+    public List<SubjectResDto> getAllMonHoc() {
         return monHocRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public MonHocResDto updateMonHoc(Long id, CreateMonHocReq req) {
+    public SubjectResDto updateMonHoc(Long id, CreateSubjectReq req) {
         Subject monHoc = monHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("MonHoc not found"));
-        monHoc.setSubjectCode(req.getMaMonHoc());
-        monHoc.setSubjectName(req.getTenMonHoc());
-        monHoc.setCredits(req.getTinChi());
+        monHoc.setSubjectCode(req.getSubjectCode());
+        monHoc.setSubjectName(req.getSubjectName());
+        monHoc.setCredits(req.getCredits());
         Subject updated = monHocRepository.save(monHoc);
         return toDto(updated);
     }
@@ -61,12 +61,12 @@ public class MonHocServiceImpl implements MonHocService {
         monHocRepository.deleteById(id);
     }
 
-    private MonHocResDto toDto(Subject monHoc) {
-        return MonHocResDto.builder()
+    private SubjectResDto toDto(Subject monHoc) {
+        return SubjectResDto.builder()
                 .id(monHoc.getId())
-                .maMonHoc(monHoc.getSubjectCode())
-                .tenMonHoc(monHoc.getSubjectName())
-                .tinChi(monHoc.getCredits())
+                .subjectCode(monHoc.getSubjectCode())
+                .subjectName(monHoc.getSubjectName())
+                .credits(monHoc.getCredits())
                 .build();
     }
 }
