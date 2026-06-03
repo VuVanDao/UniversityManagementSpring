@@ -26,8 +26,8 @@ public class Khoa extends AbstractModel {
     String maKhoa;
     String tenKhoa;
 
-    @OneToOne
-    User truongKhoa;
+    @OneToOne(mappedBy = "khoa")
+    GiangVien truongKhoa;
 
     @OneToMany(mappedBy = "khoa")
     @JsonIgnore

@@ -31,4 +31,8 @@ public class GiangVien extends AbstractModel {
 
     @OneToMany(mappedBy = "giangVien")
     List<NhomHoc> nhomHocs;
+
+    
+    @OneToOne
+    Khoa khoa;
 }
