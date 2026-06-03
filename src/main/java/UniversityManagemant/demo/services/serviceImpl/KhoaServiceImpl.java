@@ -10,7 +10,9 @@ import UniversityManagemant.demo.dtos.request.UpdateKhoaReq;
 import UniversityManagemant.demo.dtos.response.KhoaResDto;
 import UniversityManagemant.demo.mappers.KhoaMapper;
 import UniversityManagemant.demo.models.Khoa;
+import UniversityManagemant.demo.models.User;
 import UniversityManagemant.demo.repositories.KhoaRepository;
+import UniversityManagemant.demo.repositories.UserRepository;
 import UniversityManagemant.demo.services.serviceInterface.KhoaService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,8 @@ import lombok.experimental.FieldDefaults;
 public class KhoaServiceImpl implements KhoaService {
     final KhoaRepository khoaRepository;
     final KhoaMapper khoaMapper;
+    private final UserRepository userRepository;
+
 
     @Override
     public KhoaResDto createKhoa(CreateKhoaReq req) {
@@ -48,6 +52,11 @@ public class KhoaServiceImpl implements KhoaService {
     public KhoaResDto updateKhoa(Long id, UpdateKhoaReq req) {
         Khoa khoa = khoaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Khoa not found"));
+        if (req.getTruongKhoaId() != null) {
+            User truongKhoa = userRepository.findById(req.getTruongKhoaId())
+                    .orElseThrow(() -> new RuntimeException("Truong Khoa not found with id: " + req.getTruongKhoaId()));
+            khoa.setTruongKhoa(truongKhoa);
+        }
         khoaMapper.updateEntityFromDto(req, khoa);
         Khoa updated = khoaRepository.save(khoa);
         return khoaMapper.toResDto(updated);
