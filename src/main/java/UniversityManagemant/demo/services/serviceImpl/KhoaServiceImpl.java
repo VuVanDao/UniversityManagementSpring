@@ -9,8 +9,8 @@ import UniversityManagemant.demo.dtos.request.CreateKhoaReq;
 import UniversityManagemant.demo.dtos.request.UpdateKhoaReq;
 import UniversityManagemant.demo.dtos.response.KhoaResDto;
 import UniversityManagemant.demo.mappers.KhoaMapper;
-import UniversityManagemant.demo.models.GiangVien;
-import UniversityManagemant.demo.models.Khoa;
+import UniversityManagemant.demo.models.Lecturer;
+import UniversityManagemant.demo.models.Faculty;
 import UniversityManagemant.demo.models.Role;
 import UniversityManagemant.demo.models.User;
 import UniversityManagemant.demo.repositories.GiangVienRepository;
@@ -33,9 +33,9 @@ public class KhoaServiceImpl implements KhoaService {
 
     @Override
     public KhoaResDto createKhoa(CreateKhoaReq req) {
-        Khoa khoa = khoaMapper.toEntity(req);
+        Faculty khoa = khoaMapper.toEntity(req);
         validateKhoa(khoa, null);
-        Khoa saved = khoaRepository.save(khoa);
+        Faculty saved = khoaRepository.save(khoa);
         return khoaMapper.toResDto(saved);
     }
 
@@ -55,14 +55,14 @@ public class KhoaServiceImpl implements KhoaService {
 
     @Override
     public KhoaResDto updateKhoa(Long id, UpdateKhoaReq req) {
-        Khoa khoa = khoaRepository.findById(id)
+        Faculty khoa = khoaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tim thấy khoa với ID: " + id));
 
         if (req.getGiangVienId() != null) {
-            GiangVien giangVien = giangVienRepository.findById(req.getGiangVienId())
+            Lecturer giangVien = giangVienRepository.findById(req.getGiangVienId())
                     .orElseThrow(() -> new RuntimeException("Giang Vien with ID: " + req.getGiangVienId() + " not found"));
 
-            Khoa assignedKhoa = khoaRepository.findByTruongKhoa_Id(req.getGiangVienId());
+            Faculty assignedKhoa = khoaRepository.findByTruongKhoa_Id(req.getGiangVienId());
             if (assignedKhoa != null && !assignedKhoa.getId().equals(id)) {
                 throw new RuntimeException("Giang Vien with ID: " + req.getGiangVienId()
                         + " is already assigned as truong khoa of another khoa");
@@ -74,7 +74,7 @@ public class KhoaServiceImpl implements KhoaService {
         khoaMapper.updateEntityFromDto(req, khoa);
         validateKhoa(khoa, id);
 
-        Khoa updated = khoaRepository.save(khoa);
+        Faculty updated = khoaRepository.save(khoa);
         return khoaMapper.toResDto(updated);
     }
 
@@ -83,7 +83,7 @@ public class KhoaServiceImpl implements KhoaService {
         khoaRepository.deleteById(id);
     }
 
-    private void validateKhoa(Khoa khoa, Long excludeId) {
+    private void validateKhoa(Faculty khoa, Long excludeId) {
         if (khoa.getMaKhoa() != null && khoaRepository.existsByMaKhoaAndIdNot(khoa.getMaKhoa(), excludeId)) {
             throw new RuntimeException("Ma Khoa already exists: " + khoa.getMaKhoa());
         }

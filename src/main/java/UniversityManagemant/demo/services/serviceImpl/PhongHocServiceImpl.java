@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreatePhongHocReq;
 import UniversityManagemant.demo.dtos.response.PhongHocResDto;
-import UniversityManagemant.demo.models.PhongHoc;
+import UniversityManagemant.demo.models.Classroom;
 import UniversityManagemant.demo.repositories.PhongHocRepository;
 import UniversityManagemant.demo.services.serviceInterface.PhongHocService;
 import lombok.AccessLevel;
@@ -22,10 +22,10 @@ public class PhongHocServiceImpl implements PhongHocService {
 
     @Override
     public PhongHocResDto createPhongHoc(CreatePhongHocReq req) {
-        PhongHoc phongHoc = PhongHoc.builder()
+        Classroom phongHoc = Classroom.builder()
                 .tenPhongHoc(req.getTenPhongHoc())
                 .build();
-        PhongHoc saved = phongHocRepository.save(phongHoc);
+        Classroom saved = phongHocRepository.save(phongHoc);
         return toDto(saved);
     }
 
@@ -45,10 +45,10 @@ public class PhongHocServiceImpl implements PhongHocService {
 
     @Override
     public PhongHocResDto updatePhongHoc(Long id, CreatePhongHocReq req) {
-        PhongHoc phongHoc = phongHocRepository.findById(id)
+        Classroom phongHoc = phongHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("PhongHoc not found"));
         phongHoc.setTenPhongHoc(req.getTenPhongHoc());
-        PhongHoc updated = phongHocRepository.save(phongHoc);
+        Classroom updated = phongHocRepository.save(phongHoc);
         return toDto(updated);
     }
 
@@ -57,7 +57,7 @@ public class PhongHocServiceImpl implements PhongHocService {
         phongHocRepository.deleteById(id);
     }
 
-    private PhongHocResDto toDto(PhongHoc phongHoc) {
+    private PhongHocResDto toDto(Classroom phongHoc) {
         return PhongHocResDto.builder()
                 .id(phongHoc.getId())
                 .tenPhongHoc(phongHoc.getTenPhongHoc())

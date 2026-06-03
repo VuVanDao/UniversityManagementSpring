@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreateHocKiReq;
 import UniversityManagemant.demo.dtos.response.HocKiResDto;
-import UniversityManagemant.demo.models.HocKi;
+import UniversityManagemant.demo.models.Semester;
 import UniversityManagemant.demo.repositories.HocKiRepository;
 import UniversityManagemant.demo.services.serviceInterface.HocKiService;
 import lombok.AccessLevel;
@@ -22,12 +22,12 @@ public class HocKiServiceImpl implements HocKiService {
 
     @Override
     public HocKiResDto createHocKi(CreateHocKiReq req) {
-        HocKi hocKi = HocKi.builder()
+        Semester hocKi = Semester.builder()
                 .tenHocKi(req.getTenHocKi())
                 .fromTime(req.getFromTime())
                 .toTime(req.getToTime())
                 .build();
-        HocKi saved = hocKiRepository.save(hocKi);
+        Semester saved = hocKiRepository.save(hocKi);
         return toDto(saved);
     }
 
@@ -47,12 +47,12 @@ public class HocKiServiceImpl implements HocKiService {
 
     @Override
     public HocKiResDto updateHocKi(Long id, CreateHocKiReq req) {
-        HocKi hocKi = hocKiRepository.findById(id)
+        Semester hocKi = hocKiRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("HocKi not found"));
         hocKi.setTenHocKi(req.getTenHocKi());
         hocKi.setFromTime(req.getFromTime());
         hocKi.setToTime(req.getToTime());
-        HocKi updated = hocKiRepository.save(hocKi);
+        Semester updated = hocKiRepository.save(hocKi);
         return toDto(updated);
     }
 
@@ -61,7 +61,7 @@ public class HocKiServiceImpl implements HocKiService {
         hocKiRepository.deleteById(id);
     }
 
-    private HocKiResDto toDto(HocKi hocKi) {
+    private HocKiResDto toDto(Semester hocKi) {
         return HocKiResDto.builder()
                 .id(hocKi.getId())
                 .tenHocKi(hocKi.getTenHocKi())

@@ -3,12 +3,12 @@ package UniversityManagemant.demo.mappers;
 import org.springframework.stereotype.Component;
 
 import UniversityManagemant.demo.dtos.response.NhomHoc_SinhVienResDto;
-import UniversityManagemant.demo.models.NhomHoc_SinhVien;
+import UniversityManagemant.demo.models.StudyGroupStudent;
 
 @Component
 public class NhomHoc_SinhVienMapper {
 
-    public NhomHoc_SinhVienResDto toResDto(NhomHoc_SinhVien nhomHoc_SinhVien) {
+    public NhomHoc_SinhVienResDto toResDto(StudyGroupStudent nhomHoc_SinhVien) {
         return NhomHoc_SinhVienResDto.builder()
                 // .id(nhomHoc_SinhVien.getId())
                 // .maNhom(nhomHoc_SinhVien.getNhomHoc() != null ? nhomHoc_SinhVien.getNhomHoc().getMaNhom() : null)

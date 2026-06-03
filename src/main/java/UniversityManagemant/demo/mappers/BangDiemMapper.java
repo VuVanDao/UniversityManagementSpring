@@ -3,12 +3,12 @@ package UniversityManagemant.demo.mappers;
 import org.springframework.stereotype.Component;
 
 import UniversityManagemant.demo.dtos.response.BangDiemResDto;
-import UniversityManagemant.demo.models.BangDiem;
+import UniversityManagemant.demo.models.GradeRecord;
 
 @Component
 public class BangDiemMapper {
 
-    public BangDiemResDto toResDto(BangDiem bangDiem) {
+    public BangDiemResDto toResDto(GradeRecord bangDiem) {
         return BangDiemResDto.builder()
                 .id(bangDiem.getId())
                 .maSinhVien(bangDiem.getSinhVien() != null ? bangDiem.getSinhVien().getMaSinhVien() : null)

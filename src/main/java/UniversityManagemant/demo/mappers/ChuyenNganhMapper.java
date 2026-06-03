@@ -4,12 +4,12 @@ import org.springframework.stereotype.Component;
 
 import UniversityManagemant.demo.dtos.request.CreateChuyenNganhReq;
 import UniversityManagemant.demo.dtos.response.ChuyenNganhResDto;
-import UniversityManagemant.demo.models.ChuyenNganh;
+import UniversityManagemant.demo.models.Major;
 
 @Component
 public class ChuyenNganhMapper {
 
-    public ChuyenNganhResDto toResDto(ChuyenNganh chuyenNganh) {
+    public ChuyenNganhResDto toResDto(Major chuyenNganh) {
         return ChuyenNganhResDto.builder()
                 .id(chuyenNganh.getId())
                 .maChuyenNganh(chuyenNganh.getMaChuyenNganh())

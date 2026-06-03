@@ -1,8 +1,10 @@
 package UniversityManagemant.demo.models;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,8 +20,15 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class HocKi extends AbstractModel {
-    String tenHocKi;
-    LocalDate fromTime;
-    LocalDate toTime;
+public class Subject extends AbstractModel {
+    String maMonHoc;
+    String tenMonHoc;
+    Integer tinChi;
+
+    // @OneToMany(mappedBy = "monHoc")
+    // List<BangDiem> bangDiems;
+
+    @OneToMany(mappedBy = "monHoc")
+    @JsonIgnore
+    List<StudyGroup> nhomHocs;
 }

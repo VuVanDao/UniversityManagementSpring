@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import UniversityManagemant.demo.dtos.request.CreateGiangVienReq;
 import UniversityManagemant.demo.dtos.response.GiangVienResDto;
 import UniversityManagemant.demo.mappers.GiangVienMapper;
-import UniversityManagemant.demo.models.GiangVien;
+import UniversityManagemant.demo.models.Lecturer;
 import UniversityManagemant.demo.repositories.GiangVienRepository;
 import UniversityManagemant.demo.repositories.UserRepository;
 import UniversityManagemant.demo.repositories.LopQuanLiRepository;
@@ -28,11 +28,11 @@ public class GiangVienServiceImpl implements GiangVienService {
 
     @Override
     public GiangVienResDto createGiangVien(CreateGiangVienReq req) {
-        GiangVien giangVien = GiangVien.builder()
+        Lecturer giangVien = Lecturer.builder()
                 .user(userRepository.findById(req.getUserId()).orElseThrow())
                 .lopQuanLi(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow())
                 .build();
-        GiangVien saved = giangVienRepository.save(giangVien);
+        Lecturer saved = giangVienRepository.save(giangVien);
         return giangVienMapper.toResDto(saved);
     }
 
@@ -52,11 +52,11 @@ public class GiangVienServiceImpl implements GiangVienService {
 
     @Override
     public GiangVienResDto updateGiangVien(Long id, CreateGiangVienReq req) {
-        GiangVien giangVien = giangVienRepository.findById(id)
+        Lecturer giangVien = giangVienRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("GiangVien not found"));
         giangVien.setUser(userRepository.findById(req.getUserId()).orElseThrow());
         giangVien.setLopQuanLi(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow());
-        GiangVien updated = giangVienRepository.save(giangVien);
+        Lecturer updated = giangVienRepository.save(giangVien);
         return giangVienMapper.toResDto(updated);
     }
 

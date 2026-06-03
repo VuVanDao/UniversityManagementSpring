@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreateChuyenNganhReq;
 import UniversityManagemant.demo.dtos.response.ChuyenNganhResDto;
-import UniversityManagemant.demo.models.ChuyenNganh;
+import UniversityManagemant.demo.models.Major;
 import UniversityManagemant.demo.repositories.ChuyenNganhRepository;
 import UniversityManagemant.demo.repositories.KhoaRepository;
 import UniversityManagemant.demo.services.serviceInterface.ChuyenNganhService;
@@ -24,12 +24,12 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
 
     @Override
     public ChuyenNganhResDto createChuyenNganh(CreateChuyenNganhReq req) {
-        ChuyenNganh chuyenNganh = ChuyenNganh.builder()
+        Major chuyenNganh = Major.builder()
                 .maChuyenNganh(req.getMaChuyenNganh())
                 .tenChuyenNganh(req.getTenChuyenNganh())
                 .khoa(khoaRepository.findById(req.getKhoaId()).orElseThrow())
                 .build();
-        ChuyenNganh saved = chuyenNganhRepository.save(chuyenNganh);
+        Major saved = chuyenNganhRepository.save(chuyenNganh);
         return toDto(saved);
     }
 
@@ -49,12 +49,12 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
 
     @Override
     public ChuyenNganhResDto updateChuyenNganh(Long id, CreateChuyenNganhReq req) {
-        ChuyenNganh chuyenNganh = chuyenNganhRepository.findById(id)
+        Major chuyenNganh = chuyenNganhRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("ChuyenNganh not found"));
         chuyenNganh.setMaChuyenNganh(req.getMaChuyenNganh());
         chuyenNganh.setTenChuyenNganh(req.getTenChuyenNganh());
         chuyenNganh.setKhoa(khoaRepository.findById(req.getKhoaId()).orElseThrow());
-        ChuyenNganh updated = chuyenNganhRepository.save(chuyenNganh);
+        Major updated = chuyenNganhRepository.save(chuyenNganh);
         return toDto(updated);
     }
 
@@ -63,7 +63,7 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
         chuyenNganhRepository.deleteById(id);
     }
 
-    private ChuyenNganhResDto toDto(ChuyenNganh chuyenNganh) {
+    private ChuyenNganhResDto toDto(Major chuyenNganh) {
         return ChuyenNganhResDto.builder()
                 .id(chuyenNganh.getId())
                 .maChuyenNganh(chuyenNganh.getMaChuyenNganh())

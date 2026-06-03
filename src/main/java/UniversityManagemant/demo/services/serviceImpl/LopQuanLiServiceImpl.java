@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreateLopQuanLiReq;
 import UniversityManagemant.demo.dtos.response.LopQuanLiResDto;
-import UniversityManagemant.demo.models.LopQuanLi;
+import UniversityManagemant.demo.models.ClassManagement;
 import UniversityManagemant.demo.repositories.LopQuanLiRepository;
 import UniversityManagemant.demo.repositories.ChuyenNganhRepository;
 import UniversityManagemant.demo.services.serviceInterface.LopQuanLiService;
@@ -24,12 +24,12 @@ public class LopQuanLiServiceImpl implements LopQuanLiService {
 
     @Override
     public LopQuanLiResDto createLopQuanLi(CreateLopQuanLiReq req) {
-        LopQuanLi lopQuanLi = LopQuanLi.builder()
+        ClassManagement lopQuanLi = ClassManagement.builder()
                 .maLop(req.getMaLop())
                 .tenLop(req.getTenLop())
                 .chuyenNganh(chuyenNganhRepository.findById(req.getChuyenNganhId()).orElseThrow())
                 .build();
-        LopQuanLi saved = lopQuanLiRepository.save(lopQuanLi);
+        ClassManagement saved = lopQuanLiRepository.save(lopQuanLi);
         return toDto(saved);
     }
 
@@ -49,12 +49,12 @@ public class LopQuanLiServiceImpl implements LopQuanLiService {
 
     @Override
     public LopQuanLiResDto updateLopQuanLi(Long id, CreateLopQuanLiReq req) {
-        LopQuanLi lopQuanLi = lopQuanLiRepository.findById(id)
+        ClassManagement lopQuanLi = lopQuanLiRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("LopQuanLi not found"));
         lopQuanLi.setMaLop(req.getMaLop());
         lopQuanLi.setTenLop(req.getTenLop());
         lopQuanLi.setChuyenNganh(chuyenNganhRepository.findById(req.getChuyenNganhId()).orElseThrow());
-        LopQuanLi updated = lopQuanLiRepository.save(lopQuanLi);
+        ClassManagement updated = lopQuanLiRepository.save(lopQuanLi);
         return toDto(updated);
     }
 
@@ -63,7 +63,7 @@ public class LopQuanLiServiceImpl implements LopQuanLiService {
         lopQuanLiRepository.deleteById(id);
     }
 
-    private LopQuanLiResDto toDto(LopQuanLi lopQuanLi) {
+    private LopQuanLiResDto toDto(ClassManagement lopQuanLi) {
         return LopQuanLiResDto.builder()
                 .id(lopQuanLi.getId())
                 .maLop(lopQuanLi.getMaLop())

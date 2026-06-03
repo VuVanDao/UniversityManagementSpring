@@ -21,7 +21,6 @@ public class UserMapper {
                 .email(createUserReq.getEmail())
                 .password(createUserReq.getPassword())
                 .ngaySinh(createUserReq.getNgay_sinh())
-                .role(createUserReq.getRole())
                 .build();
     }
 
@@ -44,6 +43,6 @@ public class UserMapper {
         user.setEmail(createUserReq.getEmail());
         user.setPassword(createUserReq.getPassword());
         user.setNgaySinh(createUserReq.getNgay_sinh());
-        user.setRole(createUserReq.getRole());
+        // user.setRole(createUserReq.getRole());
     }
 }

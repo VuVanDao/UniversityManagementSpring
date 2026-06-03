@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreateNhomHocReq;
 import UniversityManagemant.demo.dtos.response.NhomHocResDto;
-import UniversityManagemant.demo.models.NhomHoc;
+import UniversityManagemant.demo.models.StudyGroup;
 import UniversityManagemant.demo.repositories.NhomHocRepository;
 import UniversityManagemant.demo.repositories.MonHocRepository;
 import UniversityManagemant.demo.repositories.GiangVienRepository;
@@ -28,7 +28,7 @@ public class NhomHocServiceImpl implements NhomHocService {
 
     @Override
     public NhomHocResDto createNhomHoc(CreateNhomHocReq req) {
-        NhomHoc nhomHoc = NhomHoc.builder()
+        StudyGroup nhomHoc = StudyGroup.builder()
                 .maNhom(req.getMaNhom())
                 .tenNhom(req.getTenNhom())
                 .tietBatDau(req.getTietBatDau())
@@ -40,7 +40,7 @@ public class NhomHocServiceImpl implements NhomHocService {
                 .giangVien(giangVienRepository.findById(req.getGiangVienId()).orElseThrow())
                 .phongHoc(phongHocRepository.findById(req.getPhongHocId()).orElseThrow())
                 .build();
-        NhomHoc saved = nhomHocRepository.save(nhomHoc);
+        StudyGroup saved = nhomHocRepository.save(nhomHoc);
         return toDto(saved);
     }
 
@@ -60,7 +60,7 @@ public class NhomHocServiceImpl implements NhomHocService {
 
     @Override
     public NhomHocResDto updateNhomHoc(Long id, CreateNhomHocReq req) {
-        NhomHoc nhomHoc = nhomHocRepository.findById(id)
+        StudyGroup nhomHoc = nhomHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("NhomHoc not found"));
         nhomHoc.setMaNhom(req.getMaNhom());
         nhomHoc.setTenNhom(req.getTenNhom());
@@ -72,7 +72,7 @@ public class NhomHocServiceImpl implements NhomHocService {
         nhomHoc.setMonHoc(monHocRepository.findById(req.getMonHocId()).orElseThrow());
         nhomHoc.setGiangVien(giangVienRepository.findById(req.getGiangVienId()).orElseThrow());
         nhomHoc.setPhongHoc(phongHocRepository.findById(req.getPhongHocId()).orElseThrow());
-        NhomHoc updated = nhomHocRepository.save(nhomHoc);
+        StudyGroup updated = nhomHocRepository.save(nhomHoc);
         return toDto(updated);
     }
 
@@ -81,7 +81,7 @@ public class NhomHocServiceImpl implements NhomHocService {
         nhomHocRepository.deleteById(id);
     }
 
-    private NhomHocResDto toDto(NhomHoc nhomHoc) {
+    private NhomHocResDto toDto(StudyGroup nhomHoc) {
         return NhomHocResDto.builder()
                 .id(nhomHoc.getId())
                 .maNhom(nhomHoc.getMaNhom())

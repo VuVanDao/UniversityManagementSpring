@@ -4,12 +4,12 @@ import org.springframework.stereotype.Component;
 
 import UniversityManagemant.demo.dtos.request.CreateNhomHocReq;
 import UniversityManagemant.demo.dtos.response.NhomHocResDto;
-import UniversityManagemant.demo.models.NhomHoc;
+import UniversityManagemant.demo.models.StudyGroup;
 
 @Component
 public class NhomHocMapper {
 
-    public NhomHocResDto toResDto(NhomHoc nhomHoc) {
+    public NhomHocResDto toResDto(StudyGroup nhomHoc) {
         return NhomHocResDto.builder()
                 .id(nhomHoc.getId())
                 .maNhom(nhomHoc.getMaNhom())

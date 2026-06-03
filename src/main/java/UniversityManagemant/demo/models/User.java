@@ -48,15 +48,15 @@ public class User extends AbstractModel implements UserDetails{
 
     @ManyToOne
     @JoinColumn(name = "chuyen_nganh_id", nullable = true)
-    ChuyenNganh chuyenNganh;
+    Major chuyenNganh;
 
     @OneToOne(mappedBy = "user")
     @JsonIgnore
-    GiangVien giangVien;
+    Lecturer giangVien;
 
     @OneToOne(mappedBy = "user")
     @JsonIgnore
-    SinhVien sinhVien;
+    Student sinhVien;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

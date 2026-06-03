@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class NhomHoc extends AbstractModel {
+public class StudyGroup extends AbstractModel {
     String maNhom;
     String tenNhom;
     Integer tietBatDau;
@@ -34,17 +34,17 @@ public class NhomHoc extends AbstractModel {
 
     @ManyToOne
     @JoinColumn(name = "mon_hoc_id")
-    MonHoc monHoc;
+    Subject monHoc;
 
     @ManyToOne
     @JoinColumn(name = "giang_vien_id")
-    GiangVien giangVien;
+    Lecturer giangVien;
 
     @ManyToOne
     @JoinColumn(name = "phong_hoc_id")
-    PhongHoc phongHoc;
+    Classroom phongHoc;
 
     @OneToMany(mappedBy = "nhomHoc")
     @JsonIgnore
-    List<NhomHoc_SinhVien> nhomHocSinhViens;
+    List<StudyGroupStudent> nhomHocSinhViens;
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import UniversityManagemant.demo.dtos.request.CreateSinhVienReq;
 import UniversityManagemant.demo.dtos.response.SinhVienResDto;
-import UniversityManagemant.demo.models.SinhVien;
+import UniversityManagemant.demo.models.Student;
 import UniversityManagemant.demo.repositories.SinhVienRepository;
 import UniversityManagemant.demo.repositories.UserRepository;
 import UniversityManagemant.demo.repositories.LopQuanLiRepository;
@@ -26,12 +26,12 @@ public class SinhVienServiceImpl implements SinhVienService {
 
     @Override
     public SinhVienResDto createSinhVien(CreateSinhVienReq req) {
-        SinhVien sinhVien = SinhVien.builder()
+        Student sinhVien = Student.builder()
                 .maSinhVien(req.getMaSinhVien())
                 .user(userRepository.findById(req.getUserId()).orElseThrow())
                 .lopQuanLi(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow())
                 .build();
-        SinhVien saved = sinhVienRepository.save(sinhVien);
+        Student saved = sinhVienRepository.save(sinhVien);
         return toDto(saved);
     }
 
@@ -51,12 +51,12 @@ public class SinhVienServiceImpl implements SinhVienService {
 
     @Override
     public SinhVienResDto updateSinhVien(Long id, CreateSinhVienReq req) {
-        SinhVien sinhVien = sinhVienRepository.findById(id)
+        Student sinhVien = sinhVienRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("SinhVien not found"));
         sinhVien.setMaSinhVien(req.getMaSinhVien());
         sinhVien.setUser(userRepository.findById(req.getUserId()).orElseThrow());
         sinhVien.setLopQuanLi(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow());
-        SinhVien updated = sinhVienRepository.save(sinhVien);
+        Student updated = sinhVienRepository.save(sinhVien);
         return toDto(updated);
     }
 
@@ -65,7 +65,7 @@ public class SinhVienServiceImpl implements SinhVienService {
         sinhVienRepository.deleteById(id);
     }
 
-    private SinhVienResDto toDto(SinhVien sinhVien) {
+    private SinhVienResDto toDto(Student sinhVien) {
         return SinhVienResDto.builder()
                 .id(sinhVien.getId())
                 .maSinhVien(sinhVien.getMaSinhVien())

@@ -3,9 +3,11 @@ package UniversityManagemant.demo.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+
+import java.math.BigDecimal;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,14 +24,22 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Khoa extends AbstractModel {
-    String maKhoa;
-    String tenKhoa;
+public class Student extends AbstractModel {
+    String maSinhVien;
+    BigDecimal diemGPA;
+    String HeDaoTao;
 
-    @OneToOne(mappedBy = "khoa")
-    GiangVien truongKhoa;
+    @OneToOne
+    User user;
 
-    @OneToMany(mappedBy = "khoa")
+    @ManyToOne
+    ClassManagement lopQuanLi;
+
+    @OneToMany(mappedBy = "sinhVien")
     @JsonIgnore
-    List<ChuyenNganh> chuyenNganhs;
+    List<GradeRecord> bangDiems;
+
+    @OneToMany(mappedBy = "sinhVien")
+    @JsonIgnore
+    List<StudyGroupStudent> nhomHocSinhViens;
 }
