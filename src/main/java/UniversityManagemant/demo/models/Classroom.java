@@ -21,9 +21,9 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Classroom extends AbstractModel {
-    String tenPhongHoc;
+    String classroomName;
 
-    @OneToMany(mappedBy = "phongHoc")
+    @OneToMany(mappedBy = "classroom")
     @JsonIgnore
-    List<StudyGroup> nhomHocs;
+    List<StudyGroup> StudyGroups;
 }

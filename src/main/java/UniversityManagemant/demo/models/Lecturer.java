@@ -27,12 +27,11 @@ public class Lecturer extends AbstractModel {
     User user;
 
     @OneToOne
-    ClassManagement lopQuanLi;
+    ClassManagement classManagement;
 
-    @OneToMany(mappedBy = "giangVien")
-    List<StudyGroup> nhomHocs;
+    @OneToMany(mappedBy = "lecturer")
+    List<StudyGroup> studyGroups;
 
-    
     @OneToOne
-    Faculty khoa;
+    Faculty faculty;
 }

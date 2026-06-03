@@ -11,21 +11,21 @@ public class RoleMapper {
 
     public Role toEntity(CreateRoleReq createRoleReq) {
         return Role.builder()
-                .tenRole(createRoleReq.getTenRole())
-                .moTa(createRoleReq.getMoTa())
+                .roleName(createRoleReq.getTenRole())
+                .description(createRoleReq.getMoTa())
                 .build();
     }
 
     public RoleResDto toResDto(Role role) {
         return RoleResDto.builder()
                 .id(role.getId())
-                .tenRole(role.getTenRole())
-                .moTa(role.getMoTa())
+                .tenRole(role.getRoleName())
+                .moTa(role.getDescription())
                 .build();
     }
 
     public void updateEntityFromDto(CreateRoleReq createRoleReq, Role role) {
-        role.setTenRole(createRoleReq.getTenRole());
-        role.setMoTa(createRoleReq.getMoTa());
+        role.setRoleName(createRoleReq.getTenRole());
+        role.setDescription(createRoleReq.getMoTa());
     }
 }

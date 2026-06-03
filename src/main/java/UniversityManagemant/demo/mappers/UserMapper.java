@@ -16,33 +16,33 @@ public class UserMapper {
     
     public User toEntity(CreateUserReq createUserReq) {
         return User.builder()
-                .maNguoiDung(createUserReq.getMa_nguoi_dung())
-                .tenNguoiDung(createUserReq.getTen_nguoi_dung())
+                .userCode(createUserReq.getMa_nguoi_dung())
+                .userName(createUserReq.getTen_nguoi_dung())
                 .email(createUserReq.getEmail())
                 .password(createUserReq.getPassword())
-                .ngaySinh(createUserReq.getNgay_sinh())
+                .dateOfBirth(createUserReq.getNgay_sinh())
                 .build();
     }
 
     public UserResDto toResDto(User user) {
         return UserResDto.builder()
                 .id(user.getId())
-                .maNguoiDung(user.getMaNguoiDung())
-                .tenNguoiDung(user.getTenNguoiDung())
+                .maNguoiDung(user.getUserCode())
+                .tenNguoiDung(user.getUsername())
                 .email(user.getEmail())
-                .ngaySinh(user.getNgaySinh())
-                .gioiTinh(user.getGioiTinh() != null ? (user.getGioiTinh()) : null)
+                .ngaySinh(user.getDateOfBirth())
+                .gioiTinh(user.getGender() != null ? (user.getGender()) : null)
                 .role(user.getRole())
-                .chuyenNganh(user.getChuyenNganh() != null ? chuyenNganhMapper.toResDto(user.getChuyenNganh()) : null)
+                .chuyenNganh(user.getMajor() != null ? chuyenNganhMapper.toResDto(user.getMajor()) : null)
                 .build();
     }
 
     public void updateEntityFromDto(CreateUserReq createUserReq, User user) {
-        user.setMaNguoiDung(createUserReq.getMa_nguoi_dung());
-        user.setTenNguoiDung(createUserReq.getTen_nguoi_dung());
+        user.setUserCode(createUserReq.getMa_nguoi_dung());
+        user.setUserName(createUserReq.getTen_nguoi_dung());
         user.setEmail(createUserReq.getEmail());
         user.setPassword(createUserReq.getPassword());
-        user.setNgaySinh(createUserReq.getNgay_sinh());
+        user.setDateOfBirth(createUserReq.getNgay_sinh());
         // user.setRole(createUserReq.getRole());
     }
 }

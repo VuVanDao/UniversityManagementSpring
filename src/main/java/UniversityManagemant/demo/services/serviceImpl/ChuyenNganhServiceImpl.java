@@ -25,9 +25,9 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
     @Override
     public ChuyenNganhResDto createChuyenNganh(CreateChuyenNganhReq req) {
         Major chuyenNganh = Major.builder()
-                .maChuyenNganh(req.getMaChuyenNganh())
-                .tenChuyenNganh(req.getTenChuyenNganh())
-                .khoa(khoaRepository.findById(req.getKhoaId()).orElseThrow())
+                .MajorCode(req.getMaChuyenNganh())
+                .MajorName(req.getTenChuyenNganh())
+                .faculty(khoaRepository.findById(req.getKhoaId()).orElseThrow())
                 .build();
         Major saved = chuyenNganhRepository.save(chuyenNganh);
         return toDto(saved);
@@ -51,9 +51,9 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
     public ChuyenNganhResDto updateChuyenNganh(Long id, CreateChuyenNganhReq req) {
         Major chuyenNganh = chuyenNganhRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("ChuyenNganh not found"));
-        chuyenNganh.setMaChuyenNganh(req.getMaChuyenNganh());
-        chuyenNganh.setTenChuyenNganh(req.getTenChuyenNganh());
-        chuyenNganh.setKhoa(khoaRepository.findById(req.getKhoaId()).orElseThrow());
+        chuyenNganh.setMajorCode(req.getMaChuyenNganh());
+        chuyenNganh.setMajorName(req.getTenChuyenNganh());
+        chuyenNganh.setFaculty(khoaRepository.findById(req.getKhoaId()).orElseThrow());
         Major updated = chuyenNganhRepository.save(chuyenNganh);
         return toDto(updated);
     }
@@ -66,9 +66,9 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
     private ChuyenNganhResDto toDto(Major chuyenNganh) {
         return ChuyenNganhResDto.builder()
                 .id(chuyenNganh.getId())
-                .maChuyenNganh(chuyenNganh.getMaChuyenNganh())
-                .tenChuyenNganh(chuyenNganh.getTenChuyenNganh())
-                .tenKhoa(chuyenNganh.getKhoa() != null ? chuyenNganh.getKhoa().getTenKhoa() : null)
+                .maChuyenNganh(chuyenNganh.getMajorCode())
+                .tenChuyenNganh(chuyenNganh.getMajorName())
+                .tenKhoa(chuyenNganh.getFaculty() != null ? chuyenNganh.getFaculty().getFacultyName() : null)
                 .build();
     }
 }

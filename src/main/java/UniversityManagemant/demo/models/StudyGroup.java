@@ -24,27 +24,27 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StudyGroup extends AbstractModel {
-    String maNhom;
-    String tenNhom;
-    Integer tietBatDau;
-    Integer tietKetThuc;
+    String studyGroupCode;
+    String studyGroupName;
+    Integer startTime;
+    Integer endTime;
     LocalDateTime fromTime;
     LocalDateTime toTime;
-    Integer soLuongSinhVien;
+    Integer numberOfStudents;
 
     @ManyToOne
-    @JoinColumn(name = "mon_hoc_id")
-    Subject monHoc;
+    @JoinColumn(name = "subject_id")
+    Subject subject;
 
     @ManyToOne
-    @JoinColumn(name = "giang_vien_id")
-    Lecturer giangVien;
+    @JoinColumn(name = "lecturer_id")
+    Lecturer lecturer;
 
     @ManyToOne
-    @JoinColumn(name = "phong_hoc_id")
-    Classroom phongHoc;
+    @JoinColumn(name = "classroom_id")
+    Classroom classroom;
 
-    @OneToMany(mappedBy = "nhomHoc")
+    @OneToMany(mappedBy = "studyGroup")
     @JsonIgnore
-    List<StudyGroupStudent> nhomHocSinhViens;
+    List<StudyGroupStudent> studyGroupStudents;
 }

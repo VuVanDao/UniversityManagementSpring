@@ -19,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Semester extends AbstractModel {
-    String tenHocKi;
+    String semesterName;
     LocalDate fromTime;
     LocalDate toTime;
 }

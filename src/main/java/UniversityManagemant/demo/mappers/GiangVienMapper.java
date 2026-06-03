@@ -15,10 +15,10 @@ public class GiangVienMapper {
     public GiangVienResDto toResDto(Lecturer giangVien) {
         return GiangVienResDto.builder()
                 .id(giangVien.getId())
-                .tenNguoiDung(giangVien.getUser() != null ? giangVien.getUser().getTenNguoiDung() : null)
-                .maNguoiDung(giangVien.getUser() != null ? giangVien.getUser().getMaNguoiDung() : null)
+                .tenNguoiDung(giangVien.getUser() != null ? giangVien.getUser().getUsername() : null)
+                .maNguoiDung(giangVien.getUser() != null ? giangVien.getUser().getUserCode() : null)
                 .email(giangVien.getUser() != null ? giangVien.getUser().getEmail() : null)
-                .lopQuanLi(giangVien.getLopQuanLi() != null ? lopQuanLiMapper.toResDto(giangVien.getLopQuanLi()) : null)
+                .lopQuanLi(giangVien.getClassManagement() != null ? lopQuanLiMapper.toResDto(giangVien.getClassManagement()) : null)
                 .build();
     }
 }

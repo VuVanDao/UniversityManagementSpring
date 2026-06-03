@@ -29,16 +29,16 @@ public class NhomHocServiceImpl implements NhomHocService {
     @Override
     public NhomHocResDto createNhomHoc(CreateNhomHocReq req) {
         StudyGroup nhomHoc = StudyGroup.builder()
-                .maNhom(req.getMaNhom())
-                .tenNhom(req.getTenNhom())
-                .tietBatDau(req.getTietBatDau())
-                .tietKetThuc(req.getTietKetThuc())
+                .studyGroupCode(req.getMaNhom())
+                .studyGroupName(req.getTenNhom())
+                .startTime(req.getTietBatDau())
+                .endTime(req.getTietKetThuc())
                 .fromTime(req.getFromTime())
                 .toTime(req.getToTime())
-                .soLuongSinhVien(req.getSoLuongSinhVien())
-                .monHoc(monHocRepository.findById(req.getMonHocId()).orElseThrow())
-                .giangVien(giangVienRepository.findById(req.getGiangVienId()).orElseThrow())
-                .phongHoc(phongHocRepository.findById(req.getPhongHocId()).orElseThrow())
+                .numberOfStudents(req.getSoLuongSinhVien())
+                .subject(monHocRepository.findById(req.getMonHocId()).orElseThrow())
+                .lecturer(giangVienRepository.findById(req.getGiangVienId()).orElseThrow())
+                .classroom(phongHocRepository.findById(req.getPhongHocId()).orElseThrow())
                 .build();
         StudyGroup saved = nhomHocRepository.save(nhomHoc);
         return toDto(saved);
@@ -62,16 +62,16 @@ public class NhomHocServiceImpl implements NhomHocService {
     public NhomHocResDto updateNhomHoc(Long id, CreateNhomHocReq req) {
         StudyGroup nhomHoc = nhomHocRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("NhomHoc not found"));
-        nhomHoc.setMaNhom(req.getMaNhom());
-        nhomHoc.setTenNhom(req.getTenNhom());
-        nhomHoc.setTietBatDau(req.getTietBatDau());
-        nhomHoc.setTietKetThuc(req.getTietKetThuc());
+        nhomHoc.setStudyGroupCode(req.getMaNhom());
+        nhomHoc.setStudyGroupName(req.getTenNhom());
+        nhomHoc.setStartTime(req.getTietBatDau());
+        nhomHoc.setEndTime(req.getTietKetThuc());
         nhomHoc.setFromTime(req.getFromTime());
         nhomHoc.setToTime(req.getToTime());
-        nhomHoc.setSoLuongSinhVien(req.getSoLuongSinhVien());
-        nhomHoc.setMonHoc(monHocRepository.findById(req.getMonHocId()).orElseThrow());
-        nhomHoc.setGiangVien(giangVienRepository.findById(req.getGiangVienId()).orElseThrow());
-        nhomHoc.setPhongHoc(phongHocRepository.findById(req.getPhongHocId()).orElseThrow());
+        nhomHoc.setNumberOfStudents(req.getSoLuongSinhVien());
+        nhomHoc.setSubject(monHocRepository.findById(req.getMonHocId()).orElseThrow());
+        nhomHoc.setLecturer(giangVienRepository.findById(req.getGiangVienId()).orElseThrow());
+        nhomHoc.setClassroom(phongHocRepository.findById(req.getPhongHocId()).orElseThrow());
         StudyGroup updated = nhomHocRepository.save(nhomHoc);
         return toDto(updated);
     }
@@ -84,17 +84,17 @@ public class NhomHocServiceImpl implements NhomHocService {
     private NhomHocResDto toDto(StudyGroup nhomHoc) {
         return NhomHocResDto.builder()
                 .id(nhomHoc.getId())
-                .maNhom(nhomHoc.getMaNhom())
-                .tenNhom(nhomHoc.getTenNhom())
-                .tietBatDau(nhomHoc.getTietBatDau())
-                .tietKetThuc(nhomHoc.getTietKetThuc())
+                .maNhom(nhomHoc.getStudyGroupCode())
+                .tenNhom(nhomHoc.getStudyGroupName())
+                .tietBatDau(nhomHoc.getStartTime())
+                .tietKetThuc(nhomHoc.getEndTime())
                 .fromTime(nhomHoc.getFromTime())
                 .toTime(nhomHoc.getToTime())
-                .soLuongSinhVien(nhomHoc.getSoLuongSinhVien())
-                .tenMonHoc(nhomHoc.getMonHoc() != null ? nhomHoc.getMonHoc().getTenMonHoc() : null)
-                .tenGiangVien(nhomHoc.getGiangVien() != null && nhomHoc.getGiangVien().getUser() != null
-                    ? nhomHoc.getGiangVien().getUser().getTenNguoiDung() : null)
-                .tenPhongHoc(nhomHoc.getPhongHoc() != null ? nhomHoc.getPhongHoc().getTenPhongHoc() : null)
+                .soLuongSinhVien(nhomHoc.getNumberOfStudents())
+                .tenMonHoc(nhomHoc.getSubject() != null ? nhomHoc.getSubject().getSubjectName() : null)
+                .tenGiangVien(nhomHoc.getLecturer() != null && nhomHoc.getLecturer().getUser() != null
+                    ? nhomHoc.getLecturer().getUser().getUsername() : null)
+                .tenPhongHoc(nhomHoc.getClassroom() != null ? nhomHoc.getClassroom().getClassroomName() : null)
                 .build();
     }
 }

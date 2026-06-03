@@ -10,9 +10,9 @@ public class LopQuanLiMapper {
     public LopQuanLiResDto toResDto(ClassManagement lopQuanLi) {
         return LopQuanLiResDto.builder()
                 .id(lopQuanLi.getId())
-                .maLop(lopQuanLi.getMaLop())
-                .tenLop(lopQuanLi.getTenLop())
-                .tenChuyenNganh(lopQuanLi.getChuyenNganh() != null ? lopQuanLi.getChuyenNganh().getTenChuyenNganh() : null)
+                .maLop(lopQuanLi.getClassManagementCode())
+                .tenLop(lopQuanLi.getClassManagementCode())
+                .tenChuyenNganh(lopQuanLi.getMajor() != null ? lopQuanLi.getMajor().getMajorName() : null)
                 .build();
     }
 }

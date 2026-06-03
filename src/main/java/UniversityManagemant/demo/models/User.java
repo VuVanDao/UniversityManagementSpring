@@ -34,25 +34,25 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User extends AbstractModel implements UserDetails{
-    String maNguoiDung;
-    String tenNguoiDung;
+    String userCode;
+    String userName;
     String email;
     String password;
-    LocalDate ngaySinh;
+    LocalDate dateOfBirth;
     @Enumerated(EnumType.STRING)
-    Gender gioiTinh;
+    Gender gender;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     Role role;
 
     @ManyToOne
-    @JoinColumn(name = "chuyen_nganh_id", nullable = true)
-    Major chuyenNganh;
+    @JoinColumn(name = "major_id", nullable = true)
+    Major major;
 
     @OneToOne(mappedBy = "user")
     @JsonIgnore
-    Lecturer giangVien;
+    Lecturer lecturer;
 
     @OneToOne(mappedBy = "user")
     @JsonIgnore
@@ -60,7 +60,7 @@ public class User extends AbstractModel implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + this.getRole().getTenRole());
+        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + this.getRole().getRoleName());
         Collection<GrantedAuthority> authorities = Collections.singletonList(authority);
         return authorities;
     }

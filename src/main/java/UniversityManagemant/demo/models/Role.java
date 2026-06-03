@@ -22,8 +22,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Role extends AbstractModel {
-    String tenRole;
-    String moTa;
+    String roleName;
+    String description;
 
     @OneToMany(mappedBy = "role")
     @JsonIgnore

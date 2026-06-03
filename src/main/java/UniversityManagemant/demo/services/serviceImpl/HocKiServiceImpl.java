@@ -23,7 +23,7 @@ public class HocKiServiceImpl implements HocKiService {
     @Override
     public HocKiResDto createHocKi(CreateHocKiReq req) {
         Semester hocKi = Semester.builder()
-                .tenHocKi(req.getTenHocKi())
+                .semesterName(req.getTenHocKi())
                 .fromTime(req.getFromTime())
                 .toTime(req.getToTime())
                 .build();
@@ -49,7 +49,7 @@ public class HocKiServiceImpl implements HocKiService {
     public HocKiResDto updateHocKi(Long id, CreateHocKiReq req) {
         Semester hocKi = hocKiRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("HocKi not found"));
-        hocKi.setTenHocKi(req.getTenHocKi());
+        hocKi.setSemesterName(req.getTenHocKi());
         hocKi.setFromTime(req.getFromTime());
         hocKi.setToTime(req.getToTime());
         Semester updated = hocKiRepository.save(hocKi);
@@ -64,7 +64,7 @@ public class HocKiServiceImpl implements HocKiService {
     private HocKiResDto toDto(Semester hocKi) {
         return HocKiResDto.builder()
                 .id(hocKi.getId())
-                .tenHocKi(hocKi.getTenHocKi())
+                .tenHocKi(hocKi.getSemesterName())
                 .fromTime(hocKi.getFromTime())
                 .toTime(hocKi.getToTime())
                 .build();

@@ -25,21 +25,20 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Student extends AbstractModel {
-    String maSinhVien;
-    BigDecimal diemGPA;
-    String HeDaoTao;
+    BigDecimal GPAPoint;
+    String TrainingSystem;// hệ đào tạo
 
     @OneToOne
     User user;
 
     @ManyToOne
-    ClassManagement lopQuanLi;
+    ClassManagement classManagement;
 
-    @OneToMany(mappedBy = "sinhVien")
+    @OneToMany(mappedBy = "student")
     @JsonIgnore
-    List<GradeRecord> bangDiems;
+    List<GradeRecord> gradeRecords;
 
-    @OneToMany(mappedBy = "sinhVien")
+    @OneToMany(mappedBy = "student")
     @JsonIgnore
-    List<StudyGroupStudent> nhomHocSinhViens;
+    List<StudyGroupStudent> studyGroupStudents;
 }

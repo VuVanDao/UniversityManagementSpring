@@ -22,10 +22,10 @@ import lombok.experimental.SuperBuilder;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StudyGroupStudent extends AbstractModel {
     @ManyToOne
-    @JoinColumn(name = "nhom_hoc_id")
-    StudyGroup nhomHoc;
+    @JoinColumn(name = "study_group_id")
+    StudyGroup studyGroup;
 
     @ManyToOne
-    @JoinColumn(name = "sinh_vien_id")
-    Student sinhVien;
+    @JoinColumn(name = "student_id")
+    Student student;
 }

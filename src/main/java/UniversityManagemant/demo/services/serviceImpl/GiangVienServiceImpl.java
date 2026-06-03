@@ -30,7 +30,7 @@ public class GiangVienServiceImpl implements GiangVienService {
     public GiangVienResDto createGiangVien(CreateGiangVienReq req) {
         Lecturer giangVien = Lecturer.builder()
                 .user(userRepository.findById(req.getUserId()).orElseThrow())
-                .lopQuanLi(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow())
+                .classManagement(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow())
                 .build();
         Lecturer saved = giangVienRepository.save(giangVien);
         return giangVienMapper.toResDto(saved);
@@ -55,7 +55,7 @@ public class GiangVienServiceImpl implements GiangVienService {
         Lecturer giangVien = giangVienRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("GiangVien not found"));
         giangVien.setUser(userRepository.findById(req.getUserId()).orElseThrow());
-        giangVien.setLopQuanLi(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow());
+        giangVien.setClassManagement(lopQuanLiRepository.findById(req.getLopQuanLiId()).orElseThrow());
         Lecturer updated = giangVienRepository.save(giangVien);
         return giangVienMapper.toResDto(updated);
     }

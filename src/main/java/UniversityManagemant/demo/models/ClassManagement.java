@@ -23,14 +23,14 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ClassManagement extends AbstractModel {
-    String maLop;
-    String tenLop;
+    String classManagementCode;
+    String classManagementName;
 
     @ManyToOne
-    @JoinColumn(name = "chuyen_nganh_id")
-    Major chuyenNganh;
+    @JoinColumn(name = "major_id")
+    Major major;
 
-    @OneToMany(mappedBy = "lopQuanLi")
+    @OneToMany(mappedBy = "classManagement")
     @JsonIgnore
-    List<Student> sinhViens;
+    List<Student> students;
 }

@@ -11,24 +11,24 @@ public class MonHocMapper {
 
     public Subject toEntity(CreateMonHocReq createMonHocReq) {
         return Subject.builder()
-                .maMonHoc(createMonHocReq.getMaMonHoc())
-                .tenMonHoc(createMonHocReq.getTenMonHoc())
-                .tinChi(createMonHocReq.getTinChi())
+                .subjectCode(createMonHocReq.getMaMonHoc())
+                .subjectName(createMonHocReq.getTenMonHoc())
+                .credits(createMonHocReq.getTinChi())
                 .build();
     }
 
     public MonHocResDto toResDto(Subject monHoc) {
         return MonHocResDto.builder()
                 .id(monHoc.getId())
-                .maMonHoc(monHoc.getMaMonHoc())
-                .tenMonHoc(monHoc.getTenMonHoc())
-                .tinChi(monHoc.getTinChi())
+                .maMonHoc(monHoc.getSubjectCode())
+                .tenMonHoc(monHoc.getSubjectName())
+                .tinChi(monHoc.getCredits())
                 .build();
     }
 
     public void updateEntityFromDto(CreateMonHocReq createMonHocReq, Subject monHoc) {
-        monHoc.setMaMonHoc(createMonHocReq.getMaMonHoc());
-        monHoc.setTenMonHoc(createMonHocReq.getTenMonHoc());
-        monHoc.setTinChi(createMonHocReq.getTinChi());
+        monHoc.setSubjectCode(createMonHocReq.getMaMonHoc());
+        monHoc.setSubjectName(createMonHocReq.getTenMonHoc());
+        monHoc.setCredits(createMonHocReq.getTinChi());
     }
 }

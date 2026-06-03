@@ -67,8 +67,7 @@ public class KhoaServiceImpl implements KhoaService {
                 throw new RuntimeException("Giang Vien with ID: " + req.getGiangVienId()
                         + " is already assigned as truong khoa of another khoa");
             }
-
-            khoa.setTruongKhoa(giangVien);
+            khoa.setDean(giangVien);
         }
 
         khoaMapper.updateEntityFromDto(req, khoa);
@@ -84,12 +83,12 @@ public class KhoaServiceImpl implements KhoaService {
     }
 
     private void validateKhoa(Faculty khoa, Long excludeId) {
-        if (khoa.getMaKhoa() != null && khoaRepository.existsByMaKhoaAndIdNot(khoa.getMaKhoa(), excludeId)) {
-            throw new RuntimeException("Ma Khoa already exists: " + khoa.getMaKhoa());
+        if (khoa.getFacultyCode() != null && khoaRepository.existsByFacultyCodeAndIdNot(khoa.getFacultyCode(), excludeId)) {
+            throw new RuntimeException("Ma Khoa already exists: " + khoa.getFacultyCode());
         }
 
-        if (khoa.getTenKhoa() != null && khoaRepository.existsByTenKhoaIgnoreCaseAndIdNot(khoa.getTenKhoa(), excludeId)) {
-            throw new RuntimeException("Ten Khoa already exists: " + khoa.getTenKhoa());
+        if (khoa.getFacultyName() != null && khoaRepository.existsByFacultyNameIgnoreCaseAndIdNot(khoa.getFacultyName(), excludeId)) {
+            throw new RuntimeException("Ten Khoa already exists: " + khoa.getFacultyName());
         }
     }
 }

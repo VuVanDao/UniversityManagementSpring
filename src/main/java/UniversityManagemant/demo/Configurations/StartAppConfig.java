@@ -30,18 +30,18 @@ public class StartAppConfig {
                 if (isAdminRoleExists == null) {
                     System.out.println("Admin role does not exist. Creating one...");
                     Role adminRole = Role.builder()
-                                        .tenRole("ADMIN")
+                                        .roleName("ADMIN")
                                         .build();
                     roleRepository.save(adminRole);
                     isAdminRoleExists = adminRole;
                 }
                 User user = User.builder()
-                    .maNguoiDung("admin code")
-                    .tenNguoiDung("admin")
+                    .userCode("admin code")
+                    .userName("admin")
                     .email("admin@example.com")
                     .password(passwordEncoder.encode("admin123"))
-                    .ngaySinh(LocalDate.now())
-                    .gioiTinh(Gender.KHAC)
+                    .dateOfBirth(LocalDate.now())
+                    .gender(Gender.OTHER)
                     .role(isAdminRoleExists)
                     .build();
                 userRepository.save(user);

@@ -23,18 +23,18 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Major extends AbstractModel {
-    String maChuyenNganh;
-    String tenChuyenNganh;
+    String MajorCode;
+    String MajorName;
 
     @ManyToOne
-    @JoinColumn(name = "khoa_id", nullable = false)
-    Faculty khoa;
+    @JoinColumn(name = "faculty_id", nullable = false)
+    Faculty faculty;
 
-    @OneToMany(mappedBy = "chuyenNganh")
+    @OneToMany(mappedBy = "major")
     @JsonIgnore
     List<User> users;
 
-    @OneToMany(mappedBy = "chuyenNganh")
+    @OneToMany(mappedBy = "major")
     @JsonIgnore
     List<ClassManagement> lopQuanLis;
 }
