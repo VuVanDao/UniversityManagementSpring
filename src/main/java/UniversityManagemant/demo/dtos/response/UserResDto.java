@@ -25,6 +25,6 @@ public class UserResDto {
     String email;
     LocalDate dateOfBirth;
     Gender gender;
-    Role role;
+    RoleResDto role;
     MajorResDto major;
 }

@@ -2,6 +2,7 @@ package UniversityManagemant.demo.dtos.request;
 
 import java.time.LocalDate;
 
+import UniversityManagemant.demo.enums.Gender;
 import UniversityManagemant.demo.models.Role;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -25,4 +26,5 @@ public class CreateUserReq {
     LocalDate dateOfBirth;
     Long role_id;
     Long majorId;
+    Gender gender;
 }

@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import UniversityManagemant.demo.enums.Gender;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -50,12 +51,10 @@ public class User extends AbstractModel implements UserDetails{
     @JoinColumn(name = "major_id", nullable = true)
     Major major;
 
-    @OneToOne(mappedBy = "user")
-    @JsonIgnore
+    @OneToOne(mappedBy = "user",cascade = CascadeType.REMOVE)
     Lecturer lecturer;
 
-    @OneToOne(mappedBy = "user")
-    @JsonIgnore
+    @OneToOne(mappedBy = "user",cascade = CascadeType.REMOVE)
     Student sinhVien;
 
     @Override

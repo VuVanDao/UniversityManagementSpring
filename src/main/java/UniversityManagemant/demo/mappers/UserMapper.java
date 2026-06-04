@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 public class UserMapper {
 
     private final ChuyenNganhMapper chuyenNganhMapper;
+    private final RoleMapper roleMapper;
     
     public User toEntity(CreateUserReq createUserReq) {
         return User.builder()
@@ -31,7 +32,7 @@ public class UserMapper {
                 .email(user.getEmail())
                 .dateOfBirth(user.getDateOfBirth())
                 .gender(user.getGender() != null ? (user.getGender()) : null)
-                .role(user.getRole())
+                .role(roleMapper.toResDto(user.getRole()))
                 .major(user.getMajor() != null ? chuyenNganhMapper.toResDto(user.getMajor()) : null)
                 .build();
     }
@@ -40,7 +41,6 @@ public class UserMapper {
         user.setUserCode(createUserReq.getUserCode());
         user.setUserName(createUserReq.getUserName());
         user.setEmail(createUserReq.getEmail());
-        user.setPassword(createUserReq.getPassword());
         user.setDateOfBirth(createUserReq.getDateOfBirth());
     }
 }
