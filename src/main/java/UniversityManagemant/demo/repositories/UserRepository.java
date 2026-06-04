@@ -11,5 +11,7 @@ import UniversityManagemant.demo.models.User;
 public interface UserRepository extends JpaRepository<User,Long>{
     User findByUserName(String userName);
     Optional<User> findByEmailOrUserCode(String email, String userCode);
+
     Optional<User> findByEmail(String email);
+    boolean existsByEmail(String email);
 }

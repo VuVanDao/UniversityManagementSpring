@@ -27,7 +27,7 @@ public class MajorServiceImpl implements MajorService {
         Major major = Major.builder()
                 .MajorCode(req.getMajorCode())
                 .MajorName(req.getMajorName())
-                .faculty(facultyRepository.findById(req.getFacultyId()).orElseThrow())
+                .faculty(facultyRepository.findById(req.getFacultyId()).orElseThrow(() -> new RuntimeException("Faculty not found with id: " + req.getFacultyId())))
                 .build();
         Major saved = majorRepository.save(major);
         return toDto(saved);
